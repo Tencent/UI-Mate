@@ -1,0 +1,68 @@
+{
+  "source": "One complete, successful episode (reward 1.0) recorded on the OSWorld benchmark (https://github.com/xlang-ai/OSWorld). Frames are the observation the agent saw at each step; recorded_response is the reply the model actually produced there, replayed as history so every step sees the true prefix.",
+  "instruction": "Please help me clone the repo \"https://github.com/xlang-ai/instructor-embedding\" to /home/user.",
+  "osworld_domain": "multi_apps",
+  "osworld_task_id": "acb0f96b-e27c-44d8-b55f-7cb76609dfcd",
+  "steps": [
+    {
+      "image": "step_00.png",
+      "recorded_action": "pyautogui.click(36, 606)",
+      "recorded_response": "The task is to clone the repository \"https://github.com/xlang-ai/instructor-embedding\" to /home/user. To accomplish this, I need to open a terminal where I can run a git clone command. There's a terminal icon in the left sidebar, so I'll click it to open a terminal window.\n</think>\n\n<action>\nClick the terminal icon in the left sidebar to open a terminal.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\nleft_click\n</parameter>\n<parameter=coordinate>\n[19, 561]\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_01.png",
+      "recorded_action": "pyautogui.click(972, 85)",
+      "recorded_response": "I accidentally clicked on the Files icon instead of the Terminal icon. I need to close this file manager and find the actual Terminal application. Let me close this window first and then look for the terminal in the application menu or sidebar.\n</think>\n\n<action>\nClick the X button to close the file manager window.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\nleft_click\n</parameter>\n<parameter=coordinate>\n[506, 79]\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_02.png",
+      "recorded_action": "pyautogui.click(48, 12)",
+      "recorded_response": "The file manager is closed. Now I need to open a terminal. I should click on \"Activities\" in the top left corner to access the applications menu where I can find the Terminal application. Alternatively, I could look for a terminal icon in the sidebar. Let me click on \"Activities\" to search for the terminal application.\n</think>\n\n<action>\nClick on \"Activities\" in the top-left corner to open the applications menu.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\nleft_click\n</parameter>\n<parameter=coordinate>\n[25, 12]\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_03.png",
+      "recorded_action": "pyautogui.press('t')\npyautogui.press('e')\npyautogui.press('r')\npyautogui.press('m')\npyautogui.press('i')\npyautogui.press('n')\npyautogui.press('a')\npyautogui.press('l')\n",
+      "recorded_response": "The Activities overview is now open with a search bar at the top. I'll type \"terminal\" to search for the Terminal application.\n</think>\n\n<action>\nType \"terminal\" into the search bar to find the Terminal application.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\ntype\n</parameter>\n<parameter=text>\nterminal\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_04.png",
+      "recorded_action": "pyautogui.click(993, 182)",
+      "recorded_response": "The search results show the Terminal application at the top. I'll click on it to open the terminal.\n</think>\n\n<action>\nClick on the Terminal application in the search results to open it.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\nleft_click\n</parameter>\n<parameter=coordinate>\n[517, 169]\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_05.png",
+      "recorded_action": "pyautogui.click(472, 300)",
+      "recorded_response": "The terminal is now open. I can see it's in the home directory (indicated by the ~ symbol in the prompt). Now I need to run the git clone command to clone the repository to /home/user. I'll type the command to clone the repo.\n</think>\n\n<action>\nClick on the terminal window to focus it and then type the git clone command.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\nleft_click\n</parameter>\n<parameter=coordinate>\n[246, 278]\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_06.png",
+      "recorded_action": "pyautogui.press('g')\npyautogui.press('i')\npyautogui.press('t')\npyautogui.press(' ')\npyautogui.press('c')\npyautogui.press('l')\npyautogui.press('o')\npyautogui.press('n')\npyautogui.press('e')\npyautogui.press(' ')\npyautogui.press('h')\npyautogui.press('t')\npyautogui.press('t')\npyautogui.press('p')\npyautogui.press('s')\npyautogui.press(':')\npyautogui.press('/')\npyautogui.press('/')\npyautogui.press('g')\npyautogui.press('i')\npyautogui.press('t')\npyautogui.press('h')\npyautogui.press('u')\npyautogui.press('b')\npyautogui.press('.')\npyautogui.press('c')\npyautogui.press('o')\npyautogui.press('m')\npyautogui.press('/')\npyautogui.press('x')\npyautogui.press('l')\npyautogui.press('a')\npyautogui.press('n')\npyautogui.press('g')\npyautogui.press('-')\npyautogui.press('a')\npyautogui.press('i')\npyautogui.press('/')\npyautogui.press('i')\npyautogui.press('n')\npyautogui.press('s')\npyautogui.press('t')\npyautogui.press('r')\npyautogui.press('u')\npyautogui.press('c')\npyautogui.press('t')\npyautogui.press('o')\npyautogui.press('r')\npyautogui.press('-')\npyautogui.press('e')\npyautogui.press('m')\npyautogui.press('b')\npyautogui.press('e')\npyautogui.press('d')\npyautogui.press('d')\npyautogui.press('i')\npyautogui.press('n')\npyautogui.press('g')\npyautogui.press(' ')\npyautogui.press('/')\npyautogui.press('h')\npyautogui.press('o')\npyautogui.press('m')\npyautogui.press('e')\npyautogui.press('/')\npyautogui.press('u')\npyautogui.press('s')\npyautogui.press('e')\npyautogui.press('r')\npyautogui.press('/')\n",
+      "recorded_response": "The terminal is focused. Now I'll type the git clone command to clone the repository to /home/user. Since the current directory is already /home/user (as indicated by the ~ in the prompt), I'll use the command `git clone https://github.com/xlang-ai/instructor-embedding /home/user/` or simply `git clone https://github.com/xlang-ai/instructor-embedding .` to clone it in the current directory.\n</think>\n\n<action>\nType the git clone command in the terminal to clone the repository to /home/user.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\ntype\n</parameter>\n<parameter=text>\ngit clone https://github.com/xlang-ai/instructor-embedding /home/user/\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_07.png",
+      "recorded_action": "pyautogui.press('return')",
+      "recorded_response": "The command has been typed in the terminal. Now I need to press Enter to execute the command. This will start the git clone process to clone the repository to /home/user.\n</think>\n\n<action>\nPress Enter to execute the git clone command.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\npress\n</parameter>\n<parameter=keys>\n[\"return\"]\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_08.png",
+      "recorded_action": "pyautogui.press('g')\npyautogui.press('i')\npyautogui.press('t')\npyautogui.press(' ')\npyautogui.press('c')\npyautogui.press('l')\npyautogui.press('o')\npyautogui.press('n')\npyautogui.press('e')\npyautogui.press(' ')\npyautogui.press('h')\npyautogui.press('t')\npyautogui.press('t')\npyautogui.press('p')\npyautogui.press('s')\npyautogui.press(':')\npyautogui.press('/')\npyautogui.press('/')\npyautogui.press('g')\npyautogui.press('i')\npyautogui.press('t')\npyautogui.press('h')\npyautogui.press('u')\npyautogui.press('b')\npyautogui.press('.')\npyautogui.press('c')\npyautogui.press('o')\npyautogui.press('m')\npyautogui.press('/')\npyautogui.press('x')\npyautogui.press('l')\npyautogui.press('a')\npyautogui.press('n')\npyautogui.press('g')\npyautogui.press('-')\npyautogui.press('a')\npyautogui.press('i')\npyautogui.press('/')\npyautogui.press('i')\npyautogui.press('n')\npyautogui.press('s')\npyautogui.press('t')\npyautogui.press('r')\npyautogui.press('u')\npyautogui.press('c')\npyautogui.press('t')\npyautogui.press('o')\npyautogui.press('r')\npyautogui.press('-')\npyautogui.press('e')\npyautogui.press('m')\npyautogui.press('b')\npyautogui.press('e')\npyautogui.press('d')\npyautogui.press('d')\npyautogui.press('i')\npyautogui.press('n')\npyautogui.press('g')\n",
+      "recorded_response": "The error message indicates that git clone failed because `/home/user/` already exists and is not an empty directory. Git clone expects to create a new directory for the repository. I should clone it to a subdirectory instead. I can either:\n1. Clone to `/home/user/instructor-embedding` (which is the default behavior - git will create this directory)\n2. Or clone to a different location\n\nLet me use the default behavior by just specifying the repository URL without the destination path, or I can specify `/home/user/instructor-embedding` explicitly.\n\nActually, the most common approach is to just run:\n`git clone https://github.com/xlang-ai/instructor-embedding`\n\nThis will create a new directory `/home/user/instructor-embedding` by default. Let me do that.\n</think>\n\n<action>\nType the git clone command without specifying a destination directory, letting Git create the default directory.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\ntype\n</parameter>\n<parameter=text>\ngit clone https://github.com/xlang-ai/instructor-embedding\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_09.png",
+      "recorded_action": "pyautogui.press('return')",
+      "recorded_response": "The command is typed and ready to execute. I need to press Enter to run it. This time, since I'm not specifying a destination path, git will create a new directory called \"instructor-embedding\" inside /home/user/, which should work fine.\n</think>\n\n<action>\nPress Enter to execute the git clone command.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\npress\n</parameter>\n<parameter=keys>\n[\"return\"]\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_10.png",
+      "recorded_action": "WAIT",
+      "recorded_response": "The git clone command is now running successfully. It's cloning the repository into the 'instructor-embedding' directory inside /home/user. The process is at 30% of receiving objects (950 out of 3165 objects). I should wait for the clone to complete before taking any further action.\n</think>\n\n<action>\nWait for the git clone operation to complete.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\nwait\n</parameter>\n<parameter=time>\n0.5\n</parameter>\n</function>\n</tool_call>"
+    },
+    {
+      "image": "step_11.png",
+      "recorded_action": "DONE",
+      "recorded_response": "The git clone operation has completed successfully! The repository has been cloned to `/home/user/instructor-embedding`. The terminal shows:\n- \"Cloning into 'instructor-embedding'...\"\n- All objects were received (100% - 3165/3165)\n- Resolving deltas completed (100% - 952/952)\n- The command prompt is back\n\nThe task is complete. The repository has been successfully cloned to /home/user/instructor-embedding.\n</think>\n\n<action>\nThe repository has been successfully cloned to `/home/user/instructor-embedding`. The task is complete.\n</action>\n\n<tool_call>\n<function=computer_use>\n<parameter=action>\nfinished\n</parameter>\n<parameter=status>\nsuccess\n</parameter>\n</function>\n</tool_call>"
+    }
+  ]
+}

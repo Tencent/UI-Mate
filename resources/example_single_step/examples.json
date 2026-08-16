@@ -1,0 +1,40 @@
+{
+  "source": "Initial-state (step 0) screenshots from the OSWorld benchmark (https://github.com/xlang-ai/OSWorld), captured on its Ubuntu 22.04 image at 1920x1080. Each instruction is the OSWorld task's own; osworld_task_id identifies the task under evaluation_examples/examples/<osworld_domain>/.",
+  "examples": [
+    {
+      "image": "os_install_spotify.png",
+      "app": "os",
+      "instruction": "I want to install Spotify on my current system. Could you please help me?",
+      "osworld_domain": "os",
+      "osworld_task_id": "94d95f96-9699-4208-98ba-3c3119edf9c2"
+    },
+    {
+      "image": "chrome_bookmark_page.png",
+      "app": "chrome",
+      "instruction": "Can you save this webpage I'm looking at to bookmarks bar so I can come back to it later?",
+      "osworld_domain": "chrome",
+      "osworld_task_id": "7a5a7856-f1b6-42a4-ade9-1ca81ca0f263"
+    },
+    {
+      "image": "vscode_install_extension.png",
+      "app": "vs_code",
+      "instruction": "Please help me install the autoDocstring extension in VS Code.",
+      "osworld_domain": "vs_code",
+      "osworld_task_id": "4e60007a-f5be-4bfc-9723-c39affa0a6d3"
+    },
+    {
+      "image": "thunderbird_add_account.png",
+      "app": "thunderbird",
+      "instruction": "Help me access my outlook account with address \"anonym-x2024@outlook.com\" and password 'password' (without ') in Thunderbird. Just fill in the information and stay on that page. I will check it manually later.",
+      "osworld_domain": "thunderbird",
+      "osworld_task_id": "15c3b339-88f7-4a86-ab16-e71c58dcb01e"
+    },
+    {
+      "image": "calc_export_html.png",
+      "app": "libreoffice_calc",
+      "instruction": "Please convert a .xlsx file opened in LibreOffice Calc to a .html file and view it in Chrome.",
+      "osworld_domain": "multi_apps",
+      "osworld_task_id": "e135df7c-7687-4ac0-a5f0-76b74438b53e"
+    }
+  ]
+}
