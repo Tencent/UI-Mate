@@ -16,6 +16,7 @@ Tencent HY Frontier · Multimodal Agent Team
 
 </div>
 
+<img width="3008" height="724" alt="github_teaser" src="https://github.com/user-attachments/assets/6ff5b154-5105-4d3a-b5a0-7e95e95deffe" />
 
 
 ## 🔍 Overview
