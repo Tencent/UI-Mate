@@ -6,7 +6,7 @@
 
 **Show the workflow once. Let the agent adapt it to the task at hand.**
 
-Tencent HY Frontier · Multimodal Agent Team
+Tencent HY Frontier
 
 [![Project Page](https://img.shields.io/badge/Project%20Page-ui--mate.github.io-2456e6?logo=googlechrome&logoColor=white)](https://ui-mate.github.io)
 [![arXiv](https://img.shields.io/badge/arXiv-b31b1b?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2608.15930)
