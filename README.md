@@ -325,9 +325,6 @@ If you find UI-Mate useful in your research or applications, please cite:
   author        = {Tencent HY Frontier Team},
   journal       = {arXiv preprint arXiv:2608.15930},
   year          = {2026},
-  eprint        = {2608.15930},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.AI}
 }
 ```
 
