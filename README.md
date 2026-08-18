@@ -11,7 +11,6 @@ Tencent HY Frontier
 [![Project Page](https://img.shields.io/badge/Project%20Page-ui--mate.github.io-2456e6?logo=googlechrome&logoColor=white)](https://ui-mate.github.io)
 [![arXiv](https://img.shields.io/badge/arXiv-b31b1b?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2608.15930)
 [![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-tencent%2Fui--mate-ffd21e)](https://huggingface.co/collections/tencent/ui-mate)
-[![Code](https://img.shields.io/badge/Code-Tencent%2FUI--Mate-181717?logo=github&logoColor=white)](https://github.com/Tencent/UI-Mate)
 [![OSWorkerBench](https://img.shields.io/badge/%F0%9F%A4%97%20OSWorkerBench-Coming%20Soon-ff8f00)]()
 
 </div>
