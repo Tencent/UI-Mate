@@ -299,8 +299,8 @@ or `FAIL` in place of pyautogui calls.
 
 | Artifact                                                      | Status      |
 | ------------------------------------------------------------- | ----------- |
-| UI-Mate technical report                                      | Coming soon |
-| Desktop application                                           | Coming soon |
+| UI-Mate technical report                                      | [arXiv](https://arxiv.org/abs/2608.15930) |
+| Desktop application                                           | [Download Link](https://ui-mate.github.io/#app) |
 | OSWorkerBench tasks, demonstrations, metadata, and evaluators | Coming soon |
 
 
