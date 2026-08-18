@@ -303,23 +303,33 @@ subtask's key steps. When the model reports `subtask_complete` the pointer moves
 on; recorded coordinates are never replayed, so the live screenshot stays
 authoritative.
 
-`examples/trajectory_captioned_ssh_user.json` is a real one — an OSWorld episode
-scored 1.0, distilled into 12 subtasks over 42 steps. Try it on any screenshot:
+`resources/example_demonstration/` holds a real one:
+
+| File | What it is |
+| --- | --- |
+| `task.json` | The task, byte-identical to its definition in [OSWorld](https://github.com/xlang-ai/OSWorld) (`os/5812b315-...`) — instruction, setup and evaluator. Configuring a chroot-restricted SSH user. |
+| `trajectory_captioned.json` | A run of that task scored 1.0, distilled into 12 subtasks over 42 steps. Same task, so this is the self-demo setting. |
 
 ```bash
+# --instruction is the "instruction" field of task.json, quoted verbatim.
 python examples/run_agent.py \
-    --demo examples/trajectory_captioned_ssh_user.json \
+    --demo resources/example_demonstration/trajectory_captioned.json \
     --image resources/example_single_step/os_install_spotify.png \
     --instruction 'Please create an SSH user named "charles" with password "Ex@mpleP@55w0rd!" on Ubuntu who is only allowed to access the folder "/home/test1".' \
     --base-url http://127.0.0.1:8000/v1
 ```
 
-The reply opens a terminal, because the demonstration's first subtask says to.
-Guidance reaches the prompt as three blocks placed before the instruction —
-`<workflow_progress>`, `<current_subtask>` and `<current_subtask_action_list>` —
-and `subtask_complete` is added to the tool schema.
+This shows the guidance being assembled: three blocks placed before the
+instruction — `<workflow_progress>`, `<current_subtask>` and
+`<current_subtask_action_list>` — and `subtask_complete` added to the tool schema.
+It does not show what guidance is worth. Opening a terminal is the obvious first
+move here and the model makes it either way; the demonstration earns its keep
+later, on the steps that cannot be read off the screen (`Match User`,
+`ChrootDirectory`, `ForceCommand`, and the ownership a chroot demands). Seeing
+that requires running the task in a real environment against `task.json`'s
+evaluator, which lives in OSWorld rather than here.
 
-In your own loop, pass `demo=` a demo file or a directory holding a
+In your own loop, pass `demo=` a demo file, or a directory holding a single
 `trajectory_captioned*.json`:
 
 ```python
@@ -327,7 +337,7 @@ from agents.ui_mate_agent import UIMateAgent
 
 agent = UIMateAgent(
     base_url="http://127.0.0.1:8000/v1",
-    demo="examples/trajectory_captioned_ssh_user.json",
+    demo="resources/example_demonstration/trajectory_captioned.json",
 )
 agent.reset()
 response, actions = agent.predict(instruction, {"screenshot": png_bytes})

@@ -14,7 +14,10 @@ Quick start::
 
     from agents.ui_mate_agent import UIMateAgent
 
-    agent = UIMateAgent(base_url=..., demo="examples/trajectory_captioned_ssh_user.json")
+    agent = UIMateAgent(
+        base_url=...,
+        demo="resources/example_demonstration/trajectory_captioned.json",
+    )
     agent.reset()
     response, actions = agent.predict(instruction, {"screenshot": png_bytes})
 """
