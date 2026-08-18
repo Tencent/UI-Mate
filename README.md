@@ -293,6 +293,62 @@ or `FAIL` in place of pyautogui calls.
 
 </details>
 
+<details>
+<summary><b>4 · Guide a run with a demonstration</b></summary>
+
+A demonstration is a successful episode already segmented into subtasks. Point
+the agent at one and the run becomes demonstration-guided: each step is shown the
+subtask checklist, the current subtask with its completion criterion, and that
+subtask's key steps. When the model reports `subtask_complete` the pointer moves
+on; recorded coordinates are never replayed, so the live screenshot stays
+authoritative.
+
+`resources/example_demonstration/` holds a real one:
+
+| File | What it is |
+| --- | --- |
+| `task.json` | The task, byte-identical to its definition in [OSWorld](https://github.com/xlang-ai/OSWorld) (`os/5812b315-...`) — instruction, setup and evaluator. Configuring a chroot-restricted SSH user. |
+| `trajectory_captioned.json` | A run of that task scored 1.0, distilled into 12 subtasks over 42 steps. Same task, so this is the self-demo setting. |
+
+```bash
+# --instruction is the "instruction" field of task.json, quoted verbatim.
+python examples/run_agent.py \
+    --demo resources/example_demonstration/trajectory_captioned.json \
+    --image resources/example_single_step/os_install_spotify.png \
+    --instruction 'Please create an SSH user named "charles" with password "Ex@mpleP@55w0rd!" on Ubuntu who is only allowed to access the folder "/home/test1".' \
+    --base-url http://127.0.0.1:8000/v1
+```
+
+This shows the guidance being assembled: three blocks placed before the
+instruction — `<workflow_progress>`, `<current_subtask>` and
+`<current_subtask_action_list>` — and `subtask_complete` added to the tool schema.
+It does not show what guidance is worth. Opening a terminal is the obvious first
+move here and the model makes it either way; the demonstration earns its keep
+later, on the steps that cannot be read off the screen (`Match User`,
+`ChrootDirectory`, `ForceCommand`, and the ownership a chroot demands). Seeing
+that requires running the task in a real environment against `task.json`'s
+evaluator, which lives in OSWorld rather than here.
+
+In your own loop, pass `demo=` a demo file, or a directory holding a single
+`trajectory_captioned*.json`:
+
+```python
+from agents.ui_mate_agent import UIMateAgent
+
+agent = UIMateAgent(
+    base_url="http://127.0.0.1:8000/v1",
+    demo="resources/example_demonstration/trajectory_captioned.json",
+)
+agent.reset()
+response, actions = agent.predict(instruction, {"screenshot": png_bytes})
+```
+
+A step where the model only reports progress comes back as `WAIT`, and a
+premature `finished` on a non-final subtask advances the workflow instead of
+ending the episode, so completing one subtask cannot end the task.
+
+</details>
+
 ## 🖥️ Desktop Application
 
 UI-Mate provides a standalone desktop application for automated GUI interactions and evaluation.

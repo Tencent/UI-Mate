@@ -209,7 +209,13 @@ def build_agent(args: argparse.Namespace) -> UIMateAgent:
     if args.images_to_keep is not None:
         overrides["images_to_keep"] = args.images_to_keep
 
-    agent = UIMateAgent(model=args.model, base_url=args.base_url, api_key=args.api_key, **overrides)
+    agent = UIMateAgent(
+        model=args.model,
+        base_url=args.base_url,
+        api_key=args.api_key,
+        demo=args.demo,
+        **overrides,
+    )
     check_endpoint(agent)
     return agent
 
@@ -385,6 +391,14 @@ def parse_args() -> argparse.Namespace:
     endpoint.add_argument("--model", default=DEFAULT_MODEL, help="Model name to request from the endpoint")
     endpoint.add_argument("--temperature", type=float, help="Override the sampling temperature")
     endpoint.add_argument("--max-tokens", type=int, help="Override the generation length cap")
+
+    guidance = parser.add_argument_group("demonstration-guided execution")
+    guidance.add_argument(
+        "--demo",
+        metavar="PATH",
+        help="Guide the run with a demonstration: a trajectory_captioned*.json, "
+             "or a directory holding one",
+    )
 
     output = parser.add_argument_group("output")
     output.add_argument(
