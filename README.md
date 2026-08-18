@@ -317,7 +317,19 @@ verify the resulting application and artifact state.
 
 ## 📚 Citation
 
-Citation information will be added when the technical report is released.
+If you find UI-Mate useful in your research or applications, please cite:
+
+```bibtex
+@article{uimate2026,
+  title         = {UI-Mate: Advancing Open-Weight Foundation GUI Agents with In-Context Demonstrations},
+  author        = {Tencent HY Frontier Team},
+  journal       = {arXiv preprint arXiv:2608.15930},
+  year          = {2026},
+  eprint        = {2608.15930},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI}
+}
+```
 
 ## 📄 License
 
