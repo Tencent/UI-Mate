@@ -293,6 +293,52 @@ or `FAIL` in place of pyautogui calls.
 
 </details>
 
+<details>
+<summary><b>4 · Guide a run with a demonstration</b></summary>
+
+A demonstration is a successful episode already segmented into subtasks. Point
+the agent at one and the run becomes demonstration-guided: each step is shown the
+subtask checklist, the current subtask with its completion criterion, and that
+subtask's key steps. When the model reports `subtask_complete` the pointer moves
+on; recorded coordinates are never replayed, so the live screenshot stays
+authoritative.
+
+`examples/trajectory_captioned_ssh_user.json` is a real one — an OSWorld episode
+scored 1.0, distilled into 12 subtasks over 42 steps. Try it on any screenshot:
+
+```bash
+python examples/run_agent.py \
+    --demo examples/trajectory_captioned_ssh_user.json \
+    --image resources/example_single_step/os_install_spotify.png \
+    --instruction 'Please create an SSH user named "charles" with password "Ex@mpleP@55w0rd!" on Ubuntu who is only allowed to access the folder "/home/test1".' \
+    --base-url http://127.0.0.1:8000/v1
+```
+
+The reply opens a terminal, because the demonstration's first subtask says to.
+Guidance reaches the prompt as three blocks placed before the instruction —
+`<workflow_progress>`, `<current_subtask>` and `<current_subtask_action_list>` —
+and `subtask_complete` is added to the tool schema.
+
+In your own loop, pass `demo=` a demo file or a directory holding a
+`trajectory_captioned*.json`:
+
+```python
+from agents.ui_mate_agent import UIMateAgent
+
+agent = UIMateAgent(
+    base_url="http://127.0.0.1:8000/v1",
+    demo="examples/trajectory_captioned_ssh_user.json",
+)
+agent.reset()
+response, actions = agent.predict(instruction, {"screenshot": png_bytes})
+```
+
+A step where the model only reports progress comes back as `WAIT`, and a
+premature `finished` on a non-final subtask advances the workflow instead of
+ending the episode, so completing one subtask cannot end the task.
+
+</details>
+
 ## 🖥️ Desktop Application
 
 UI-Mate provides a standalone desktop application for automated GUI interactions and evaluation.

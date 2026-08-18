@@ -13,6 +13,10 @@ Quick start::
     agent = UIMateAgent(base_url="http://127.0.0.1:8000/v1")
     agent.reset()
     response, actions = agent.predict("Open Firefox", {"screenshot": png_bytes})
+
+Pass ``demo=<path>`` to run demonstration-guided (see ``agents/demo_workflow.py``); the
+agent then reads the guidance out of ``obs`` and the workflow tracks the subtask
+pointer, while everything below stays the same general agent.
 """
 
 from __future__ import annotations
@@ -25,9 +29,18 @@ import os
 import re
 import time
 from io import BytesIO
+from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple, Union
 
 from PIL import Image
+
+from agents.demo_workflow import (
+    OBS_GUIDANCE,
+    OBS_SYSTEM_PROMPT,
+    SUBTASK_COMPLETE_ACTION,
+    DemoWorkflow,
+    patch_tools_schema,
+)
 
 logger = logging.getLogger("ui_mate.agent")
 
@@ -405,15 +418,21 @@ RESPONSE_FORMAT = (
 )
 
 
-def build_system_prompt() -> str:
-    tools_block = build_tools_and_format_block(build_tools_def(build_description_prompt()))
-    return (
+def build_system_prompt(obs: Optional[Dict] = None) -> str:
+    """Assemble the system prompt, folding in the workflow parts obs may carry."""
+    tools_def = patch_tools_schema(build_tools_def(build_description_prompt()), obs)
+    prompt = (
         "You are a helpful GUI agent.\n\n"
-        + tools_block + "\n\n"
+        + build_tools_and_format_block(tools_def) + "\n\n"
         + PROMPT_ADDITIONS + "\n\n"
         "# Response format\n\n"
         + RESPONSE_FORMAT
     ).strip()
+
+    workflow_section = obs.get(OBS_SYSTEM_PROMPT) if isinstance(obs, dict) else None
+    if isinstance(workflow_section, str) and workflow_section:
+        return prompt + "\n\n" + workflow_section
+    return prompt
 
 
 # ---------------------------------------------------------------------------
@@ -647,6 +666,11 @@ def to_pyautogui_code(
     if action == "wait":
         return "WAIT"
 
+    if action == SUBTASK_COMPLETE_ACTION:
+        # The workflow rewrites this step's actions; here it only has to stay harmless
+        # instead of scoring as a parse failure.
+        return "WAIT"
+
     if action == "finished":
         status = str(args.get("status", "")).lower()
         return "DONE" if status in ("success", "successful", "yes", "ok") else "FAIL"
@@ -762,6 +786,8 @@ class UIMateAgent:
         api_key: Optional[str] = None,
         request_timeout: Optional[float] = None,
         max_retry_times: Optional[int] = None,
+        # --- demonstration-guided execution (off unless a demo is given) ---
+        demo: Optional[Union[str, Path, DemoWorkflow]] = None,
         # --- runner-side context (accepted for parity, unused by predict) ---
         max_steps: int = DEFAULT_MAX_STEPS,
         screen_size: Sequence[int] = DEFAULT_SCREEN_SIZE,
@@ -817,6 +843,10 @@ class UIMateAgent:
         self.client_password = client_password
         self.extra_kwargs = kwargs
 
+        self.demo = (
+            DemoWorkflow.from_path(demo) if isinstance(demo, (str, Path)) else demo
+        )
+
         self.logger = logger
         self.sliced_messages_dir: Optional[str] = None
 
@@ -830,7 +860,10 @@ class UIMateAgent:
         self.full_messages_history: List[Dict] = []
 
         self.logger.info(
-            "UIMateAgent ready | model=%s | endpoint=%s", self.model, self.base_url
+            "UIMateAgent ready | model=%s | endpoint=%s | demo=%s",
+            self.model,
+            self.base_url,
+            f"{len(self.demo.plan.subtasks)} subtask(s)" if self.demo else "none",
         )
 
     # -- message construction ------------------------------------------------
@@ -842,7 +875,7 @@ class UIMateAgent:
             + [{"type": "text", "text": "\n</tool_response>"}]
         )
 
-    def build_messages(self, instruction: str) -> List[Dict]:
+    def build_messages(self, instruction: str, obs: Optional[Dict] = None) -> List[Dict]:
         """Build the chat messages for the current step from agent state."""
         total_steps = len(self.screenshots)
         start_step = max(1, total_steps - self.history_n)
@@ -863,10 +896,16 @@ class UIMateAgent:
             f"{chr(10).join(previous_actions) if previous_actions else 'None'}"
         )
 
+        guidance = obs.get(OBS_GUIDANCE) if isinstance(obs, dict) else None
+        if isinstance(guidance, str) and guidance:
+            # A guided run is trained with the workflow ahead of the instruction and no
+            # action history, so the baseline first-turn text is replaced wholesale.
+            instruction_prompt = f"\n{guidance}\n\nInstruction: {instruction}"
+
         messages: List[Dict] = [
             {
                 "role": "system",
-                "content": [{"type": "text", "text": build_system_prompt()}],
+                "content": [{"type": "text", "text": build_system_prompt(obs)}],
             }
         ]
 
@@ -923,9 +962,13 @@ class UIMateAgent:
         screenshot_bytes = obs["screenshot"]
         original_width, original_height = Image.open(BytesIO(screenshot_bytes)).size
 
+        if self.demo is not None:
+            obs = self.demo.decorate_obs(obs)
+            self.logger.info("Demonstration workflow: %s", self.demo.progress)
+
         self.screenshots.append(process_image(screenshot_bytes))
 
-        messages = self.build_messages(instruction)
+        messages = self.build_messages(instruction, obs)
 
         save_snapshot = False
         if self.enable_traj_slice:
@@ -980,6 +1023,8 @@ class UIMateAgent:
         low_level_instruction, pyautogui_code = parse_response(
             response or "", original_width, original_height, self.coordinate_type
         )
+        if self.demo is not None:
+            pyautogui_code = self.demo.after_predict(response or "", pyautogui_code)
         self.logger.info("Low level instruction: %s", low_level_instruction)
         self.logger.info("Pyautogui code: %s", pyautogui_code)
 
@@ -1162,6 +1207,8 @@ class UIMateAgent:
         self.collapsed_message_count = 0
         self.sliced_message_count = 0
         self.full_messages_history = []
+        if self.demo is not None:
+            self.demo.reset()
 
 
 __all__ = [
