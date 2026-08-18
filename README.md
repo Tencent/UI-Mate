@@ -29,12 +29,14 @@ goal is easy to describe, but real workflows also depend on personal tools,
 file layouts, naming conventions, and organization-specific procedures. These
 details are often easier to **show** than to write down.
 
-UI-Mate therefore supports two complementary ways to express intent:
+UI-Mate therefore supports two complementary ways to express intent, each served
+by its own checkpoint:
 
 
 | General computer use                                                                          | Demonstration-guided computer use                                                                        |
 | --------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | The agent plans and executes a task from a natural-language instruction and live screenshots. | A related human demonstration is distilled into a reusable workflow that guides execution on a new task. |
+| `UI-Mate-9B` · `UI-Mate-27B`                                                                  | `UI-Mate-democua-27B`                                                                                    |
 
 
 The demonstration is **advice, not a script**. UI-Mate follows the demonstrated
@@ -42,9 +44,17 @@ procedure where it carries user intent, while re-planning from the live
 interface whenever the target task, data, window layout, or application state
 differs.
 
+## 🤖 Models
+
+
+| Checkpoint                                                                | Base model  | Use it for                        |
+| ------------------------------------------------------------------------- | ----------- | --------------------------------- |
+| [UI-Mate-9B](https://huggingface.co/tencent/UI-Mate-9B)                   | Qwen3.5-9B  | General computer use              |
+| [UI-Mate-27B](https://huggingface.co/tencent/UI-Mate-27B)                 | Qwen3.6-27B | General computer use              |
+| [UI-Mate-democua-27B](https://huggingface.co/tencent/UI-Mate-democua-27B) | Qwen3.6-27B | Demonstration-guided computer use |
+
+
 ## ✨ Highlights
-
-
 
 ### 🔄 Scalable, environment-grounded training
 
@@ -68,8 +78,6 @@ required deliverable instead of trusting the agent's final claim.
 generation toward underrepresented applications, operations, and task
 lengths.
 
-
-
 ### 🧠 Training a General CUA
 
 Supervised fine-tuning first teaches the interaction protocol, visual
@@ -88,8 +96,6 @@ application domains; and
 - an optional Process Credit Model (PCM) that localizes verifier-derived credit
 to the decisions most relevant to success or failure.
 
-
-
 ### 🎬 Learn procedures from one demonstration
 
 A UI-Mate demonstration is a recorded successful desktop execution: every
@@ -107,6 +113,10 @@ Low-level coordinates are not treated as the solution. The live screenshot
 remains authoritative, allowing the agent to transfer a procedure across
 different content, layouts, and application states.
 
+This mode is served by the dedicated `UI-Mate-democua-27B` checkpoint, obtained
+by continuing from the general CUA checkpoint after RL and training on a mixture
+of general and demonstration-augmented data.
+
 ### 🖥️ A native, model-agnostic desktop application
 
 The UI-Mate application is an OpenAI-compatible client rather than a bundled
@@ -121,8 +131,6 @@ It provides:
 - demonstration capture, retrieval, editing, and attachment;
 - pause, resume, and user interjection during a run; and
 - inspectable session and demonstration artifacts.
-
-
 
 ## 🧪 OSWorkerBench
 
@@ -158,8 +166,6 @@ whether it can replay the example's action sequence.
 
 ## 📈 Results
 
-Final public-benchmark numbers are being verified.
-
 ### Instruction-only benchmarks
 
 
@@ -176,9 +182,11 @@ On OSWorkerBench, UI-Mate-27B improves over its Qwen3.6-27B base model by
 
 ### Demonstration-guided execution
 
-UI-Mate-27B in the **self-demo** setting, where each target is paired with a
-successful rollout of that same task from a stronger agent. Initial states,
-budgets, and evaluators are identical; only the demonstration differs.
+`UI-Mate-democua-27B` in the **self-demo** setting, where each target is paired
+with a successful rollout of that same task from a stronger agent. Initial
+states, budgets, and evaluators are identical; only the demonstration differs.
+Both columns below are that same demonstration-guided checkpoint, run with and
+without the demonstration.
 
 
 | Evaluation set · metric                        | Instruction only | + one self-demo | Change    |
@@ -196,20 +204,20 @@ exploratory detours.
 
 ## 💻 Example Usage
 
-UI-Mate runs against any OpenAI-compatible endpoint. Click a section to expand.
+UI-Mate runs against any OpenAI-compatible endpoint. The two model families are
+used differently, so each has its own walkthrough. Click a section to expand.
 
 <details>
-<summary><b>1 · Serve a checkpoint with vLLM</b></summary>
+<summary><b>General CUA</b></summary>
 
-Two flags matter more than the rest. `--chat-template-content-format openai`
-is required because the agent sends OpenAI-style content lists, and
-`--limit-mm-per-prompt` has to admit at least `images_to_keep + 1` images —
-six with the default of five, since the newest screenshot arrives before the
-oldest is collapsed.
+Runs on `UI-Mate-9B` or `UI-Mate-27B`, from an instruction and screenshots alone.
+
+**Serve with vLLM**
 
 ```bash
 pip install openai pillow
 
+# or /path/to/UI-Mate-9B
 vllm serve /path/to/UI-Mate-27B \
     --trust-remote-code \
     --served-model-name UI_Mate \
@@ -227,10 +235,9 @@ Confirm the name the server ended up exposing before pointing the agent at it:
 curl -s http://127.0.0.1:8000/v1/models
 ```
 
-</details>
 
-<details>
-<summary><b>2 · Run the bundled examples</b></summary>
+
+**Run the bundled examples**
 
 Single-step mode walks five screenshots from unrelated tasks, resetting between
 each, so every prediction is that task's opening move:
@@ -239,10 +246,9 @@ each, so every prediction is that task's opening move:
 python examples/run_agent.py --base-url http://127.0.0.1:8000/v1
 ```
 
-Replay mode walks one whole episode without resetting, which is what exercises
-the behaviour that only appears over time: the growing `Previous actions` list,
-past replies fed back as history, and older screenshots collapsing into
-placeholders once more than `images_to_keep` have piled up:
+Replay mode walks one whole episode without resetting, so it exercises the
+behaviour that only appears over time: accumulated action history and older
+screenshots collapsing into placeholders:
 
 ```bash
 python examples/run_agent.py --replay --base-url http://127.0.0.1:8000/v1
@@ -261,10 +267,9 @@ marked. Pass `--model` whenever the endpoint serves something other than
 `UI_Mate`; the script checks the name against `/v1/models` and stops early
 rather than failing later as an empty response.
 
-</details>
 
-<details>
-<summary><b>3 · Drive the agent from Python</b></summary>
+
+**Drive the agent from Python**
 
 ```python
 from agents.ui_mate_agent import UIMateAgent
@@ -286,15 +291,36 @@ agent.reset()     # drop history before starting another episode
 `reset` only between episodes. The endpoint can also come from
 `OPENAI_BASE_URL` and `OPENAI_API_KEY` instead of constructor arguments.
 
-The model reasons in a normalized 1000x1000 screen space; returned actions are
-already rescaled to the screenshot's own pixel size, so they can be executed or
-plotted as they come. A step may also yield the control tokens `WAIT`, `DONE`,
-or `FAIL` in place of pyautogui calls.
+A step may also yield the control tokens `WAIT`, `DONE`, or `FAIL` in place of
+pyautogui calls.
 
 </details>
 
 <details>
-<summary><b>4 · Guide a run with a demonstration</b></summary>
+<summary><b>DemoCUA</b></summary>
+
+Runs on `UI-Mate-democua-27B`. Consuming a workflow and emitting
+`subtask_complete` are behaviours learned in this checkpoint's
+demonstration-augmented SFT stage, so a general checkpoint will accept the same
+prompt without acting on it.
+
+**Serve with vLLM**
+
+```bash
+pip install openai pillow
+
+vllm serve /path/to/UI-Mate-democua-27B \
+    --trust-remote-code \
+    --served-model-name UI_Mate \
+    --port 8000 \
+    --tensor-parallel-size 2 \
+    --gpu-memory-utilization 0.85 \
+    --mm-encoder-tp-mode data \
+    --chat-template-content-format openai \
+    --limit-mm-per-prompt '{"image":6,"video":0}'
+```
+
+**Guide a run with a demonstration**
 
 A demonstration is a successful episode already segmented into subtasks. Point
 the agent at one and the run becomes demonstration-guided: each step is shown the
@@ -305,10 +331,12 @@ authoritative.
 
 `resources/example_demonstration/` holds a real one:
 
-| File | What it is |
-| --- | --- |
-| `task.json` | The task, byte-identical to its definition in [OSWorld](https://github.com/xlang-ai/OSWorld) (`os/5812b315-...`) — instruction, setup and evaluator. Configuring a chroot-restricted SSH user. |
-| `trajectory_captioned.json` | A run of that task scored 1.0, distilled into 12 subtasks over 42 steps. Same task, so this is the self-demo setting. |
+
+| File                        | What it is                                                                                                                                                                                     |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `task.json`                 | The task, byte-identical to its definition in [OSWorld](https://github.com/xlang-ai/OSWorld) (`os/5812b315-...`) — instruction, setup and evaluator. Configuring a chroot-restricted SSH user. |
+| `trajectory_captioned.json` | A run of that task scored 1.0, distilled into 12 subtasks over 42 steps. Same task, so this is the self-demo setting.                                                                          |
+
 
 ```bash
 # --instruction is the "instruction" field of task.json, quoted verbatim.
@@ -349,30 +377,30 @@ ending the episode, so completing one subtask cannot end the task.
 
 </details>
 
+
+
 ## 🖥️ Desktop Application
 
 UI-Mate provides a standalone desktop application for automated GUI interactions and evaluation.
 
-* **Download**: Get the latest release from the [UI-Mate App Download](https://ui-mate.github.io/#app) page.
-* **Tutorial & Documentation**: Check out the comprehensive setup and usage guide in the [UI-Mate App Usage Guide](https://ui-mate.github.io/usage.html).
+- **Download**: Get the latest release from the [UI-Mate App Download](https://ui-mate.github.io/#app) page.
+- **Tutorial & Documentation**: Check out the comprehensive setup and usage guide in the [UI-Mate App Usage Guide](https://ui-mate.github.io/usage.html).
 
 ### Quick Start
+
 1. **Install & Launch**: Download the package for your operating system and open the UI-Mate desktop client.
-2. **Configure Endpoint**: Set your model endpoint (e.g., `http://127.0.0.1:8000/v1`) and required API keys in the settings panel.
+2. **Configure Endpoint**: Set your model endpoint (e.g., `http://127.0.0.1:8000/v1`) and required API keys in the settings panel. Serve `UI-Mate-9B` or `UI-Mate-27B` for instruction-only runs, or `UI-Mate-democua-27B` if you plan to attach demonstrations.
 3. **Grant Permissions**: Ensure accessibility and screen-recording permissions are granted so the agent can inspect UI elements and execute actions.
 4. **Execute Tasks**: Enter natural language instructions in the input bar to begin automated workflows.
-   
 
 ## 🚀 Planned Release
 
 
-| Artifact                                                      | Status      |
-| ------------------------------------------------------------- | ----------- |
-| UI-Mate technical report                                      | [arXiv](https://arxiv.org/abs/2608.15930) |
+| Artifact                                                      | Status                                          |
+| ------------------------------------------------------------- | ----------------------------------------------- |
+| UI-Mate technical report                                      | [arXiv](https://arxiv.org/abs/2608.15930)       |
 | Desktop application                                           | [Download Link](https://ui-mate.github.io/#app) |
-| OSWorkerBench tasks, demonstrations, metadata, and evaluators | Coming soon |
-
-
+| OSWorkerBench tasks, demonstrations, metadata, and evaluators | Coming soon                                     |
 
 
 ## 🛡️ Safety
