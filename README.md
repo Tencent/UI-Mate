@@ -294,6 +294,20 @@ or `FAIL` in place of pyautogui calls.
 
 </details>
 
+## 🖥️ Desktop Application
+
+UI-Mate provides a standalone desktop application for automated GUI interactions and evaluation.
+
+* **Download**: Get the latest release from the [UI-Mate App Download](https://ui-mate.github.io/#app) page.
+* **Tutorial & Documentation**: Check out the comprehensive setup and usage guide in the [UI-Mate App Usage Guide](https://ui-mate.github.io/usage.html).
+
+### Quick Start
+1. **Install & Launch**: Download the package for your operating system and open the UI-Mate desktop client.
+2. **Configure Endpoint**: Set your model endpoint (e.g., `http://127.0.0.1:8000/v1`) and required API keys in the settings panel.
+3. **Grant Permissions**: Ensure accessibility and screen-recording permissions are granted so the agent can inspect UI elements and execute actions.
+4. **Execute Tasks**: Enter natural language instructions in the input bar to begin automated workflows.
+   
+
 ## 🚀 Planned Release
 
 
