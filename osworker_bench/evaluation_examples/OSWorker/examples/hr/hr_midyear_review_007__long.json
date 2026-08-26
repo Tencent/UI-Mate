@@ -1,0 +1,77 @@
+{
+  "id": "hr_midyear_review_007__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou're Tara, the HR Business Partner running this cycle's mid-year reviews in Workday. For every direct report whose review is waiting on your manager rating, read their self-assessment and give a 1-5 rating by goal attainment: 5 = significantly exceeded their goals, 4 = exceeded most, 3 = met expectations, 2 = partially met, 1 = did not meet. Submit a rating for each one.\n\nThen handle merit increases: ONLY for reports you rated 4 or 5, send each of them the 'Salary Increase Confirmation Letter' for signature in DocuSign, addressed to that employee. Do not send a letter to anyone rated 3 or below.\n\nRecord every report's name and the rating you gave in the 'Performance Review Tracker' sheet, and mark whether a raise letter was sent. Finally, post a summary to the Slack #hr channel stating how many reviews you completed and how many raise letters you sent.",
+  "app_type": "workday_mock,docusign_mock,slack_mock,google_sheets_mock",
+  "domain": "hr",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

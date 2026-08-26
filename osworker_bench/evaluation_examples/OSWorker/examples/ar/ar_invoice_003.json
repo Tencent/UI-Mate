@@ -1,0 +1,79 @@
+{
+  "instruction": "The 'Acme Corp - Platform License' opportunity just closed. In Salesforce, open that Closed-Won opportunity to read the amount, Close Date, and payment terms, then add a new invoice row to the 'AR Invoice Ledger' Google Sheet using the opportunity's Close Date as the invoice Issue Date and computing the Due Date from the Net 30 terms, and let the account executive know in Slack #finance that the invoice has been issued.",
+  "id": "ar_invoice_003",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T17:52:04.464484",
+  "adversarial_rounds": "1",
+  "domain": "ar",
+  "_source": "minicua",
+  "instruction_zh": "“Acme Corp - Platform License” 商机刚刚成交。在 Salesforce 中打开该 Closed-Won 商机，读取金额、成交日期和付款条款，然后在 “AR Invoice Ledger” Google Sheet 中新增一行发票记录，以商机的成交日期作为开票日期，并根据 Net 30 条款计算到期日，最后在 Slack #finance 频道通知客户经理发票已开具。"
+}

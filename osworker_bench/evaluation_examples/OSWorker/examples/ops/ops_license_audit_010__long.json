@@ -1,0 +1,112 @@
+{
+  "id": "ops_license_audit_010__long",
+  "snapshot": "chrome",
+  "instruction": "You are doing an open-source license audit. On the Desktop there is a project file \"requirements.txt\" (Python dependencies, each line pinned as \"name==version\") and an almost-empty worksheet \"license_audit.xlsx\" whose row 1 already contains the headers: package, version, license, url. For EACH package listed in requirements.txt, in the order it appears: (1) look up the package on PyPI at https://pypi.org/project/<name>/ ; (2) read the short license identifier shown in the \"License\" field of the sidebar on that project page (e.g. \"MIT\", \"Apache 2.0\", \"ISC\") and copy it verbatim; do NOT expand it into the long classifier text (e.g. do NOT write \"GNU Lesser General Public License (LGPL)\" or \"BSD License\"); (3) fill the next empty row of license_audit.xlsx with A=package name, B=version from requirements.txt (e.g. \"1.26.4\"), C=the short license identifier copied in step (2), D=the PyPI project URL (https://pypi.org/project/<name>/); (4) if the license string contains any of \"GPL\", \"AGPL\", or \"LGPL\" (case insensitive), fill the whole row A:D with a solid red background. Save the xlsx when you are done.",
+  "source": "authors",
+  "config": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/9dfa49b2-f205-4683-af68-44b92a40dd66/requirements.txt",
+            "path": "/home/user/Desktop/requirements.txt"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/9dfa49b2-f205-4683-af68-44b92a40dd66/license_audit_template.xlsx",
+            "path": "/home/user/Desktop/license_audit.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "code",
+          "--no-sandbox",
+          "--user-data-dir=/home/user/.config/Code",
+          "/home/user/Desktop/requirements.txt"
+        ]
+      }
+    },
+    {
+      "type": "open",
+      "parameters": {
+        "path": "/home/user/Desktop/license_audit.xlsx"
+      }
+    }
+  ],
+  "trajectory": "trajectories/",
+  "related_apps": [
+    "vs_code",
+    "chrome",
+    "libreoffice_calc"
+  ],
+  "evaluator": {
+    "func": "compare_xlsx_license_audit_partial",
+    "result": {
+      "type": "vm_file",
+      "path": "/home/user/Desktop/license_audit.xlsx",
+      "dest": "license_audit.xlsx"
+    },
+    "expected": {
+      "type": "cloud_file",
+      "path": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/9dfa49b2-f205-4683-af68-44b92a40dd66/license_audit_gold_long.xlsx",
+      "dest": "license_audit_gold.xlsx"
+    },
+    "options": {
+      "match_by": "package_name",
+      "license_match": {
+        "mode": "alias_then_alnum_casefold_substring",
+        "alias_groups": [
+          [
+            "apache-2.0",
+            "apache 2.0",
+            "apache20",
+            "apache license 2.0",
+            "apache software license"
+          ],
+          [
+            "mit",
+            "mit license"
+          ],
+          [
+            "lgpl",
+            "lgpl-2.1-or-later",
+            "lgplv2.1+",
+            "lgplv2.1",
+            "gnu lesser general public license (lgpl)",
+            "gnu lesser general public license v2 or later (lgplv2+)"
+          ],
+          [
+            "bsd-3-clause",
+            "bsd 3-clause",
+            "bsd 3-clause license",
+            "new bsd license",
+            "bsd license",
+            "bsd"
+          ],
+          [
+            "gplv2+",
+            "gpl-2.0-or-later",
+            "gpl v2 or later",
+            "gnu general public license v2 or later (gplv2+)",
+            "gpl-2.0+"
+          ]
+        ]
+      },
+      "red_detect": {
+        "r_min": 200,
+        "g_max": 80,
+        "b_max": 80
+      },
+      "extra_rows_penalty_per_row": "1/N"
+    }
+  },
+  "proxy": true,
+  "fixed_ip": false,
+  "possibility_of_env_change": "low",
+  "domain": "ops",
+  "app_type": "democua_multi_apps_long"
+}

@@ -1,0 +1,77 @@
+{
+  "id": "sdr_lead_import_004__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nThe 'Inbound' Google Sheet contains 10 lead rows (rows 2-11). For every row, create a Salesforce Lead with this exact field mapping: First Name -> First Name, Last Name -> Last Name, Company -> Company, Phone -> Phone, Email -> Email, Notes -> Description; set Lead Status to 'New'. After creating each lead, write 'Entered' into the Status column (column G) of that same row. If a row's Status column already says 'Entered', SKIP that row -- do not create a duplicate Lead in Salesforce. When finished, post in the Slack channel #sales-ops: 'Entered {n} new leads', where {n} is the total number of rows you needed to process (i.e. rows 2-11 whose Status column was NOT already 'Entered' before you started); use this exact count even if you did not finish them all.",
+  "app_type": "salesforce_mock,google_sheets_mock,slack_mock",
+  "domain": "sdr",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

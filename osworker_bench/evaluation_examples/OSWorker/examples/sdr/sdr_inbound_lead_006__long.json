@@ -1,0 +1,77 @@
+{
+  "id": "sdr_inbound_lead_006__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Salesforce, Gmail, Google Calendar, and Slack). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nAssume today is Monday, July 6, 2026. Work the overnight inbound emails in Gmail and qualify the sales pipeline. A GENUINE inbound is a prospect asking about the product. For each genuine inbound email, classify its tier by intent keyword in the body (precedence Hot > Warm > Cold): if the body mentions 'ready to buy', 'budget approved', or 'sign this quarter' -> Hot; else if it mentions 'evaluating', 'comparing', or 'demo' -> Warm; otherwise -> Cold.\n\nApply the matching tier label ('Hot', 'Warm', or 'Cold') to each genuine inbound email in Gmail.\n\nThen bring Salesforce into line. Find the Opportunity that matches the email's company and set its Stage by tier: Hot -> 'Value Proposition'; Warm -> 'Qualification'; Cold -> 'Prospecting'. If a genuine inbound has no matching Salesforce Opportunity, still label the email but make no Salesforce change.\n\nFor each Hot lead only, also (a) log a follow-up Task on that Opportunity with Subject 'Discovery follow-up: <Company>', and (b) book a Google Calendar discovery call titled 'Discovery call - <Company>' on Wednesday, July 8, 2026 (today + 2 days), and add the prospect (the email sender's address) as a guest on that event.\n\nDo NOT label or take Salesforce/Calendar action on newsletters, auto-replies, or email threads whose later reply says the matter is already closed -- archive all of those instead.\n\nFinally, post a one-line summary to the Slack #sales channel stating how many inbound leads you qualified, and pin that message to the channel.",
+  "app_type": "salesforce_mock,gmail_mock,google_calendar_mock,slack_mock",
+  "domain": "sdr",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

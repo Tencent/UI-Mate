@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "hr_one_on_one_009",
+  "difficulty": "hard",
+  "instruction": "Prep this week's 1:1 with your senior engineer. First, in Google Docs create a page titled '1:1 Prep - Senior Eng' whose body has three sections: Wins, Concerns, and Goals — and under Goals reference the CI/CD pipeline time goal we're tracking. Then leave written feedback in Lattice for James Kim (your senior engineer) acknowledging their work on the CI/CD speedup. Schedule the 1:1 as a Google Calendar event titled '1:1 - Senior Eng' on June 25. Finally, post in #general that the 1:1 prep doc is ready.",
+  "instruction_zh": "准备本周与高级工程师的一对一会议。首先，在 Google Docs 中创建一个标题为 '1:1 Prep - Senior Eng' 的页面，正文分三个部分：Wins、Concerns 和 Goals，并在 Goals 部分提及我们正在追踪的 CI/CD 流水线时间目标。接着，在 Lattice 中为 James Kim（你的高级工程师）撰写书面反馈，认可其在 CI/CD 加速上的工作。将这场一对一会议安排为 Google Calendar 活动，标题设为 '1:1 - Senior Eng'，日期定在 June 25。最后，在 #general 频道发帖，告知一对一准备文档已就绪。",
+  "app_type": "lattice_mock",
+  "persona": "You are an office worker acting as an engineering manager. Your tools for this task are: Lattice performance management, the team calendar, shared documents, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Lattice with 12 goals and feedback history; an empty Google Calendar; Google Docs with documents 'Team Wiki'; Slack workspace with channels #general, #engineering, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: new 1:1 prep doc (+0.2); doc has Wins/Concerns/Goals sections (+0.25); Lattice feedback to James Kim (user_4) on CI/CD work (+0.2); cal_new_event (+0.05); event titled 1:1 - Senior Eng (+0.1); scheduled on June 25 (+0.1); posts in #general (+0.1). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "hr",
+  "_source": "cua_gym"
+}

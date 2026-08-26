@@ -1,0 +1,167 @@
+{
+  "id": "ops_grade_report_011__long",
+  "snapshot": "thunderbird",
+  "instruction": "You are the homeroom teacher of class B2D9. Three source files are provided:\n  - /home/user/Desktop/grades.xlsx  (columns A..E: name, score, rank, comment, status; rows 2.. are the 7 students currently enrolled in the class; the \"status\" column is initially empty).\n  - /home/user/Desktop/template.docx  (a LibreOffice Writer report card template that contains the placeholders {{NAME}}, {{SCORE}}, {{RANK}}, {{COMMENT}}).\n  - /home/user/roster.json  (a JSON list that tells you which students are actually eligible for a report this term; only those 5 students must be processed, the remaining students in the xlsx must NOT be touched).\n\nFor EACH of the 5 eligible students listed in roster.json, in the exact order they appear in that JSON file, do the following three things:\n  (1) Compute the comment text from the student's score, using these rules:\n        - if score >= 90: comment = \"Excellent, keep it up.\"\n        - if 75 <= score < 90: comment = \"Good job, room to improve.\"\n        - if score < 75: comment = \"Needs more effort next term.\"\n      Fill the \"comment\" cell (column D) of that student's row in grades.xlsx with that exact text. Save the xlsx.\n  (2) Open template.docx in LibreOffice Writer and replace the four placeholders {{NAME}}, {{SCORE}}, {{RANK}}, {{COMMENT}} with the student's values (COMMENT uses the text you computed in step 1). Export the result as a PDF to /home/user/Desktop/reports/<name>_report.pdf  (use the student's name exactly as it appears in grades.xlsx, lowercased, spaces replaced with underscores).\n  (3) In Thunderbird, compose and send an email FROM teacher@school.test TO <name>.parent@school.test (lowercase the student name and replace spaces with underscores, e.g. for a student named 'Mary Poppins', use mary_poppins.parent@school.test), subject exactly \"Report card for <Student Name>\" (use the student name exactly as in grades.xlsx), and a short body that contains the student's score, rank and the comment text from step 1. Attach the PDF you generated in step 2. After the email is sent, set the \"status\" column (E) of that student's row in grades.xlsx to \"sent\" and save the xlsx. NOTE: when sending the email, Thunderbird may falsely report an email-server connection error; please ignore it.\n\nIMPORTANT: students listed in grades.xlsx but NOT in roster.json must be left completely untouched (no comment, no status, no PDF, no email). When you are done, grades.xlsx should have \"comment\" and \"status\" filled ONLY for the 5 eligible students, /home/user/Desktop/reports/ should contain exactly 5 PDFs, and exactly 5 emails should have been sent from teacher@school.test.",
+  "source": "authors",
+  "config": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/b2d9c649-7e4a-49a3-bc2e-000000b2d9/grades.xlsx",
+            "path": "/home/user/Desktop/grades.xlsx"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/b2d9c649-7e4a-49a3-bc2e-000000b2d9/template.docx",
+            "path": "/home/user/Desktop/template.docx"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/b2d9c649-7e4a-49a3-bc2e-000000b2d9/roster.json",
+            "path": "/home/user/roster.json"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/b2d9c649-7e4a-49a3-bc2e-000000b2d9/b2d9report-thunderbird-profile.tar.gz",
+            "path": "/home/user/b2d9report-thunderbird-profile.tar.gz"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/b2d9c649-7e4a-49a3-bc2e-000000b2d9/fake_smtpd.py",
+            "path": "/home/user/fake_smtpd.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "tar",
+          "-xzv",
+          "--recursive-unlink",
+          "-f",
+          "/home/user/b2d9report-thunderbird-profile.tar.gz",
+          "-C",
+          "/home/user/"
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "mkdir",
+          "-p",
+          "/home/user/Desktop/reports",
+          "/home/user/fake_smtp_mail"
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "sh",
+          "-c",
+          "rm -f /home/user/fake_smtp_mail/*.eml; nohup python3 /home/user/fake_smtpd.py >/home/user/fake_smtpd.log 2>&1 & disown; sleep 1"
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "/usr/bin/thunderbird"
+        ]
+      }
+    }
+  ],
+  "trajectory": "trajectories/",
+  "related_apps": [
+    "libreoffice_calc",
+    "libreoffice_writer",
+    "thunderbird",
+    "os"
+  ],
+  "evaluator": {
+    "postconfig": [
+      {
+        "type": "command",
+        "parameters": {
+          "command": [
+            "sh",
+            "-c",
+            "tar -czf /home/user/b2d9_artifacts.tar.gz -C /home/user Desktop/grades.xlsx Desktop/reports fake_smtp_mail 2>/dev/null; ls -la /home/user/b2d9_artifacts.tar.gz"
+          ],
+          "stdout": "b2d9_artifacts.ls"
+        }
+      }
+    ],
+    "func": "evaluate_student_report_partial",
+    "result": {
+      "type": "vm_file",
+      "path": "/home/user/b2d9_artifacts.tar.gz",
+      "dest": "b2d9_artifacts.tar.gz"
+    },
+    "expected": {},
+    "options": {
+      "students_gold": [
+        {
+          "name": "Alice Chen",
+          "score": 95,
+          "rank": 2,
+          "comment": "Excellent, keep it up."
+        },
+        {
+          "name": "Bob Kumar",
+          "score": 88,
+          "rank": 8,
+          "comment": "Good job, room to improve."
+        },
+        {
+          "name": "Carol Diaz",
+          "score": 72,
+          "rank": 18,
+          "comment": "Needs more effort next term."
+        },
+        {
+          "name": "David Okafor",
+          "score": 91,
+          "rank": 5,
+          "comment": "Excellent, keep it up."
+        },
+        {
+          "name": "Eve Tanaka",
+          "score": 80,
+          "rank": 12,
+          "comment": "Good job, room to improve."
+        }
+      ],
+      "distractor_students": [
+        "Frank Miller",
+        "Grace Park"
+      ],
+      "teacher_email": "teacher@school.test",
+      "parent_email_template": "{name_slug}.parent@school.test",
+      "pdf_dir": "Desktop/reports",
+      "xlsx_path": "Desktop/grades.xlsx",
+      "eml_dir": "fake_smtp_mail",
+      "pdf_keyword_fields": [
+        "name",
+        "score",
+        "rank",
+        "comment"
+      ],
+      "eml_body_keyword_fields": [
+        "score",
+        "rank",
+        "comment"
+      ],
+      "overreach_penalty_per_item": "1/(3N)"
+    }
+  },
+  "proxy": false,
+  "fixed_ip": false,
+  "possibility_of_env_change": "low",
+  "domain": "ops",
+  "app_type": "democua_multi_apps_long"
+}

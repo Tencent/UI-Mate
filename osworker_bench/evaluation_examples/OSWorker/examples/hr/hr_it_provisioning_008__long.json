@@ -1,0 +1,77 @@
+{
+  "id": "hr_it_provisioning_008__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Workday, Gmail, Google Docs, and Slack). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou are the onboarding coordinator filing IT provisioning tickets for this week's new hires. The roster is in Workday: your Workday Inbox lists exactly the new hires that still need provisioning -- one 'Provision IT for new hire ...' to-do per person. You can also open the Directory (left sidebar) to see everyone's details; each person's card shows their role, department, employee type (Full-Time vs Contractor), and provisioning status. Do NOT file a ticket for anyone who is not in your Inbox to-do list (a contractor, or someone already marked Provisioned in the Directory). Each hire's configuration is NOT listed here: read the role-to-config matrix in the 'Provisioning Config Matrix' document in Google Docs, and check the Slack #it-onboarding pinned note for any stock substitution. For each hire you provision, email IT (it-provisioning@northgate.com) one ticket whose body lists that hire's laptop, all required software, and all required access groups for their role. If the pinned note says a laptop model is out of stock, substitute the replacement it names.\n\nOnly provision active full-time hires; contractors do not receive company provisioning, and leave anyone already provisioned. Finally, post a one-line summary to Slack #it-onboarding.",
+  "app_type": "workday_mock,gmail_mock,google_docs_mock,slack_mock",
+  "domain": "hr",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

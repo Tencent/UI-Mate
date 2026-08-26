@@ -1,0 +1,79 @@
+{
+  "instruction": "We received Initech's payment on invoice INV-1045. Mark it Paid in the 'AR Invoice Ledger' Google Sheet, log a payment-received activity on the related Salesforce opportunity, and notify the deal's AE in Slack #finance that it's settled.",
+  "id": "ar_payment_004",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T17:45:22.270347",
+  "adversarial_rounds": "1",
+  "domain": "ar",
+  "_source": "minicua",
+  "instruction_zh": "我们已收到 Initech 针对发票 INV-1045 的付款。请在 'AR Invoice Ledger' Google Sheet 中将其标记为 Paid，在相关的 Salesforce 商机中记录一笔已收款活动，并在 Slack #finance 频道中通知该笔交易的 AE 款项已结清。"
+}

@@ -1,0 +1,77 @@
+{
+  "id": "csops_ticket_queue_005__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Zendesk, Slack, Gmail, and Google Sheets). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou are the support lead triaging the overnight ticket queue in Zendesk. Set a priority on each new ticket and route it per the SLA policy. The policy is NOT repeated here: read it in the Slack #support-ops channel (see the pinned message, and check your direct messages for any clarification) and apply it.\n\nIf a ticket does not give you enough information to set its priority confidently, do not guess -- post a question in Slack #support-ops asking for the missing detail, and leave that ticket unset.\n\nRecord what you did in the 'Triage Log' tab of the Google Sheet: one row per triaged ticket with columns Ticket, Priority, Escalated (yes/no). Then email a wrap-up to the team: in Gmail, send a message to support-team@northgate.com with the exact subject 'Overnight triage summary - 2026-04-30' and a one-line body stating how many tickets you triaged and how many you escalated to Tier 2. Finally, post a one-line summary to Slack #support-ops and pin it.",
+  "app_type": "Zendesk_mock,slack_mock,gmail_mock,google_sheets_mock",
+  "domain": "csops",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

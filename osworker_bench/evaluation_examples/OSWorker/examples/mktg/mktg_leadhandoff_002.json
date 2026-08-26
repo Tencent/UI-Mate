@@ -1,0 +1,79 @@
+{
+  "instruction": "The 'Product Demo Request' campaign generated qualified leads ready for sales. In HubSpot, there are 8 contacts currently in the 'MQL' lifecycle stage that are Unassigned. Open each of these 8 contacts, and in its edit panel set the 'Assigned To' / 'Owner' field to the sales rep 'Jordan Blake' and save (there is no bulk-assign action, so update the contacts one by one). Then log the handoff in the Airtable 'Lead Handoff' table (Campaign = Product Demo Request, Lead Count = 8, Assigned To = Jordan Blake, Handoff Date = today's date), and post a message in Slack #sales-handoff that @mentions Jordan asking him to follow up on the 8 leads.",
+  "id": "mktg_leadhandoff_002",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T17:23:04.390644",
+  "adversarial_rounds": "1",
+  "domain": "mktg",
+  "_source": "minicua",
+  "instruction_zh": "“Product Demo Request”营销活动生成了已准备好对接销售的合格线索。在 HubSpot 中，当前有 8 个处于“MQL”生命周期阶段且为 Unassigned 的联系人。逐个打开这 8 个联系人，在其编辑面板中将“Assigned To”/“Owner”字段设置为销售代表“Jordan Blake”并保存（没有批量分配操作，因此需要逐个更新联系人）。然后在 Airtable 的“Lead Handoff”表中记录此次交接（Campaign = Product Demo Request，Lead Count = 8，Assigned To = Jordan Blake，Handoff Date = 今天的日期），并在 Slack 频道 #sales-handoff 中发布一条消息，@提及 Jordan，请他跟进这 8 条线索。"
+}

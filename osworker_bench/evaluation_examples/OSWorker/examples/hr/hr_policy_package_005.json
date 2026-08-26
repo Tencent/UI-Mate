@@ -1,0 +1,79 @@
+{
+  "instruction": "You are an HR Generalist sending the annual policy acknowledgement package. Step 1: Open DocuSign and send an envelope titled 'FY2026 Policy Acknowledgement' to 'Ava Thompson' (ava.thompson@northwindcloud.com) with a single signing document 'FY2026 Employee Policy Acknowledgement.pdf' and one signature field labeled 'Employee Signature' placed on the signature line. Step 2: Open Gusto, go to the Documents page, click 'Upload document', and upload a document with category 'Compliance', related employee 'Ava Thompson', and document name 'FY2026 Policy Acknowledgement sent via DocuSign on 2026-07-02; due 2026-07-20.' Step 3: In Slack post to #hr-ops the message: 'Policy ack sent — Ava Thompson (Backend Engineer, start 2026-07-13) received the FY2026 Policy Acknowledgement via DocuSign; due 2026-07-20. Envelope: FY2026 Policy Acknowledgement.'. Do not modify any other employee records or post to other channels.",
+  "instruction_zh": "你是一名HR Generalist，正在发送年度政策确认包。步骤1：打开DocuSign，发送一个标题为'FY2026 Policy Acknowledgement'的信封给'Ava Thompson'（ava.thompson@northwindcloud.com），附带一份签署文件'FY2026 Employee Policy Acknowledgement.pdf'，并在签名行上放置一个标签为'Employee Signature'的签名字段。步骤2：打开Gusto，进入 Documents 页面，点击 'Upload document'，上传一个文档：类别选择'Compliance'，关联员工选择'Ava Thompson'，文档名为'FY2026 Policy Acknowledgement sent via DocuSign on 2026-07-02; due 2026-07-20.'。步骤3：在Slack中向#hr-ops频道发布消息：'Policy ack sent — Ava Thompson (Backend Engineer, start 2026-07-13) received the FY2026 Policy Acknowledgement via DocuSign; due 2026-07-20. Envelope: FY2026 Policy Acknowledgement.'。请勿修改其他任何员工记录，也不要向其他频道发布消息。",
+  "id": "hr_policy_package_005",
+  "app_type": "libreoffice_calc",
+  "generated_at": "2026-07-02T09:49:49.153597",
+  "adversarial_rounds": "1",
+  "domain": "hr",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

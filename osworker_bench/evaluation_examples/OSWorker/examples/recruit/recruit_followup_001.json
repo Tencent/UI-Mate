@@ -1,0 +1,79 @@
+{
+  "instruction": "Send a same-day follow-up email to candidate Diego Ramos (diego.ramos@gmail.com) from Gmail thanking him for today's technical interview — the email must clearly thank him and reference the interview. Then post a quick reminder in Slack #hiring that mentions both interviewers by name, Sara and Ben, asking them to submit their scorecards in Greenhouse by end of day (the reminder should include the word 'scorecard' and reference Greenhouse or end of day).",
+  "id": "recruit_followup_001",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T19:22:18.619589",
+  "adversarial_rounds": "2",
+  "domain": "recruit",
+  "_source": "minicua",
+  "instruction_zh": "通过 Gmail 向候选人 Diego Ramos（diego.ramos@gmail.com）发送一封当日跟进邮件，感谢他参加今天的技术面试——邮件必须明确致谢并提及此次面试。随后在 Slack #hiring 中发布一条简短提醒，点名提到两位面试官 Sara 和 Ben，请他们在今天结束前将 scorecards 提交至 Greenhouse（提醒内容需包含单词 \"scorecard\"，并提及 Greenhouse 或今天结束前）。"
+}

@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "sre_runbook_003",
+  "difficulty": "hard",
+  "instruction": "We keep hitting the same database connection-pool exhaustion during traffic spikes. Capture the fix so the next on-call doesn't rediscover it. Create a wiki page in the Engineering space titled 'DB Connection Pool Exhaustion Runbook' whose body documents the concrete remediation: raise the pool max size and recycle idle connections, and mention checking pgbouncer. Then move the related Linear issue ENG-6 'Refactor database connection pooling' to In Review since this runbook unblocks it, and tell #engineering the runbook is up and name ENG-6.",
+  "instruction_zh": "我们在流量高峰期间反复遇到同样的数据库连接池耗尽问题。请记录下修复方案，以免下一位值班同事重新摸索。在 Engineering 空间创建一个标题为 'DB Connection Pool Exhaustion Runbook' 的 wiki 页面，正文记录具体的修复措施：提高连接池最大大小、回收空闲连接，并提及检查 pgbouncer。然后将相关的 Linear 工单 ENG-6 'Refactor database connection pooling' 移至 In Review 状态，因为这份运行手册为其扫清了障碍；并在 #engineering 频道告知大家运行手册已发布，同时提及 ENG-6。",
+  "app_type": "docusign_mock",
+  "persona": "You are an office worker acting as a technical writer. Your tools for this task are: the team wiki, the Linear issue tracker, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): a team wiki with Engineering/Product spaces and pages; Linear workspace (32 issues across Engineering/Design teams); Slack workspace with channels #general, #engineering, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: new pool-exhaustion runbook page (+0.3); runbook body has concrete remediation (pool + pgbouncer) (+0.25); ENG-6 moved to In Review (+0.25); slack_new_msg (+0.1); Slack names ENG-6 (+0.1). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "sre",
+  "_source": "cua_gym"
+}

@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "qa_bug_escalate_004",
+  "difficulty": "hard",
+  "instruction": "Customers are reporting checkout failures with a payment timeout. Find the matching bug on the Kanban board (it's the one about payment checkout timing out), move it to 'In Progress', and open a matching issue in the GitLab backend-api project titled 'Payment checkout timeout' so the code work is tracked there. Then add a concrete troubleshooting step to the 'Payments Runbook' page in Notion — specifically to raise the payment gateway timeout and retry idempotently — and paste a pointer to that runbook back onto the Jira bug as a comment. Finally, note in #engineering which issue you're working. Leave the other board items alone.",
+  "instruction_zh": "客户报告结账时因支付超时而失败。请在 Kanban 看板上找到对应的 bug（即关于支付结账超时的问题），将其移动到 'In Progress'，并在 GitLab 的 backend-api 项目中创建一个标题为 'Payment checkout timeout' 的对应 issue，以便在那里跟踪代码工作。然后在 Notion 的 'Payments Runbook' 页面中添加一个具体的故障排查步骤——特别是提高支付网关的超时时间并进行幂等重试——并将该运行手册的链接作为评论粘贴回 Jira bug 上。最后，在 #engineering 频道中说明你正在处理哪个 issue。不要动看板上的其他事项。",
+  "app_type": "jira_mock",
+  "persona": "You are an office worker acting as a software engineer. Your tools for this task are: the Jira project board, the GitLab projects, the Notion workspace, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Jira Kanban project with issues KAN-1(Done), KAN-8(To Do), KAN-9(To Do), KAN-10(To Do); GitLab with 6 issues, 2 MRs across projects; Notion workspace with pages 'Payments Runbook'; Slack workspace with channels #general, #engineering, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: KAN-9 (payment timeout) moved to In Progress (+0.25); matching GitLab issue in backend-api (+0.2); runbook gains a concrete remediation step (+0.25); runbook pointer pasted back on KAN-9 (+0.2); Slack names KAN-9 exactly (+0.1). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "qa",
+  "_source": "cua_gym"
+}

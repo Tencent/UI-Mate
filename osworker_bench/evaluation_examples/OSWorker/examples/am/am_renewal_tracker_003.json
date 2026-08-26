@@ -1,0 +1,79 @@
+{
+  "instruction": "I'm doing my quarterly renewal review. In Salesforce, go through our open renewal opportunities and find every account whose renewal closes within the next 90 days — today is June 24, 2026. For each qualifying renewal, add a row to the 'Renewal Tracker 2026' database in Notion with the account name, its annual contract value (ARR), the renewal date, a risk level based on our standard probability cutoffs, and the current sales stage. Skip anything that renews after the 90-day window or is already closed.",
+  "instruction_zh": "我正在做季度续费回顾。在 Salesforce 中，梳理我们未关闭的续费商机，找出所有预计在未来 90 天内关闭的客户——今天是 June 24, 2026。对于每个符合条件的续费，在 Notion 的 'Renewal Tracker 2026' 数据库中添加一行，填入 account name、annual contract value (ARR)、renewal date、基于我们 standard probability cutoffs 的 risk level，以及 current sales stage。跳过所有超出 90 天窗口期的续费，以及已关闭的条目。",
+  "id": "am_renewal_tracker_003",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:06:55.995384",
+  "adversarial_rounds": "1",
+  "domain": "am",
+  "_source": "cua_gym"
+}

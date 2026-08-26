@@ -1,0 +1,79 @@
+{
+  "instruction": "Do a signature sweep on this week's contracts. For the three DocuSign envelopes 'Stark Industries SOW', 'Oscorp License Agreement', and 'Tyrell Corp MSA', check each one's status. For any that aren't completed, send the signer a signing reminder by Gmail, then post a roundup in Slack #finance listing which contracts are signed and which are still outstanding.",
+  "id": "ar_signature_005",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T17:57:37.678050",
+  "adversarial_rounds": "1",
+  "domain": "ar",
+  "_source": "minicua",
+  "instruction_zh": "对本周的合同做一次签名排查。针对三个 DocuSign 信封 'Stark Industries SOW'、'Oscorp License Agreement' 和 'Tyrell Corp MSA'，逐一检查它们的状态。如有未完成的，通过 Gmail 向签署人发送签署提醒，然后在 Slack #finance 发布一份汇总，列出哪些合同已签署、哪些仍未完成。"
+}

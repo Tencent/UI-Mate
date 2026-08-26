@@ -1,0 +1,79 @@
+{
+  "instruction": "The Globex Platform Expansion deal just closed-won, so let's get the order form out for signature. In Salesforce, find the closed-won Globex opportunity and confirm the customer contact. Then add a row to the Notion 'Contracts' tracker with Customer 'Globex Corporation', Deal 'Globex Platform Expansion', Amount 120000, and Status 'Sent'. Create a DocuSign envelope titled for the Globex Platform Expansion order form addressed only to that contact as the signer, and send it. Once it's sent, log the envelope on the Salesforce opportunity and drop a note in the Slack #deal-desk channel with the customer, the deal amount, and that we're awaiting signature. Only do this for the deal that actually closed-won.",
+  "instruction_zh": "Globex Platform Expansion 交易刚刚已成交，请将订单表格发出以供签署。在 Salesforce 中，找到已成交的 Globex 商机并确认客户联系人。然后在 Notion 的 'Contracts' 追踪表中添加一行，Customer 填 'Globex Corporation'，Deal 填 'Globex Platform Expansion'，Amount 填 120000，Status 填 'Sent'。创建一个 DocuSign 信封，标题设为 Globex Platform Expansion 订单表格，并且只将该联系人添加为签署人，然后发送。发送后，将该信封记录到 Salesforce 商机中，并在 Slack 的 #deal-desk 频道中发布一条备注，内容包括客户名称、交易金额以及我们正在等待签署。仅对实际已成交的交易执行此操作。",
+  "id": "ae_contract_signature_001",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:10:09.906202",
+  "adversarial_rounds": "1",
+  "domain": "ae",
+  "_source": "cua_gym"
+}

@@ -1,0 +1,118 @@
+{
+  "id": "fin_expense_claim_002__long__cond",
+  "snapshot": "thunderbird",
+  "instruction": "Please help me submit a reimbursement for the invoices in \"Desktop/invoices/\". The company's reimbursement system is already open in Chrome — check the instructions on the homepage for the correct process.\n\nThe two invoices have a combined total of ¥1,105. The expense category is \"Transportation\" and the description is \"Taxi fares for client visits on May 12-13\".\n\nUpload both invoice files and fill in all required fields. If the system asks for additional documents or information, you can find them in the invoices folder. Then submit.",
+  "source": "authors",
+  "config": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/c0ndoa02-eea1-49a3-bc2e-c0ndbr020001/oa_server.py",
+            "path": "/home/user/oa_server.py"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/c0ndoa02-eea1-49a3-bc2e-c0ndbr020001/invoice_1.pdf",
+            "path": "/home/user/Desktop/invoices/invoice_1.pdf"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/c0ndoa02-eea1-49a3-bc2e-c0ndbr020001/invoice_2.pdf",
+            "path": "/home/user/Desktop/invoices/invoice_2.pdf"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/c0ndoa02-eea1-49a3-bc2e-c0ndbr020001/justification.txt",
+            "path": "/home/user/Desktop/invoices/justification.txt"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/c0ndoa02-eea1-49a3-bc2e-c0ndbr020001/manager_approval.pdf",
+            "path": "/home/user/Desktop/invoices/manager_approval.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "mkdir",
+          "-p",
+          "/home/user/oa_data"
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "sh",
+          "-c",
+          "nohup python3 /home/user/oa_server.py --user zhang_wei --role employee --port 8765 >/home/user/oa_server.log 2>&1 & disown; sleep 3"
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "google-chrome",
+          "http://localhost:8765/"
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "nautilus",
+          "/home/user/Desktop/invoices"
+        ]
+      }
+    }
+  ],
+  "trajectory": "trajectories/",
+  "related_apps": [
+    "google-chrome",
+    "os"
+  ],
+  "evaluator": {
+    "postconfig": [
+      {
+        "type": "command",
+        "parameters": {
+          "command": [
+            "sh",
+            "-c",
+            "tar -czf /home/user/cond_oa_artifacts.tar.gz -C /home/user oa_data 2>/dev/null; ls -la /home/user/cond_oa_artifacts.tar.gz"
+          ],
+          "stdout": "cond_oa_artifacts.ls"
+        }
+      }
+    ],
+    "func": "evaluate_oa_amount_condition",
+    "result": {
+      "type": "vm_file",
+      "path": "/home/user/cond_oa_artifacts.tar.gz",
+      "dest": "cond_oa_artifacts.tar.gz"
+    },
+    "expected": {},
+    "options": {
+      "branch": "branch02",
+      "expected_amount": 1105,
+      "expected_category": "Transportation",
+      "expected_description_keywords": [
+        "taxi",
+        "client"
+      ],
+      "expected_invoice_count": 2,
+      "expected_justification": true,
+      "expected_approval_report": true,
+      "amount_threshold": 1000
+    }
+  },
+  "proxy": false,
+  "fixed_ip": false,
+  "possibility_of_env_change": "low",
+  "domain": "fin",
+  "app_type": "democua_condition"
+}

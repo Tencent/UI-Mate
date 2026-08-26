@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "ops_inbox_meeting_007",
+  "difficulty": "hard",
+  "instruction": "Triage the exec inbox and act on the real meeting request. Several emails are informational, but one is an actual request to meet: the board chair wants a 30-minute prep call on June 26 at 10:00 AM. Put that on the Google Calendar as an event titled 'Board Prep Call' on June 26, then reply to the sender confirming the time. Don't create events for the newsletter or the FYI updates.",
+  "instruction_zh": "梳理高管收件箱，处理其中真实的会议请求。几封邮件属于资讯性质，但有一封是实际的会议邀约：董事会主席希望在 June 26 上午 10:00 进行一次30分钟的准备通话。请将该会议加入 Google Calendar，创建标题为 'Board Prep Call'、日期为 June 26 的活动，然后回复发件人确认时间。不要为 newsletter 或 FYI updates 创建活动。",
+  "app_type": "gmail_mock",
+  "persona": "You are an office worker acting as an operations associate. Your tools for this task are: the shared email inbox, the team calendar, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Gmail inbox with 3 email(s): \"Your industry roundup\" from news@digest.com; \"Prep call before the board meeting?\" from chair@board.org; \"FYI: office closed July 4\" from facilities@company.com; an empty Google Calendar; Slack workspace with channels #general, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: cal_new_event (+0.2); event titled Board Prep Call (+0.2); on June 26 (+0.2); gmail_new_sent (+0.1); replied to the board chair (+0.2); slack_new_msg (+0.1). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "ops",
+  "_source": "cua_gym"
+}

@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "ops_meeting_setup_009",
+  "difficulty": "medium",
+  "instruction": "Your boss emailed (it's the message from boss@company.com in Outlook) asking you to set up a leadership sync for June 27 at 2:00 PM. Create the meeting on Google Calendar titled 'Leadership Sync' on June 27, then post a reminder in the Engineering team's General channel in Microsoft Teams so the leads see it.",
+  "instruction_zh": "你的老板发来了一封邮件（在 Outlook 中，来自 boss@company.com），要求你为 June 27 at 2:00 PM 安排一场 leadership sync。请在 Google Calendar 上创建一场标题为 'Leadership Sync'、日期为 June 27 的会议，然后在 Microsoft Teams 的 Engineering 团队 General 频道中发布一条提醒，以便各位负责人看到。",
+  "app_type": "outlook_web_mock",
+  "persona": "You are an office worker acting as an operations associate. Your tools for this task are: the Outlook mailbox, the team calendar, Microsoft Teams.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Outlook mailbox with 15 message(s) across Inbox/Sent/Drafts; an empty Google Calendar; Microsoft Teams with Engineering/Design teams, channels, and 1:1 chats. GROUND TRUTH — the agent earns partial credit for each checkpoint: cal_new_event (+0.25); event titled Leadership Sync (+0.2); on June 27 (+0.25); Teams reminder in Engineering General (+0.3). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "ops",
+  "_source": "cua_gym"
+}

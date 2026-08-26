@@ -1,0 +1,79 @@
+{
+  "instruction": "I need an AR aging snapshot for the finance review, using today (2026-07-01) as the as-of date. In the 'AR Invoice Ledger' Google Sheet, build a summary block below the data that totals all outstanding (unpaid, i.e. any invoice whose Status is not 'Paid') invoices into four aging buckets by their Due Date relative to 2026-07-01: 'current' (not yet due — due date on or after 2026-07-01), '1-30 days overdue' (1 to 30 days past due), '31-60 days overdue' (31 to 60 days past due), and '60+ days overdue' (more than 60 days past due). Write each bucket's total amount and the overall total outstanding. Then in Slack #finance post the three overdue customers with the largest outstanding balances (ranked by dollar amount, with their amounts) and the total outstanding.",
+  "id": "ar_aging_001",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T17:34:27.555402",
+  "adversarial_rounds": "1",
+  "domain": "ar",
+  "_source": "minicua",
+  "instruction_zh": "我需要一份用于财务审查的应收账款账龄快照，以今天（2026-07-01）为截至日期。在 'AR Invoice Ledger' Google Sheet 中，于数据下方构建一个汇总区块，按到期日相对于 2026-07-01 将所有未结清（未付款，即状态不是 'Paid'）的发票分为四个账龄区间：\"current\"（尚未到期——到期日在 2026-07-01 当天或之后）、\"1-30 days overdue\"（逾期 1 至 30 天）、\"31-60 days overdue\"（逾期 31 至 60 天）和 \"60+ days overdue\"（逾期超过 60 天），并汇总每个区间的金额。写出每个区间的总金额以及未结清总额。然后在 Slack #finance 频道发布逾期金额最大的三家客户（按金额排序，并附上各自的金额）以及未结清总额。"
+}

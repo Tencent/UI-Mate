@@ -1,0 +1,79 @@
+{
+  "instruction": "It's the end-of-month pipeline review. Go through my Salesforce opportunities and find the open deals whose close date is before 2026-06-20, then push each of those overdue close dates out to 2026-07-31. Capture only those overdue open deals (with their old and new close dates, amounts and owner) in the Notion 'Pipeline Hygiene' table; if draft rows for opportunities are already present, fill the overdue rows instead of adding new ones. Check DocuSign for the closed-won Hooli deal and note whether its agreement is fully signed yet. Then email my manager a recap of what you rescheduled, and post a forecast summary in Slack #sales with the total open pipeline and a flag on any closed-won deal still waiting on signature. Leave the on-track and closed deals alone.",
+  "instruction_zh": "现在是月末 pipeline 审查。梳理我的 Salesforce opportunities，找出 close date 早于 2026-06-20 的 open deals，然后将这些逾期的 close dates 全部推迟到 2026-07-31。只将这些逾期 open deals（连同其旧和新的 close dates、amounts 与 owner）记录到 Notion 的 'Pipeline Hygiene' 表格中；如果表格中已经有 opportunity 草稿行，请填写逾期交易对应的行，不要新增行。在 DocuSign 中查看那笔 Hooli 的 closed-won 交易，并注明其协议是否已完全签署。随后给我经理发送一封邮件，汇总你所重新安排的内容；并在 Slack #sales 中发布一份预测摘要，列明 total open pipeline，同时标记出所有仍在等待签署的 closed-won 交易。不要动那些 on-track 和 closed 的交易。",
+  "id": "ae_pipeline_hygiene_003",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:02:45.641003",
+  "adversarial_rounds": "1",
+  "domain": "ae",
+  "_source": "cua_gym"
+}

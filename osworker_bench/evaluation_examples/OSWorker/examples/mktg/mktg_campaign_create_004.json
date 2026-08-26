@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Marketing Campaign Manager. Create a new campaign record and its execution task. Step 1: Open Airtable (base 'Campaign Ops', table 'Campaigns'). Create a new record with these exact field values: 'Campaign Name' = 'Summer SaaS Launch 2026'; 'Target Audience' = 'Mid-market SaaS operations leaders'; 'Channels' = 'Email, LinkedIn, Webinar'; 'Launch Date' = '2026-07-15'; 'Status' = 'Planned'. Step 2: Open Asana (project 'Campaign Execution'). Create a task titled 'Execute: Summer SaaS Launch 2026' assigned to you, with the description 'Run Email + LinkedIn + Webinar per Airtable plan; launch 2026-07-15', and set the due date to 2026-07-15. Do not modify any other Airtable records or Asana tasks.",
+  "instruction_zh": "你是一名营销活动经理。请创建一条新的营销活动记录及其执行任务。步骤1：打开 Airtable（base 'Campaign Ops'，table 'Campaigns'）。创建一条新记录，并填入以下确切的字段值：'Campaign Name' = 'Summer SaaS Launch 2026'；'Target Audience' = 'Mid-market SaaS operations leaders'；'Channels' = 'Email, LinkedIn, Webinar'；'Launch Date' = '2026-07-15'；'Status' = 'Planned'。步骤2：打开 Asana（project 'Campaign Execution'）。创建一个任务，标题为 'Execute: Summer SaaS Launch 2026'，指派给你自己，描述填写为 'Run Email + LinkedIn + Webinar per Airtable plan; launch 2026-07-15'，并将截止日期设为 2026-07-15。请勿修改任何其他 Airtable 记录或 Asana 任务。",
+  "id": "mktg_campaign_create_004",
+  "app_type": "libreoffice_calc",
+  "generated_at": "2026-07-02T08:50:09.906307",
+  "adversarial_rounds": "3",
+  "domain": "mktg",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

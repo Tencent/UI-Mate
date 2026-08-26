@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Marketing Operations / Growth Analyst. We just ran the 'Q3 Product Launch Webinar' and have an attendee export to turn into a tracked list and push qualified leads into HubSpot as MQLs. Step 1: Open Airtable (base 'Marketing Ops', table 'Webinar Attendees'). Create a new record for each of the 8 attendees listed below in the 'Attendee Name' / 'Email' / 'Company' / 'Attended Live?' / 'Qualified?' columns. Attendees: (1) Priya Nair, priya.nair@cobaltstack.io, Cobalt Stack, Yes, Yes; (2) Marcus Lee, marcus.lee@denovaworks.com, Denova Works, Yes, Yes; (3) Sofia Romano, sofia.romano@everlytics.io, Everlytics, No, Yes; (4) Tom Becker, tom.becker@finchpay.com, Finch Pay, Yes, No; (5) Aisha Khan, aisha.khan@heliosys.com, Heliosys, No, Yes; (6) Diego Alvarez, diego.alvarez@ironcladlabs.io, Ironclad Labs, Yes, Yes; (7) Lena Hofer, lena.hofer@greydesk.com, GreyDesk, No, No; (8) Ben Carter, ben.carter@bexter.com, Bexter, Yes, No. Step 2: The 5 attendees marked 'Qualified? = Yes' (Priya Nair, Marcus Lee, Sofia Romano, Aisha Khan, Diego Alvarez) are the qualified leads. For each of those 5, open HubSpot, find or create the lead record by email, and set its Lifecycle Stage to 'MQL'. Step 3: In Airtable, on each of those 5 qualified records set the 'Pushed to HubSpot?' field to 'Yes'. Do not change the 3 unqualified attendees' HubSpot records. Step 4: In Slack, post a message to the #marketing-ops channel that says: 'Q3 Product Launch Webinar: 8 attendees, 5 qualified (Priya Nair, Marcus Lee, Sofia Romano, Aisha Khan, Diego Alvarez) pushed to HubSpot as MQLs. 3 not qualified (Tom Becker, Lena Hofer, Ben Carter).'",
+  "instruction_zh": "你是一名营销运营/增长分析师。我们刚刚举办了\"Q3 Product Launch Webinar\"，现有一份参会者导出名单，需要将其转化为可跟踪的列表，并将符合条件的潜在客户作为MQL推送到HubSpot。\n\n步骤1：打开Airtable（base \"Marketing Ops\"，表格\"Webinar Attendees\"）。为下方列出的8位参会者分别在\"Attendee Name\"/\"Email\"/\"Company\"/\"Attended Live?\"/\"Qualified?\"列中创建新记录。参会者：(1) Priya Nair, priya.nair@cobaltstack.io, Cobalt Stack, Yes, Yes；(2) Marcus Lee, marcus.lee@denovaworks.com, Denova Works, Yes, Yes；(3) Sofia Romano, sofia.romano@everlytics.io, Everlytics, No, Yes；(4) Tom Becker, tom.becker@finchpay.com, Finch Pay, Yes, No；(5) Aisha Khan, aisha.khan@heliosys.com, Heliosys, No, Yes；(6) Diego Alvarez, diego.alvarez@ironcladlabs.io, Ironclad Labs, Yes, Yes；(7) Lena Hofer, lena.hofer@greydesk.com, GreyDesk, No, No；(8) Ben Carter, ben.carter@bexter.com, Bexter, Yes, No。\n\n步骤2：标记为\"Qualified? = Yes\"的5位参会者（Priya Nair、Marcus Lee、Sofia Romano、Aisha Khan、Diego Alvarez）即为合格潜在客户。针对这5人，打开HubSpot，通过邮箱查找或创建潜在客户记录，将其Lifecycle Stage设置为\"MQL\"。\n\n步骤3：在Airtable中，将这5条合格记录的\"Pushed to HubSpot?\"字段设置为\"Yes\"。不要修改3位不合格参会者的HubSpot记录。\n\n步骤4：在Slack中，向#marketing-ops频道发送一条消息，内容为：\"Q3 Product Launch Webinar: 8 attendees, 5 qualified (Priya Nair, Marcus Lee, Sofia Romano, Aisha Khan, Diego Alvarez) pushed to HubSpot as MQLs. 3 not qualified (Tom Becker, Lena Hofer, Ben Carter).\"",
+  "id": "mktg_webinar_mql_008",
+  "app_type": "libreoffice_calc",
+  "generated_at": "2026-07-02T08:27:24.313866",
+  "adversarial_rounds": "1",
+  "domain": "mktg",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "instruction": "It is the start-of-day support SLA triage for the existing Salesforce, Gmail, Jira, Notion, and Slack mocks. Use Gmail only as context. In Salesforce, triage the five open cases and make only the two breached cases Escalated: case-1 / case 00001001 for Helios Retail, \"Checkout payment declined for all EU cards\", must have status Escalated and owner Marcus Reid (user-3); case-2 / case 00001002 for Brightwave Media, \"Reports export to CSV produces empty file\", must have status Escalated and owner Priya Nair (user-2). Do not escalate the on-track cases case-3, case-4, or case-5. Because the Brightwave CSV export issue is a reproducible product defect, create a new Jira issue in the Support Engineering project (SUP) with type Bug, priority High, assignee Raj Patel (u_eng), and a summary or description that explicitly names Brightwave Media and the empty/0-byte CSV export problem. In Notion, under the existing Daily Triage page in the Support Ops workspace, create a database named Support SLA Tracker with columns for Customer or Account, Case Number, Priority, SLA Status, Owner, and Action, and add one row for each of the five open Salesforce cases. Mark the Helios Retail and Brightwave Media rows as SLA Status Breached; the Nimbus Co, Orbit Labs, and Contoso Bank rows must not be marked Breached. In Slack, post a new message in the #support channel that mentions both breached customers or problems, states that the breached cases were escalated, and references the new Jira/SUP engineering ticket. The task is complete when those exact Salesforce ownership/status updates, the Jira bug, the Notion tracker, and the #support digest are all present.",
+  "instruction_zh": "这是一次工作日开始时的支持 SLA 队列分诊，涉及现有 Salesforce、Gmail、Jira、Notion 和 Slack mock。Gmail 只作为上下文参考。在 Salesforce 中分诊 5 个未结 case，只把两个已经违反 SLA 的 case 升级为 Escalated：Helios Retail 的 case-1 / case 00001001「Checkout payment declined for all EU cards」必须设为 status Escalated，并分配给 Marcus Reid（user-3）；Brightwave Media 的 case-2 / case 00001002「Reports export to CSV produces empty file」必须设为 status Escalated，并分配给 Priya Nair（user-2）。不要把仍在正常 SLA 内的 case-3、case-4 或 case-5 升级为 Escalated。由于 Brightwave 的 CSV 导出空文件/0 字节问题是可复现的产品缺陷，请在 Jira 的 Support Engineering 项目（SUP）中新建一个 issue：type 为 Bug，priority 为 High，assignee 为 Raj Patel（u_eng），summary 或 description 需要明确写出 Brightwave Media 以及 CSV 导出空文件/0 字节问题。在 Notion 的 Support Ops workspace 里，在现有 Daily Triage 页面下创建名为 Support SLA Tracker 的数据库，字段至少包括 Customer 或 Account、Case Number、Priority、SLA Status、Owner、Action，并为 5 个未结 Salesforce case 各添加一行。Helios Retail 和 Brightwave Media 两行的 SLA Status 标为 Breached；Nimbus Co、Orbit Labs、Contoso Bank 三行不能标为 Breached。在 Slack 的 #support 频道发布一条新消息，提到两个违反 SLA 的客户或问题，说明这些 breached case 已经升级，并引用新建的 Jira/SUP 工程 ticket。完成标准是上述 Salesforce 状态和负责人、Jira bug、Notion tracker、以及 #support 摘要都已经存在。",
+  "id": "csops_sla_queue_triage_003",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:24:17.219241",
+  "adversarial_rounds": "1",
+  "domain": "csops",
+  "_source": "cua_gym"
+}

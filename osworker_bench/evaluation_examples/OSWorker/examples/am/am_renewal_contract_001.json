@@ -1,0 +1,79 @@
+{
+  "instruction": "We're ready to send Globex Corp their renewal paperwork. Open the 'Renewal Brief – Globex Corp' page in Notion to get the terms, then in DocuSign prepare and send a renewal agreement envelope for Globex using those terms — David Okafor is the signer and our finance mailbox finance@vertexcloud.example.com should be CC'd. Once it's out for signature, post in the #deal-desk Slack channel so finance and legal know the Globex renewal envelope has been sent.",
+  "instruction_zh": "我们已准备好向 Globex Corp 发送续约文件。请在 Notion 中打开 'Renewal Brief – Globex Corp' 页面获取条款，然后在 DocuSign 中使用这些条款为 Globex 准备并发送一份续约协议信封——David Okafor 是签署人，并抄送我们的财务邮箱 finance@vertexcloud.example.com。信封发出待签后，请在 #deal-desk Slack 频道中发布消息，以便财务和法律团队知晓 Globex 续约信封已发送。",
+  "id": "am_renewal_contract_001",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:07:44.741238",
+  "adversarial_rounds": "1",
+  "domain": "am",
+  "_source": "cua_gym"
+}

@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "ops_risk_log_006",
+  "difficulty": "hard",
+  "instruction": "Build this week's risk view for the steering committee. Today is June 23, 2026. In Asana, find tasks that are overdue — due before today and not yet completed. Log each overdue task into the 'Project Risk Log' sheet starting at row 2: task name in column A, its due date in column B. Then schedule a 'Steering Committee' event on Google Calendar for June 24, and post the agenda in #general noting how many items are overdue. Exactly one task is overdue; a completed task and a future-due task are not at risk.",
+  "instruction_zh": "为 steering committee 构建本周的风险视图。今天是 June 23, 2026。在 Asana 中找出逾期任务——即截止日期在今天之前且尚未完成的任务。将每个逾期任务录入 'Project Risk Log' 表格，从第2行开始：A列填写任务名称，B列填写截止日期。随后在 Google Calendar 中为 June 24 安排一个 'Steering Committee' 活动，并将议程发布到 #general，注明逾期任务的数量。恰好有一项任务逾期；已完成的任务和截止日期在未来的任务均不构成风险。",
+  "app_type": "asana_mock",
+  "persona": "You are an office worker acting as a marketing program manager. Your tools for this task are: the Asana project, shared spreadsheets, the team calendar, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Asana 'Q1 Product Launch' project with 3 task(s); a Google Sheet with seeded tabular data; an empty Google Calendar; Slack workspace with channels #general, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: risk log lists the overdue task (+0.3); risk log has its due date (+0.2); cal_new_event (+0.1); SteerCo on June 24 (+0.1); slack_new_msg (+0.1); reports one overdue item (+0.2). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "ops",
+  "_source": "cua_gym"
+}

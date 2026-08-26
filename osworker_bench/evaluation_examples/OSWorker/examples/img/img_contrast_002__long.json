@@ -1,0 +1,106 @@
+{
+  "id": "img_contrast_002__long",
+  "snapshot": "gimp",
+  "instruction": "There are several photos in the 'source_file' folder on the Desktop. For each photo, please open it with GIMP, boost its contrast to make the main subject stand out more, then export and overwrite the original file, close the image in GIMP, and proceed to the next one.",
+  "source": "https://www.reddit.com/r/GIMP/comments/12e57w8/how_to_use_gimp_to_exaggerate_contrast/",
+  "config": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/source_file/photo_1.png",
+            "path": "/home/user/Desktop/source_file/photo_1.png"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/source_file/photo_2.png",
+            "path": "/home/user/Desktop/source_file/photo_2.png"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/source_file/photo_3.png",
+            "path": "/home/user/Desktop/source_file/photo_3.png"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/source_file/photo_4.png",
+            "path": "/home/user/Desktop/source_file/photo_4.png"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/source_file/photo_5.png",
+            "path": "/home/user/Desktop/source_file/photo_5.png"
+          }
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "nautilus",
+          "/home/user/Desktop/source_file"
+        ]
+      }
+    }
+  ],
+  "trajectory": "trajectories/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5",
+  "related_apps": [
+    "gimp"
+  ],
+  "evaluator": {
+    "func": "check_contrast_increase_and_structure_sim_multiple",
+    "result": {
+      "type": "vm_file",
+      "multi": true,
+      "path": [
+        "/home/user/Desktop/source_file/photo_1.png",
+        "/home/user/Desktop/source_file/photo_2.png",
+        "/home/user/Desktop/source_file/photo_3.png",
+        "/home/user/Desktop/source_file/photo_4.png",
+        "/home/user/Desktop/source_file/photo_5.png"
+      ],
+      "dest": [
+        "local_photo_1.png",
+        "local_photo_2.png",
+        "local_photo_3.png",
+        "local_photo_4.png",
+        "local_photo_5.png"
+      ],
+      "gives": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "expected": {
+      "type": "cloud_file",
+      "multi": true,
+      "path": [
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/target_file/photo_1.png",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/target_file/photo_2.png",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/target_file/photo_3.png",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/target_file/photo_4.png",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench_test/resolve/main/gimp_long/f723c744-e62c-4ae6-98d1-750d3cd7d79d_5/target_file/photo_5.png"
+      ],
+      "dest": [
+        "photo_1.png",
+        "photo_2.png",
+        "photo_3.png",
+        "photo_4.png",
+        "photo_5.png"
+      ],
+      "gives": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "proxy": false,
+  "fixed_ip": false,
+  "possibility_of_env_change": "low",
+  "domain": "img",
+  "app_type": "democua_gimp_long"
+}

@@ -1,0 +1,79 @@
+{
+  "instruction": "You are an IT Help Desk / Access Request Manager at Northwind Corp. You need to process two access requests that came in via Slack, create Jira tickets for each, log them in the access audit tracker, write a short internal note in a Google Doc, and notify the requesters by email.\n\nStep 1 — In Slack (slack_mock), open the #it-access-requests channel and read the two most recent access request messages:\n- msg-req-101 from Priya Nair (priya.nair@northwind.io): 'Access request: App=Tableau, Requester=Priya Nair, Manager Approval=Approved by Sara Kim (s.kim@northwind.io). Need analyst access to the Q3 finance dashboards.'\n- msg-req-102 from Leo Tran (leo.tran@northwind.io): 'Access request: App=Salesforce, Requester=Leo Tran, Manager Approval=Approved by Daniel Okafor (d.okafor@northwind.io). Need edit access to the accounts module for the new sales campaign.'\n\nStep 2 — In Jira (jira_mock), create one ticket per request in the 'IT Help Desk' project (projectKey='ITHD'):\nFor Priya Nair:\n- Summary: 'Access request: Tableau analyst access for Priya Nair'\n- Description: 'Requester: Priya Nair (priya.nair@northwind.io). App: Tableau. Requested access: Analyst. Manager approval: Sara Kim (s.kim@northwind.io), Approved. Purpose: Q3 finance dashboards.'\n- Issue type: 'Access Request'\n- Priority: 'Medium'\n- Assignee: 'it-helpdesk'\nFor Leo Tran:\n- Summary: 'Access request: Salesforce edit access for Leo Tran'\n- Description: 'Requester: Leo Tran (leo.tran@northwind.io). App: Salesforce. Requested access: Edit (accounts module). Manager approval: Daniel Okafor (d.okafor@northwind.io), Approved. Purpose: New sales campaign.'\n- Issue type: 'Access Request'\n- Priority: 'High'\n- Assignee: 'it-helpdesk'\nRecord the resulting ticket keys (e.g. ITHD-101, ITHD-102).\n\nStep 3 — In Google Sheets (google_sheets_mock), open the 'Access Audit Log' workbook and the 'Access Log' sheet. Add a new row for each request after the last existing row (sheet currently has a header row and 4 existing rows; next available row is row 6):\nFor Priya Nair (row 6): A='ACC-2026-0701-101', B='2026-07-01', C='Priya Nair', D='priya.nair@northwind.io', E='Tableau', F='Analyst', G='Sara Kim', H='Approved', I='Ticket Created', J='ITHD-101'\nFor Leo Tran (row 7): A='ACC-2026-0701-102', B='2026-07-01', C='Leo Tran', D='leo.tran@northwind.io', E='Salesforce', F='Edit', G='Daniel Okafor', H='Approved', I='Ticket Created', J='ITHD-102'\n(Note: the sheet has a 10th column J titled 'Jira Ticket' already present.)\n\nStep 4 — In Google Docs (google_docs_mock), open the document titled 'Access Request Notes'. Add a new bullet under the '2026-07-01' heading:\n'- Processed 2 access requests (Tableau/Priya Nair, Salesforce/Leo Tran). Both manager-approved. Jira tickets ITHD-101 and ITHD-102 created. SLA target: provision within 24h.'\nIf the '2026-07-01' heading does not exist, create it as a Heading 2 first.\n\nStep 5 — In Gmail (gmail_mock), send an email to each requester confirming the ticket:\nTo priya.nair@northwind.io, Subject 'Access request received: Tableau (ITHD-101)', Body 'Hi Priya,\\n\\nWe received your Tableau access request and created Jira ticket ITHD-101. Your manager Sara Kim has approved it. We will provision analyst access to the Q3 finance dashboards within 24 hours.\\n\\nIT Help Desk'\nTo leo.tran@northwind.io, Subject 'Access request received: Salesforce (ITHD-102)', Body 'Hi Leo,\\n\\nWe received your Salesforce access request and created Jira ticket ITHD-102. Your manager Daniel Okafor has approved it. We will provision edit access to the accounts module within 24 hours.\\n\\nIT Help Desk'\n\nDo NOT create tickets for any other Slack messages in the channel. Do NOT modify the 4 existing rows in the Access Log sheet.",
+  "instruction_zh": "你是 Northwind Corp 的 IT 服务台/访问请求管理员。你需要处理两条通过 Slack 提交的访问请求，分别为其创建 Jira 工单，在访问审计追踪表中记录，在 Google Doc 中撰写一条简短的内部备注，并通过邮件通知请求人。\n\n步骤 1 — 在 Slack（slack_mock）中，打开 #it-access-requests 频道，阅读两条最新的访问请求消息：\n- 来自 Priya Nair（priya.nair@northwind.io）的 msg-req-101：\"Access request: App=Tableau, Requester=Priya Nair, Manager Approval=Approved by Sara Kim (s.kim@northwind.io). Need analyst access to the Q3 finance dashboards.\"\n- 来自 Leo Tran（leo.tran@northwind.io）的 msg-req-102：\"Access request: App=Salesforce, Requester=Leo Tran, Manager Approval=Approved by Daniel Okafor (d.okafor@northwind.io). Need edit access to the accounts module for the new sales campaign.\"\n\n步骤 2 — 在 Jira（jira_mock）中，在 \"IT Help Desk\" 项目（projectKey='ITHD'）下为每个请求创建一张工单：\n针对 Priya Nair：\n- 摘要：\"Access request: Tableau analyst access for Priya Nair\"\n- 描述：\"Requester: Priya Nair (priya.nair@northwind.io). App: Tableau. Requested access: Analyst. Manager approval: Sara Kim (s.kim@northwind.io), Approved. Purpose: Q3 finance dashboards.\"\n- 问题类型：\"Access Request\"\n- 优先级：\"Medium\"\n- 经办人：\"it-helpdesk\"\n针对 Leo Tran：\n- 摘要：\"Access request: Salesforce edit access for Leo Tran\"\n- 描述：\"Requester: Leo Tran (leo.tran@northwind.io). App: Salesforce. Requested access: Edit (accounts module). Manager approval: Daniel Okafor (d.okafor@northwind.io), Approved. Purpose: New sales campaign.\"\n- 问题类型：\"Access Request\"\n- 优先级：\"High\"\n- 经办人：\"it-helpdesk\"\n记录生成的工单编号（例如 ITHD-101、ITHD-102）。\n\n步骤 3 — 在 Google Sheets（google_sheets_mock）中，打开 \"Access Audit Log\" 工作簿和 \"Access Log\" 工作表。在最后一行现有数据之后为每个请求添加新行（工作表当前有 1 行标题和 4 行现有数据；下一个可用行是第 6 行）：\n针对 Priya Nair（第 6 行）：A='ACC-2026-0701-101'，B='2026-07-01'，C='Priya Nair'，D='priya.nair@northwind.io'，E='Tableau'，F='Analyst'，G='Sara Kim'，H='Approved'，I='Ticket Created'，J='ITHD-101'\n针对 Leo Tran（第 7 行）：A='ACC-2026-0701-102'，B='2026-07-01'，C='Leo Tran'，D='leo.tran@northwind.io'，E='Salesforce'，F='Edit'，G='Daniel Okafor'，H='Approved'，I='Ticket Created'，J='ITHD-102'\n（注意：工作表已有第 10 列 J，标题为 \"Jira Ticket\"。）\n\n步骤 4 — 在 Google Docs（google_docs_mock）中，打开标题为 \"Access Request Notes\" 的文档。在 \"2026-07-01\" 标题下添加一个新项目符号：\n\"- Processed 2 access requests (Tableau/Priya Nair, Salesforce/Leo Tran). Both manager-approved. Jira tickets ITHD-101 and ITHD-102 created. SLA target: provision within 24h.\"\n如果 \"2026-07-01\" 标题不存在，请先将其创建为二级标题。\n\n步骤 5 — 在 Gmail（gmail_mock）中，向每位请求人发送一封确认工单的邮件：\n收件人 priya.nair@northwind.io，主题 \"Access request received: Tableau (ITHD-101)\"，正文 \"Hi Priya,\\n\\nWe received your Tableau access request and created Jira ticket ITHD-101. Your manager Sara Kim has approved it. We will provision analyst access to the Q3 finance dashboards within 24 hours.\\n\\nIT Help Desk\"\n收件人 leo.tran@northwind.io，主题 \"Access request received: Salesforce (ITHD-102)\"，正文 \"Hi Leo,\\n\\nWe received your Salesforce access request and created Jira ticket ITHD-102. Your manager Daniel Okafor has approved it. We will provision edit access to the accounts module within 24 hours.\\n\\nIT Help Desk\"\n\n请勿为频道中的其他 Slack 消息创建工单。请勿修改 Access Log 工作表中的 4 行现有数据。",
+  "id": "itops_access_ticket_004",
+  "app_type": "mock_websites",
+  "generated_at": "2026-07-02T04:05:27.211226",
+  "adversarial_rounds": "2",
+  "domain": "itops",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

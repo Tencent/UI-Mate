@@ -1,0 +1,79 @@
+{
+  "instruction": "The latest results for the 'Spring Nurture' email campaign are: 142 MQLs, a 38.5% email open rate, and a 4.2% conversion rate. Enter these three numbers into the 'Campaign Performance' Google Sheet in the row for Spring Nurture (the MQLs, Open Rate, and Conversion Rate columns), then post a one-line summary of these results in Slack #marketing.",
+  "id": "mktg_report_003",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T16:50:36.900523",
+  "adversarial_rounds": "1",
+  "domain": "mktg",
+  "_source": "minicua",
+  "instruction_zh": "“Spring Nurture”邮件营销活动的最新结果为：142个MQL、38.5%的邮件打开率和4.2%的转化率。请将这三个数字输入到'Campaign Performance' Google Sheet中Spring Nurture所在行的对应列（MQLs、Open Rate和Conversion Rate列），然后在Slack #marketing中发布这些结果的一句话摘要。"
+}

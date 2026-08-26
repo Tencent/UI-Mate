@@ -1,0 +1,79 @@
+{
+  "instruction": "I'm prepping the renewal QBR for one of my key accounts, Aspen Dynamics, whose contract is coming up. First, pull together a QBR agenda in Notion with four sections — Business Goals, Usage Highlights, Risks, and Next Actions — using what's in their health record. Get the QBR onto my calendar for this Friday at 2 PM (based on today's local date) as a 45-minute meeting on the account, and email their primary contact an invite that walks through the agenda. Move the renewal opportunity forward in Salesforce so it reflects that we're actively in the renewal. And since their renewal date falls inside our 90-day window, send them the FY27 renewal agreement to sign through DocuSign.",
+  "instruction_zh": "我正在为我的重要客户 Aspen Dynamics 准备续约 QBR，他们的合同即将到期。首先，在 Notion 中汇总一份 QBR 议程，包含 Business Goals、Usage Highlights、Risks 和 Next Actions 四个板块，依据他们的 health record 中的信息。将这场 QBR 安排进我的日历：按当前本地日期计算的本周五 2 PM，一场 45 分钟的客户会议，并向他们的 primary contact 发送邀请邮件，在邮件中过一遍议程。在 Salesforce 中将该 renewal opportunity 向前推进，以体现我们正处于积极的续约状态。由于他们的续约日期落在我们的 90-day window 内，通过 DocuSign 向他们发送 FY27 续约协议供签署。",
+  "id": "csm_qbr_renewal_003",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:20:43.460634",
+  "adversarial_rounds": "1",
+  "domain": "csm",
+  "_source": "cua_gym"
+}

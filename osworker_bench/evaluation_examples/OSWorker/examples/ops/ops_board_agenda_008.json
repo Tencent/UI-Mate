@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "ops_board_agenda_008",
+  "difficulty": "hard",
+  "instruction": "Prepare next week's board meeting. Our Notion 'Board Brief Template' page lists the standard agenda sections: Approvals, Financials, and Risks. In Google Docs, create the 'Board Meeting Agenda - June' document whose body includes all three of those section headings. Schedule the board meeting itself as a Google Calendar event titled 'Board Meeting' on June 30. Then post in #general that the board agenda is drafted and the meeting is on the calendar.",
+  "instruction_zh": "准备下周的董事会会议。我们的 Notion 'Board Brief Template' 页面列出了标准议程章节：Approvals、Financials 和 Risks。在 Google Docs 中创建名为 'Board Meeting Agenda - June' 的文档，正文包含这三个章节标题。将董事会会议本身安排为 Google Calendar 日程，标题为 'Board Meeting'，日期为 June 30。然后在 #general 中发布消息，说明董事会议程已起草完毕，且会议已安排在日历上。",
+  "app_type": "google_docs_mock",
+  "persona": "You are an office worker acting as a project lead. Your tools for this task are: shared documents, the Notion workspace, the team calendar, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Google Docs with documents 'Board Agenda - May'; Notion workspace with pages 'Board Brief Template'; an empty Google Calendar; Slack workspace with channels #general, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: new June board agenda doc (+0.2); agenda has the template's 3 sections (+0.3); cal_new_event (+0.1); Board Meeting event (+0.1); on June 30 (+0.2); slack_new_msg (+0.1). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "ops",
+  "_source": "cua_gym"
+}

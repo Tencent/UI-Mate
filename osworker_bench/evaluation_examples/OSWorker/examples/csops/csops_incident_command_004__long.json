@@ -1,0 +1,77 @@
+{
+  "id": "csops_incident_command_004__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (ServiceNow, Microsoft Teams, Google Calendar, and Gmail). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou are the incident commander working the overnight incident queue in ServiceNow. Assign each new incident to the on-call engineer for its service, and set the incident to In Progress. The on-call rota is in a Gmail note; before assigning, check Google Calendar for anyone on PTO this week -- if the primary on-call for a service is on PTO, assign their backup instead. Only work new incidents; leave incidents that are already In Progress, Resolved, or Closed, and skip low-priority (Planning) items.\n\nFor every P1 incident, also post a bridge message naming the incident in the Microsoft Teams 'incidents' channel, and create a Google Calendar event titled exactly 'Bridge: <incident number>' dated today (2026-04-30).\n\nOne incident does not name its service or owner and its service is not in the rota. Do not guess: read the Microsoft Teams 'incidents' channel history -- the owner was already asked about and answered there -- and assign it to the engineer named in that reply.",
+  "app_type": "ServiceNow_mock,microsoft_teams_mock,google_calendar_mock,gmail_mock",
+  "domain": "csops",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

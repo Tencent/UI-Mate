@@ -1,0 +1,99 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mini-osworld"
+version = "0.1.0"
+description = "UI-Mate OSWorker harness for Docker and Ubuntu"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+
+# Enough to run the harness and agents that use an OpenAI-compatible endpoint
+# (UI-Mate and qwen); the rest is in the extras below.
+dependencies = [
+    "numpy",
+    "Pillow>=10",
+    "requests",
+    "httpx",
+    "backoff",
+    "loguru",
+    "openai",
+    "PyYAML",
+    "tiktoken",
+    "json_repair",
+    "python-dotenv",
+    "huggingface_hub",
+]
+
+[project.optional-dependencies]
+# Docker/Ubuntu DesktopEnv; not needed when the caller injects its own env.
+env = [
+    "gymnasium~=0.28.1",
+    "flask~=3.0.0",
+    "requests-toolbelt~=1.0.0",
+    "psutil~=5.9.6",
+    "pyautogui~=0.9.54",
+    "docker",
+    "playwright",
+    "filelock",
+    "tqdm",
+]
+
+# OSWorld task evaluators (file/office/image/audio comparison, OCR).
+eval = [
+    "lxml",
+    "cssselect",
+    "xmltodict",
+    "openpyxl",
+    "python-docx",
+    "python-pptx",
+    "pypdf",
+    "pypdf2",
+    "pdfplumber",
+    "pymupdf",
+    "borb",
+    "odfpy",
+    "formulas",
+    "rapidfuzz",
+    "fastdtw",
+    "chardet",
+    "ImageHash",
+    "scikit-image",
+    "opencv-python-headless~=4.8.1.78",
+    "matplotlib~=3.7.4",
+    "pandas~=2.2.3",
+    "librosa",
+    "mutagen",
+    "pyacoustid",
+    "easyocr",
+    "py7zr",
+    "LnkParse3",
+    "func-timeout",
+    "wrapt_timeout_decorator",
+    "json_minify",
+    "gdown",
+    "pydrive",
+    "beautifulsoup4",
+    "scipy",
+    "tldextract",
+    "pytz",
+]
+
+full = [
+    "mini-osworld[env,eval]",
+]
+
+# Flat layout: the existing top-level packages stay importable as-is
+# (`from core.xxx import ...`).
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "core*",
+    "desktop_env*",
+    "mm_agents*",
+]
+
+[tool.setuptools.package-data]
+"*" = ["*.txt", "*.json", "*.yaml", "*.yml", "*.md"]

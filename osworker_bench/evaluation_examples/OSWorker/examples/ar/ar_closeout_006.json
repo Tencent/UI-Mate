@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Finance Operations / Accounts Receivable specialist executing the full contract-to-cash escalation pipeline for the month-end AR close. Process the following three Closed-Won deals, each requiring different branches:\n\nDEAL A — Salesforce OPP-7741 'Cobalt Freight — Enterprise' (Account 'Cobalt Freight LLC', Amount '$95,000', Payment Terms 'Net 30', AE 'Tom Reyes'). DocuSign envelope 'MSA — Cobalt Freight (OPP-7741)' status = 'Completed'. Discount applied = 22% (over the 15% approval threshold). Invoice action: add row to Google Sheets 'Invoice Ledger' tab 'FY26 Invoices': INV-7741 | 'Cobalt Freight LLC' | '$95,000' | 'Net 30' | 'Draft' | 'Salesforce OPP-7741' | '2026-07-01'. Because discount > 15%, post to Slack #finance-approvals: 'APPROVAL NEEDED: OPP-7741 Cobalt Freight LLC — 22% discount on $95,000 invoice INV-7741 exceeds 15% threshold. AE: Tom Reyes. Envelope signed.'\n\nDEAL B — HubSpot D-7742 'Verdant Health — Platform' (Account 'Verdant Health Co.', Amount '$41,000', Payment Terms 'Net 45', AE 'Lena Park'). DocuSign envelope 'MSA — Verdant Health (D-7742)' status = 'Sent' (NOT completed). Invoice action: add row INV-7742 | 'Verdant Health Co.' | '$41,000' | 'Net 45' | 'Draft' | 'HubSpot D-7742' | '2026-07-01'. Send Gmail from ar@saas-co.com to 'contracts@verdant-health.co' Subject 'Action required: Please sign MSA — Verdant Health (D-7742)' body 'Your MSA for the Verdant Health platform (Deal D-7742, $41,000, Net 45) is awaiting signature. Envelope: MSA — Verdant Health (D-7742).' Post to Slack #finance-ar: 'Reminder: MSA — Verdant Health (D-7742) unsigned; Gmail nudge sent to contracts@verdant-health.co. AE: Lena Park. $41,000 Net 45.' (Discount 0% — no approval post.)\n\nDEAL C — Salesforce OPP-7743 'Sable Robotics — Pilot+' (Account 'Sable Robotics', Amount '$18,000', Payment Terms 'Net 60', AE 'Tom Reyes'). DocuSign envelope 'MSA — Sable Robotics (OPP-7743)' status = 'Completed'. Invoice adjustment recorded = +$3,000 manual credit applied (invoice adjustment over the $2,000 approval threshold). Invoice action: add row INV-7743 | 'Sable Robotics' | '$21,000' | 'Net 60' | 'Draft' | 'Salesforce OPP-7743' | '2026-07-01'. Because adjustment > $2,000, post to Slack #finance-approvals: 'APPROVAL NEEDED: OPP-7743 Sable Robotics — $3,000 invoice adjustment on $18,000 base (INV-7743, total $21,000) exceeds $2,000 threshold. AE: Tom Reyes. Envelope signed.'\n\nFinally, in Google Docs create a document titled 'AR Closeout — 2026-07-01' with three bold sections '1. Signed & Awaiting Approval', '2. Unsigned & Reminded', '3. Summary'. Section 1 lists OPP-7741 (22% discount) and OPP-7743 ($3,000 adjustment) with their Slack approval message text. Section 2 lists D-7742 (unsigned, reminded). Section 3 states: '3 deals processed; 2 approval posts to #finance-approvals; 1 Gmail reminder sent; 3 invoice rows added to Invoice Ledger.' Ignore distractor deal OPP-7740 'Cobalt Freight — Trial' (Stage 'Closed Lost') which must NOT be processed.",
+  "instruction_zh": "和",
+  "id": "ar_closeout_006",
+  "app_type": "mock_websites",
+  "generated_at": "2026-07-02T07:51:23.680011",
+  "adversarial_rounds": "1",
+  "domain": "ar",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,276 @@
+# Model checkpoints
+*.pth
+*.pt
+
+# Sandbox Manager runtime lock file (cross-process flock guard for known_templates.json)
+scripts/sandbox_manager/known_templates.json.lock
+
+# Credential files
+evaluation_examples/settings/google/settings.json
+evaluation_examples/settings/googledrive/credentials.json
+evaluation_examples/settings/googledrive/client_secrets.json
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# PyCharm
+**/.idea/**/*
+
+# Mac OS
+.DS_Store
+
+# data
+**/data/**/*
+!**/utils/data/**/*
+
+# tmp files
+**/tmp/**/*
+api_key.py
+tmp.*
+
+## Server logging
+**/.logging/**/*
+
+# DB cache
+**/.db_cache/**/*
+
+**/debugging/**/*
+
+# embedding repo
+instructor-embedding
+
+# plugin cache
+**/static/**/*
+
+# frontend cache
+frontend/node_modules/
+frontend/.next/
+frontend/.idea
+
+tags
+tags-opts
+snapshots
+branch_flag
+branch-config
+*.syncthing.*.tmp
+cache
+version.folder
+at_processing
+
+test.xlsx
+test2.xlsx
+
+# vm info
+.vms
+/vm_data
+docker_vm_data
+# Created by start_osworker_benchmark_test.sh: holds a symlink to the qcow2 at
+# the ${OSWORLD_VMS_DIR}/Ubuntu.qcow2 path DockerVMManager expects.
+docker_vm_data_openpyxl
+vmware_vm_data
+.vmware*
+.aws*
+# Anchored: an unanchored `tools` also hid real package dirs such as
+# mm_agents/anthropic/tools/ and desktop_env/tools/.
+/tools
+# result
+**/result*/**/*
+
+.vscode
+
+dataimpulse_proxy_config.json
+
+## reference and draft and debug
+reference/
+draft/
+check/
+manual_examine.py
+run_human_examine.sh
+quick_start.py
+evaluation_examples/settings/proxy/dataimpulse.json
+
+# Local test configurations (not for public repo)
+evaluation_examples/spiderman.json
+evaluation_examples/test_50_random_proportional.json
+evaluation_examples/test_chrome.json
+evaluation_examples/test_mini.json
+evaluation_examples_generated_20260206
+evaluation_examples_expanded_tasks_20260303_10r_all
+evaluation_examples_atomic_ability_20260306_from_evocua32b_agentnet5k
+evaluation_examples_*
+
+
+# Local smoke and regression scripts kept out of the public repository.
+# Drop ad-hoc test scripts, single-task YAML configs, or repro snippets here.
+scripts/osworker_benchmark/smoke/
+
+# Local task launchers (machine-specific paths, not for upstream)
+local_tasks/
+
+# Local VM creation / control tooling (not for upstream)
+create_vm/
+
+# Results directories
+results*/
+osworld_cache
+examples_mac
+.claude
+.omc
+.codebuddy
+temp.pdf
+
+debug.sh
+debug_task.py
+
+examples_odoo
+
+examples_stirling_pdf
+
+cache_*
+!evaluation_examples/OSWorker/cache_manifest.json
+osworld_cache.zip
+
+*.env
+
+# OSWorker local runtime cache
+/osworker_cache/
+
+# Local-only OSWorker assets: per-developer model configs, the superseded
+# legacy task set and its id-mapping drafts, and ad-hoc mock-IP helpers.
+# Kept on disk for local runs, deliberately not upstreamed.
+configs/osworker_benchmark/gpt55.yaml
+configs/osworker_benchmark/gpt56_sol.yaml
+evaluation_examples/general_benchmark.json
+evaluation_examples/OSWorker/legacy/
+evaluation_examples/OSWorker/id_mapping.json
+evaluation_examples/OSWorker/ID_MAPPING_PROPOSAL.md
+enable_internet_proxy.sh
+replace_mock_ip.sh
+scripts/cua_gym/cua_gym_convert/replace_mock_ip.py

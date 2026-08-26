@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "qa_pr_mergeable_003",
+  "difficulty": "hard",
+  "instruction": "Two PRs are up for review in hello-world and the team wants to know which one can go in. The rule: a PR is mergeable only if ALL its CI checks are green AND it has at least one approving review. Inspect both open PRs (#7 'Add retry logic to webhook dispatcher' and #8 'Refactor auth middleware'). Exactly one qualifies. For the PR that qualifies, move its linked Jira issue to 'In Review' — PR #7 is linked to KAN-3, PR #8 is linked to KAN-4. Then reply in the #engineering thread naming which PR number is ready to merge and which is blocked and why.",
+  "instruction_zh": "hello-world 中有两个 PR 待审查，团队想知道哪个可以合入。规则是：PR 只有在所有 CI 检查均为绿色，且至少有一个批准审查时，才可合并。请检查两个打开的 PR（#7 'Add retry logic to webhook dispatcher' 和 #8 'Refactor auth middleware'）。恰好有一个符合条件。对于符合条件的 PR，请将其关联的 Jira 工单移动到 'In Review' —— PR #7 关联 KAN-3，PR #8 关联 KAN-4。然后在 #engineering 线程中回复，说明哪个 PR 编号已准备好合并，哪个被阻塞以及原因。",
+  "app_type": "github_mock",
+  "persona": "You are an office worker acting as a release engineer. Your tools for this task are: the GitHub repositories, the Jira project board, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): GitHub repo with 0 issue(s) and 2 PR(s); Jira Kanban project with issues KAN-1(Done), KAN-3(In Progress), KAN-4(In Progress); Slack workspace with channels #general, #engineering, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: KAN-3 (PR #7) moved to In Review (+0.45); slack_new_msg (+0.1); verdict names PR #7 as ready (+0.2); explains #8 is blocked (+0.25). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "qa",
+  "_source": "cua_gym"
+}
