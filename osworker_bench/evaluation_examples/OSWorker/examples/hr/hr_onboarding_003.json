@@ -1,0 +1,79 @@
+{
+  "instruction": "New hire Priya Sharma (Marketing Manager, start date 2026-07-06) needs onboarding set up. In Gusto, add her to the 'Marketing' department and trigger the standard onboarding flow, then in Google Calendar create a recurring 'Onboarding Check-in' meeting with her every Monday at 9:00 AM for her first three weeks.",
+  "id": "hr_onboarding_003",
+  "app_type": "hr_cross_app",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T20:42:38.831295",
+  "adversarial_rounds": "1",
+  "domain": "hr",
+  "_source": "minicua",
+  "instruction_zh": "新员工 Priya Sharma（市场经理，入职日期 2026-07-06）需要完成入职设置。在 Gusto 中，将她添加到 'Marketing' 部门并触发标准入职流程，然后在 Google Calendar 中创建一个名为 'Onboarding Check-in' 的周期性会议，在她入职后的前三个星期内，每周一上午 9:00 与她进行。"
+}

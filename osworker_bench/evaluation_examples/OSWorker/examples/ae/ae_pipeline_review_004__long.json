@@ -1,0 +1,77 @@
+{
+  "id": "ae_pipeline_review_004__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nThe 'Pipeline Review' Google Sheet lists opportunities (rows 2+: OppName, Account, Amount, Stage, CloseDate). For each row, find the matching Salesforce Opportunity by name and bring Salesforce into line with the sheet's decision rules: if Stage is 'Closed Won', set the Salesforce opportunity stage to 'Closed Won' AND create a follow-up Task on that opportunity with Subject 'Kickoff: <Account>' and Status 'Not Started' AND reassign the opportunity's Owner to 'Morgan Avery'; if Stage is 'Closed Lost', set the SF stage to 'Closed Lost' (no task, owner unchanged); if Stage is 'Negotiation' AND Amount >= 50000, set SF stage to 'Negotiation' and create a Task 'Exec review: <Account>' (owner unchanged); all other rows: leave the SF opportunity unchanged. Skip any sheet row whose OppName has no matching Salesforce opportunity. When finished, create a new Slack channel named 'backup', then export the Salesforce Opportunities report to CSV and export the 'Pipeline Review' Google Sheet to CSV, and upload BOTH CSV files into the 'backup' channel as a backup of the synced pipeline.",
+  "app_type": "salesforce_mock,google_sheets_mock,slack_mock",
+  "domain": "ae",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

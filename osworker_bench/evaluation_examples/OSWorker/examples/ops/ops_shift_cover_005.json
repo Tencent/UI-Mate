@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Healthcare Practice Administrator at Maple Grove Family Clinic. The weekly staffing tracker shows a shift gap you must cover by posting a request in Slack.\n\nStep 1 — In Google Sheets (google_sheets_mock), open the 'Staffing Tracker' workbook and the 'Weekly Schedule' sheet. Find the row where the 'Coverage Status' column is exactly 'Gap'. It is row 4:\n- Column A (Date): '2026-07-03'\n- Column B (Shift): 'Afternoon (13:00-21:00)'\n- Column C (Role): 'Medical Assistant'\n- Column D (Assigned): '' (empty)\n- Column E (Coverage Status): 'Gap'\n\nStep 2 — In Slack (slack_mock), open the #staffing channel (channelId='staffing') and post exactly this message:\n'@channel Shift coverage needed: Medical Assistant, Fri 2026-07-03, Afternoon 13:00-21:00. Please volunteer in reply. — Practice Admin'\n\nStep 3 — Back in Google Sheets, update row 4, Column E (Coverage Status) from 'Gap' to 'Request Posted'. Leave all other columns in row 4 unchanged.\n\nDo NOT modify any other row in the Weekly Schedule sheet. Only post the one message above.",
+  "instruction_zh": "你是 Maple Grove Family Clinic 的医疗诊所管理员。每周人员排班追踪表显示存在一个班次空缺，你必须在 Slack 中发布请求来填补该空缺。\n\n步骤 1 — 在 Google Sheets（google_sheets_mock）中，打开 'Staffing Tracker' 工作簿和 'Weekly Schedule' 工作表。找到 'Coverage Status' 列的值恰好为 'Gap' 的那一行。即第 4 行：\n- A 列（Date）：'2026-07-03'\n- B 列（Shift）：'Afternoon (13:00-21:00)'\n- C 列（Role）：'Medical Assistant'\n- D 列（Assigned）：''（空）\n- E 列（Coverage Status）：'Gap'\n\n步骤 2 — 在 Slack（slack_mock）中，打开 #staffing 频道（channelId='staffing'），并准确发布以下消息：\n'@channel Shift coverage needed: Medical Assistant, Fri 2026-07-03, Afternoon 13:00-21:00. Please volunteer in reply. — Practice Admin'\n\n步骤 3 — 返回 Google Sheets，将第 4 行的 E 列（Coverage Status）从 'Gap' 更新为 'Request Posted'。保持第 4 行的其他所有列不变。\n\n请勿修改 Weekly Schedule 工作表中的任何其他行。仅发布上述一条消息。",
+  "id": "ops_shift_cover_005",
+  "app_type": "mock_websites",
+  "generated_at": "2026-07-02T05:09:45.131682",
+  "adversarial_rounds": "2",
+  "domain": "ops",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

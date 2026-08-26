@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Marketing Operations / Growth Analyst. Produce this week's funnel report and send the pipeline-vs-target summary to Slack. Step 1: Open Google Sheets (workbook 'Growth Funnel Q3', sheet 'Weekly'). The sheet has a 'Target' table (rows 2-7: Stage in A, Weekly Target in B) and a 'Current' table (rows 10-15: Stage in A, Actual in B, Source System in C). Targets: Leads 500, MQLs 180, SQLs 70, Opportunities 28, Customers 9. Current actuals to enter: Leads 472 (source HubSpot), MQLs 165 (source HubSpot), SQLs 63 (source Salesforce), Opportunities 24 (source Salesforce), Customers 7 (source Salesforce). Fill the 'Current' B column with those actuals and the C column ('Source System') with the stated source for each row. In column D compute the variance (Actual - Target) for each stage. Step 2: In Salesforce ('Campaign Attribution' report) confirm the SQL=63 / Opportunity=24 / Customer=7 figures match the 'Pipeline Report' object (they do); note any stage where Actual < Target by more than 10% — that is MQLs (165 vs 180, -8.3%, NOT flagged) and Customers (7 vs 9, -22.2%, FLAGGED). Step 3: Open Google Docs and create a new document titled 'Weekly Funnel Report - 2026-W27'. Add an H1 title 'Weekly Funnel Report (2026-W27)', then a 'Summary' section with one sentence: 'Pipeline is tracking 4% below target on volume; Customers are the at-risk stage at -22.2% vs goal.' Then a 'Stage Detail' table with columns Stage | Target | Actual | Variance | Source, listing all 5 stages with the values above. Then an 'At-Risk' section naming 'Customers (7 vs 9, -22.2%)' as the flagged stage and 'Recommendation: launch win-back nurture to the 2 slipped customers and review close-rate with Sales.' Step 4: In Slack post to #growth-reviews: 'Weekly Funnel 2026-W27 — Pipeline vs Target: Leads 472/500, MQLs 165/180, SQLs 63/70, Opps 24/28, Customers 7/9. At-risk: Customers -22.2%. Full report: <link to the Google Doc you created>.' Use the actual doc URL as the link.",
+  "instruction_zh": "你是 Marketing Operations / Growth Analyst。请生成本周的漏斗报告，并将 pipeline-vs-target 摘要发送至 Slack。\n\n步骤 1：打开 Google Sheets（工作簿 'Growth Funnel Q3'，工作表 'Weekly'）。该工作表中包含一个 'Target' 表格（第 2–7 行：A 列为 Stage，B 列为 Weekly Target）和一个 'Current' 表格（第 10–15 行：A 列为 Stage，B 列为 Actual，C 列为 Source System）。目标值：Leads 500、MQLs 180、SQLs 70、Opportunities 28、Customers 9。需录入的当前实际值：Leads 472（来源 HubSpot）、MQLs 165（来源 HubSpot）、SQLs 63（来源 Salesforce）、Opportunities 24（来源 Salesforce）、Customers 7（来源 Salesforce）。请在 'Current' 表格的 B 列填入上述实际值，在 C 列（'Source System'）填入每行对应的来源。在 D 列计算每个阶段的 variance（Actual - Target）。\n\n步骤 2：在 Salesforce（'Campaign Attribution' 报告）中确认 SQL=63 / Opportunity=24 / Customer=7 这些数据与 'Pipeline Report' 对象一致（确实一致）；记录所有 Actual < Target 且差距超过 10% 的阶段——即 MQLs（165 vs 180，-8.3%，不标记）和 Customers（7 vs 9，-22.2%，标记）。\n\n步骤 3：打开 Google Docs，新建一个标题为 'Weekly Funnel Report - 2026-W27' 的文档。添加一个 H1 标题 'Weekly Funnel Report (2026-W27)'，然后添加一个 'Summary' 部分，其中包含一句话：\"Pipeline is tracking 4% below target on volume; Customers are the at-risk stage at -22.2% vs goal.\" 接着添加一个 'Stage Detail' 表格，列名为 Stage | Target | Actual | Variance | Source，列出上述全部 5 个阶段及其对应数值。然后添加一个 'At-Risk' 部分，将 'Customers (7 vs 9, -22.2%)' 列为标记阶段，并写出建议：\"Recommendation: launch win-back nurture to the 2 slipped customers and review close-rate with Sales.\"\n\n步骤 4：在 Slack中向 #growth-reviews 频道发布消息：\"Weekly Funnel 2026-W27 — Pipeline vs Target: Leads 472/500, MQLs 165/180, SQLs 63/70, Opps 24/28, Customers 7/9. At-risk: Customers -22.2%. Full report: <link to the Google Doc you created>.\" 请使用你实际创建的 Google Doc 的 URL 作为链接。",
+  "id": "mktg_funnel_report_007",
+  "app_type": "libreoffice_calc",
+  "generated_at": "2026-07-02T08:31:45.333502",
+  "adversarial_rounds": "2",
+  "domain": "mktg",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

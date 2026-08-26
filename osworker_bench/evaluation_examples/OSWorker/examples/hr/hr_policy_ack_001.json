@@ -1,0 +1,79 @@
+{
+  "instruction": "Send the updated 'Remote Work Policy 2026' for signature to new hire Carlos Mendez via DocuSign, then post a short note in the Slack #hr-ops channel saying the policy acknowledgement has been sent to Carlos for signing. Carlos Mendez is already in the DocuSign contacts/address book — select him as the recipient (no need to type his email).",
+  "id": "hr_policy_ack_001",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T18:15:08.489346",
+  "adversarial_rounds": 1,
+  "domain": "hr",
+  "_source": "minicua",
+  "instruction_zh": "通过 DocuSign 将更新后的 'Remote Work Policy 2026' 发送给新员工 Carlos Mendez 签署，然后在 Slack #hr-ops 频道发布一条简短通知，说明政策确认文件已发送给 Carlos 待其签署。 Carlos Mendez 已在 DocuSign 通讯录（联系人）中——直接从中选择他作为收件人即可（无需手动输入邮箱）。"
+}

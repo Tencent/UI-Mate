@@ -1,0 +1,136 @@
+{
+  "ae": [
+    "ae_contract_signature_001",
+    "ae_deal_handoff_002__long",
+    "ae_pipeline_hygiene_003",
+    "ae_pipeline_review_004__long"
+  ],
+  "am": [
+    "am_renewal_contract_001",
+    "am_renewal_hubspot_004__long",
+    "am_renewal_outreach_002",
+    "am_renewal_tracker_003"
+  ],
+  "ar": [
+    "ar_aging_001",
+    "ar_approval_002",
+    "ar_billing_exception_012__long",
+    "ar_churn_refund_009__long",
+    "ar_closeout_006",
+    "ar_deal_to_invoice_007__long",
+    "ar_invoice_003",
+    "ar_payment_004",
+    "ar_payment_alert_010__long",
+    "ar_remittance_008__long",
+    "ar_signature_005",
+    "ar_stripe_reconcile_011__long"
+  ],
+  "calc": [
+    "calc_boomerang_sales_004__long",
+    "calc_employee_roles_003__long",
+    "calc_income_statement_001__long",
+    "calc_sales_rep_002__long",
+    "calc_student_grades_005__long"
+  ],
+  "csm": [
+    "csm_escalation_001",
+    "csm_health_risk_002",
+    "csm_onboarding_checklist_004",
+    "csm_qbr_renewal_003",
+    "csm_training_rate_005"
+  ],
+  "csops": [
+    "csops_email_to_crm_case_001",
+    "csops_inbox_triage_006__long",
+    "csops_incident_command_004__long",
+    "csops_p1_incident_002",
+    "csops_sla_queue_triage_003",
+    "csops_ticket_queue_005__long"
+  ],
+  "fin": [
+    "fin_expense_claim_001__long__cond",
+    "fin_expense_claim_002__long__cond"
+  ],
+  "hr": [
+    "hr_it_provisioning_008__long",
+    "hr_midyear_review_007__long",
+    "hr_onboarding_003",
+    "hr_onboarding_checklist_004",
+    "hr_one_on_one_009",
+    "hr_payroll_approval_006__long",
+    "hr_policy_ack_001",
+    "hr_policy_ack_002",
+    "hr_policy_package_005"
+  ],
+  "img": [
+    "img_brightness_001__long",
+    "img_contrast_002__long"
+  ],
+  "itops": [
+    "itops_access_approval_001",
+    "itops_access_log_003",
+    "itops_access_ticket_004",
+    "itops_field_change_002"
+  ],
+  "mktg": [
+    "mktg_campaign_001",
+    "mktg_campaign_create_004",
+    "mktg_field_reconcile_006",
+    "mktg_funnel_report_007",
+    "mktg_inbound_qualify_009__long",
+    "mktg_leadhandoff_002",
+    "mktg_perf_report_005",
+    "mktg_report_003",
+    "mktg_social_approve_010",
+    "mktg_webinar_guide_011",
+    "mktg_webinar_mql_008"
+  ],
+  "ops": [
+    "ops_board_agenda_008",
+    "ops_catalog_update_003__long",
+    "ops_grade_report_011__long",
+    "ops_inbox_meeting_007",
+    "ops_inventory_reorder_001__long",
+    "ops_license_audit_010__long",
+    "ops_meeting_schedule_004__long",
+    "ops_meeting_setup_009",
+    "ops_pdf_mail_012__long__cond",
+    "ops_region_consolidate_002__long",
+    "ops_risk_log_006",
+    "ops_shift_cover_005"
+  ],
+  "pm": [
+    "pm_board_sync_003",
+    "pm_sprint_closeout_002__long",
+    "pm_sprint_planning_001__long"
+  ],
+  "qa": [
+    "qa_bug_escalate_004",
+    "qa_defect_triage_001__long",
+    "qa_pr_latency_002",
+    "qa_pr_mergeable_003"
+  ],
+  "recruit": [
+    "recruit_candidate_flow_007__long",
+    "recruit_coordinator_006__long",
+    "recruit_followup_001",
+    "recruit_offer_003",
+    "recruit_onsite_decision_005__long",
+    "recruit_onsite_stage_008__long",
+    "recruit_resume_screen_004__long",
+    "recruit_screen_002"
+  ],
+  "sdr": [
+    "sdr_cold_outreach_001",
+    "sdr_inbound_lead_006__long",
+    "sdr_lead_import_004__long",
+    "sdr_lead_routing_005__long",
+    "sdr_outreach_tracker_002",
+    "sdr_source_lead_003"
+  ],
+  "sre": [
+    "sre_change_review_002__long",
+    "sre_error_triage_001__long",
+    "sre_runbook_003"
+  ]
+}

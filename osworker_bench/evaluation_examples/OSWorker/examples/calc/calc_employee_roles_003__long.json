@@ -1,0 +1,116 @@
+{
+  "id": "calc_employee_roles_003__long",
+  "snapshot": "libreoffice_calc",
+  "instruction": "I have 5 files named 'Employee_Roles_and_Ranks_1.xlsx' to 'Employee_Roles_and_Ranks_5.xlsx' in the 'source_file' folder on the Desktop. Please open each file in order, perform the operation, save it, and click the close button in the top-right corner to close the file. The operation is as follows: The information are mixed in one field. Help me split them and fill in the columns of First Name, Last Name and Rank. Finish the work and don't touch the original data.",
+  "source": "https://www.youtube.com/shorts/uzPo_CPCHH8",
+  "config": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/source_file/Employee_Roles_and_Ranks_1.xlsx",
+            "path": "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_1.xlsx"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/source_file/Employee_Roles_and_Ranks_2.xlsx",
+            "path": "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_2.xlsx"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/source_file/Employee_Roles_and_Ranks_3.xlsx",
+            "path": "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_3.xlsx"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/source_file/Employee_Roles_and_Ranks_4.xlsx",
+            "path": "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_4.xlsx"
+          },
+          {
+            "url": "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/source_file/Employee_Roles_and_Ranks_5.xlsx",
+            "path": "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_5.xlsx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "nautilus",
+          "/home/user/Desktop/source_file"
+        ]
+      }
+    }
+  ],
+  "trajectory": "trajectories/37608790-6147-45d0-9f20-1137bb35703d_5",
+  "related_apps": [
+    "libreoffice calc"
+  ],
+  "evaluator": {
+    "postconfig": [],
+    "func": "compare_table_multiple",
+    "expected": {
+      "type": "cloud_file",
+      "multi": true,
+      "path": [
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/target_file/Employee_Roles_and_Ranks_gold_1.xlsx",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/target_file/Employee_Roles_and_Ranks_gold_2.xlsx",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/target_file/Employee_Roles_and_Ranks_gold_3.xlsx",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/target_file/Employee_Roles_and_Ranks_gold_4.xlsx",
+        "https://huggingface.co/datasets/Selecting/long_repetitive_bench/resolve/main/libreoffice_calc_long/37608790-6147-45d0-9f20-1137bb35703d_5/target_file/Employee_Roles_and_Ranks_gold_5.xlsx"
+      ],
+      "dest": [
+        "Employee_Roles_and_Ranks_gold_1.xlsx",
+        "Employee_Roles_and_Ranks_gold_2.xlsx",
+        "Employee_Roles_and_Ranks_gold_3.xlsx",
+        "Employee_Roles_and_Ranks_gold_4.xlsx",
+        "Employee_Roles_and_Ranks_gold_5.xlsx"
+      ],
+      "gives": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "result": {
+      "type": "vm_file",
+      "multi": true,
+      "path": [
+        "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_1.xlsx",
+        "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_2.xlsx",
+        "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_3.xlsx",
+        "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_4.xlsx",
+        "/home/user/Desktop/source_file/Employee_Roles_and_Ranks_5.xlsx"
+      ],
+      "dest": [
+        "local_Employee_Roles_and_Ranks_1.xlsx",
+        "local_Employee_Roles_and_Ranks_2.xlsx",
+        "local_Employee_Roles_and_Ranks_3.xlsx",
+        "local_Employee_Roles_and_Ranks_4.xlsx",
+        "local_Employee_Roles_and_Ranks_5.xlsx"
+      ],
+      "gives": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "options": {
+      "rules": [
+        {
+          "type": "sheet_data",
+          "sheet_idx0": 0,
+          "sheet_idx1": "EI0"
+        }
+      ]
+    }
+  },
+  "proxy": false,
+  "fixed_ip": false,
+  "possibility_of_env_change": "low",
+  "domain": "calc",
+  "app_type": "democua_libreoffice_calc_long"
+}

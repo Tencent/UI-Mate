@@ -1,0 +1,77 @@
+{
+  "id": "am_renewal_hubspot_004__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (HubSpot, Gmail, and Google Calendar). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nAssume today is Monday, May 4, 2026. Run renewal outreach in HubSpot. A deal QUALIFIES for renewal outreach only if ALL of these hold: its stage is 'Closed Won', its dealType is 'existing_business', its closeDate is between 2025-05-01 and 2025-07-31 inclusive (i.e. it renews ~1 year out this summer), and its amount is >= 10000.\n\nFor EVERY qualifying deal, complete all six of the following. Some of these controls are not on the main screen -- you may need to open a record, select a row, or open an editor to find them.\n  (1) In HubSpot, append a new line to the deal's Description: 'Renewal outreach sent 2026-05-04.' (keep the existing text).\n  (2) In HubSpot, reassign that deal's owner (the 'Assigned To' field) from 'Admin User' to 'Renewals Team'.\n  (3) In Gmail, send an email to the deal's primary contact (companies[].name -> contacts whose companyId matches -> first such contact's email) with Subject 'Renewal: <Company>' and a body containing the company name, the original amount formatted as $#,##0, and the original closeDate.\n  (4) In Gmail, apply the existing 'Renewals' label to that email you just sent.\n  (5) In Google Calendar, create an event titled 'Renewal call: <Company>' on 2026-05-11 (any time).\n  (6) On that calendar event, add the deal's primary contact email as a guest.\n\nSkip every non-qualifying deal entirely (wrong stage, new_business, out-of-window closeDate, or amount < 10000): do not edit its description or owner, do not email its contact, and do not create a calendar event for it.",
+  "app_type": "hubspot_mock,gmail_mock,google_calendar_mock",
+  "domain": "am",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

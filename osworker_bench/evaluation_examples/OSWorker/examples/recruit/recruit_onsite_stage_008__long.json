@@ -1,0 +1,77 @@
+{
+  "id": "recruit_onsite_stage_008__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nAssume today is Monday, June 8, 2026. For every active application in an 'Onsite' stage that already has all of its onsite interviews marked 'completed', schedule a 30-minute debrief on the Google Calendar titled 'Debrief - <Candidate Name>'. The debrief must (a) be on a weekday within June 8-11, 2026, between 13:00 and 17:00 local, (b) not overlap any existing event on the calendar, and (c) invite as guests EXACTLY the interviewers who submitted scorecards for that application (resolve interviewer ids to their emails) -- do not invite yourself (the organizer), the candidate, or anyone else. Schedule at most ONE debrief per day: process candidates in candidate order (alphabetical by candidate name) and place each candidate on the earliest weekday in the window that does not yet hold a debrief; within that day, pick the EARLIEST conflict-free 30-min slot (aligned to :00 or :30). Skip applications that still have a 'scheduled' (not completed) onsite interview, and skip non-onsite applications.\n\nFinally, in Slack, post one message per scheduled candidate in the '#interviews' channel announcing the debrief: name the candidate and @mention EXACTLY that candidate's interviewers (the same people you invited as calendar guests) -- mention no one else.",
+  "app_type": "greenhouse_mock,google_calendar_mock,slack_mock",
+  "domain": "recruit",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

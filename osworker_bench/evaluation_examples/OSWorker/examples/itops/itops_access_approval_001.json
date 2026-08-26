@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Business Systems Administrator at Meridian Labs (a 600-person B2B SaaS company). A single access request ticket just landed in Jira and you need to verify the requester's department in Workday, then record the approval result in the access control Google Sheet.\n\nStep 1 — In Jira (jira_mock), open the 'IT Access Requests' project (projectKey='IAR') and read ticket IAR-312. Its summary is 'Access request: Salesforce read-only for onboarding rep' and its description reads: 'Requester: Tom Becker (tom.becker@meridianlabs.io). Requested system: Salesforce. Access level: Read-only. Purpose: Support onboarding-campaign reporting. Manager approval: Approved by Linda Hess (l.hess@meridianlabs.io).'\n\nStep 2 — In Workday (workday_mock), look up the employee Tom Becker (employeeId='E-10482'). Confirm his Department field. It should read 'Sales Operations'. If the department is 'Sales Operations', this request is policy-compliant (Salesforce read-only is allowed for Sales Operations).\n\nStep 3 — In Google Sheets (google_sheets_mock), open the 'Access Control Register' workbook and the 'Approvals' sheet. Add a new row at the next available row (currently row 4) with these exact values:\n- Column A (Request ID): 'IAR-312'\n- Column B (Date): '2026-07-01'\n- Column C (Requester): 'Tom Becker'\n- Column D (System): 'Salesforce'\n- Column E (Access Level): 'Read-only'\n- Column F (Department): 'Sales Operations'\n- Column G (Manager Approval): 'Approved'\n- Column H (SysAdmin Decision): 'Approved'\n- Column I (Notes): 'Department verified in Workday (E-10482). Read-only access compliant for Sales Operations.'\n\nDo NOT modify the 3 existing rows (rows 1-3) in the Approvals sheet. Only add the one new row described above. Do NOT post any Slack message for this easy task.",
+  "instruction_zh": "标签中输出最终译文。 </think> <translation>\n你是 Meridian Labs（一家 600 人的 B2B SaaS 公司）的业务系统管理员。一张单独的访问申请工单刚刚到达 Jira，你需要在 Workday 中核实申请人的部门，然后将审批结果记录到访问控制 Google Sheet 中。\n\n步骤 1 — 在 Jira（jira_mock）中，打开 \"IT Access Requests\" 项目（projectKey='IAR'），并读取工单 IAR-312。其摘要为 \"Access request: Salesforce read-only for onboarding rep\"，描述内容为：\"Requester: Tom Becker (tom.becker@meridianlabs.io). Requested system: Salesforce. Access level: Read-only. Purpose: Support onboarding-campaign reporting. Manager approval: Approved by Linda Hess (l.hess@meridianlabs.io).\"\n\n步骤 2 — 在 Workday（workday_mock）中，查找员工 Tom Becker（employeeId='E-10482'）。确认他的 Department 字段。该字段应显示为 \"Sales Operations\"。如果部门是 \"Sales Operations\"，则该申请符合策略（Sales Operations 允许使用 Salesforce 只读权限）。\n\n步骤 3 — 在 Google Sheets（google_sheets_mock）中，打开 \"Access Control Register\" 工作簿和 \"Approvals\" 工作表。在下一个可用行（当前为第 4 行）添加一行，填入以下精确值：\n- A 列（Request ID）：'IAR-312'\n- B 列（Date）：'2026-07-01'\n- C 列（Requester）：'Tom Becker'\n- D 列（System）：'Salesforce'\n- E 列（Access Level）：'Read-only'\n- F 列（Department）：'Sales Operations'\n- G 列（Manager Approval）：'Approved'\n- H 列（SysAdmin Decision）：'Approved'\n- I 列（Notes）：'Department verified in Workday (E-10482). Read-only access compliant for Sales Operations.'\n\n请勿修改 Approvals 工作表中已有的 3 行（第 1–3 行）。仅添加上述一行新记录。请勿为此简单任务发送任何 Slack 消息。",
+  "id": "itops_access_approval_001",
+  "app_type": "mock_websites",
+  "generated_at": "2026-07-02T06:14:06.740864",
+  "adversarial_rounds": "1",
+  "domain": "itops",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

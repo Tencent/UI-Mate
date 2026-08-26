@@ -1,0 +1,79 @@
+{
+  "instruction": "You are an IT Help Desk / Access Request Manager at Northwind Corp. A Slack access request has just come in and you need to log it in the access audit tracker.\n\nStep 1 — In Slack (slack_mock), open the #it-access-requests channel. Read the most recent message (messageId='msg-req-001') posted by Maya Chen. The message reads:\n'@it-helpdesk Access request: App=Salesforce, Requester=Maya Chen (maya.chen@northwind.io), Manager Approval=Approved by Daniel Okafor (d.okafor@northwind.io). Need read-only CRM access for Q3 sales support.'\n\nStep 2 — In Google Sheets (google_sheets_mock), open the 'Access Audit Log' workbook and the 'Access Log' sheet. Add a new row at the next available row (currently row 5) with these exact values:\n- Column A (Request ID): 'ACC-2026-0701-001'\n- Column B (Date): '2026-07-01'\n- Column C (Requester): 'Maya Chen'\n- Column D (Email): 'maya.chen@northwind.io'\n- Column E (App): 'Salesforce'\n- Column F (Access Level): 'Read-only'\n- Column G (Manager): 'Daniel Okafor'\n- Column H (Approval): 'Approved'\n- Column I (Status): 'Logged'\n\nDo NOT modify the 4 existing rows (rows 1-4) in the Access Log sheet. Only add the one new row described above. Do NOT create a Jira ticket for this easy task.",
+  "instruction_zh": "你是 Northwind Corp 的 IT 服务台/访问请求管理员。一条 Slack 访问请求刚刚提交，你需要将其记录到访问审计追踪表中。\n\n步骤 1 — 在 Slack（slack_mock）中，打开 #it-access-requests 频道。阅读 Maya Chen 发布的最新的消息（messageId='msg-req-001'）。消息内容为：\n'@it-helpdesk Access request: App=Salesforce, Requester=Maya Chen (maya.chen@northwind.io), Manager Approval=Approved by Daniel Okafor (d.okafor@northwind.io). Need read-only CRM access for Q3 sales support.'\n\n步骤 2 — 在 Google Sheets（google_sheets_mock）中，打开 'Access Audit Log' 工作簿和 'Access Log' 工作表。在下一个可用行（当前为第 5 行）添加一行，填入以下准确值：\n- A 列（Request ID）：'ACC-2026-0701-001'\n- B 列（Date）：'2026-07-01'\n- C 列（Requester）：'Maya Chen'\n- D 列（Email）：'maya.chen@northwind.io'\n- E 列（App）：'Salesforce'\n- F 列（Access Level）：'Read-only'\n- G 列（Manager）：'Daniel Okafor'\n- H 列（Approval）：'Approved'\n- I 列（Status）：'Logged'\n\n请勿修改 'Access Log' 工作表中已有的 4 行数据（第 1-4 行）。仅添加上述一行新数据。请勿为此简单任务创建 Jira 工单。",
+  "id": "itops_access_log_003",
+  "app_type": "mock_websites",
+  "generated_at": "2026-07-02T03:58:50.050847",
+  "adversarial_rounds": "1",
+  "domain": "itops",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

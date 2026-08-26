@@ -1,0 +1,8 @@
+python3-xlib==0.15
+PyAutoGUI==0.9.54
+Pillow==10.1.0
+requests
+flask
+numpy
+lxml
+

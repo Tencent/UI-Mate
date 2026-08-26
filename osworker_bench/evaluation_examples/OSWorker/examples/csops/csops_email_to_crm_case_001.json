@@ -1,0 +1,79 @@
+{
+  "instruction": "An urgent customer email is sitting unread in the support inbox. Please log it in the CRM as a support case against the right customer account, set the Salesforce Case priority to High and status to Working, get it to the colleague who owns that relationship, and send the customer a brief acknowledgement so they know we're on it.",
+  "instruction_zh": "支持收件箱中有一封未读的紧急客户邮件。请在 CRM 中将其登记为关联至正确客户账户的支持案例，将 Salesforce Case 的 priority 设为 High、status 设为 Working，转交给负责该客户关系的同事，并向客户发送一封简短的确认回复，让对方知道我们正在处理。",
+  "id": "csops_email_to_crm_case_001",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:20:24.659435",
+  "adversarial_rounds": "1",
+  "domain": "csops",
+  "_source": "cua_gym"
+}

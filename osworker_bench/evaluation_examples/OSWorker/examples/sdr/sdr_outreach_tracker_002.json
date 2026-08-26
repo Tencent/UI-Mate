@@ -1,0 +1,79 @@
+{
+  "instruction": "It's outreach day. Open my SDR Outreach Tracker and work through the prospects that are still Not Contacted, assigned to Alex Morgan, and have an email address. For each target, send a brief intro email from Outlook with the exact subject \"Intro from Northwind Cloud\". The emails must be sent, not left as drafts. Then mark those same tracker rows as Contacted, set Last Contacted to 2026-06-24, and make each Status cell green. Keep HubSpot in sync by changing those same prospects to leadStatus attempted.",
+  "instruction_zh": "今天是外联日。打开我的 SDR Outreach Tracker，处理仍为 Not Contacted、分配给 Alex Morgan 且有邮箱地址的潜在客户。请分别从 Outlook 给每位目标发送一封简短的自我介绍邮件，邮件主题必须精确为 \"Intro from Northwind Cloud\"，并且邮件必须已发送，不能停留为草稿。然后在 tracker 中把对应行标记为 Contacted，将 Last Contacted 填为 2026-06-24，并把各自的 Status 单元格设为绿色。最后在 HubSpot 中同步把这些潜在客户的 leadStatus 改为 attempted。",
+  "id": "sdr_outreach_tracker_002",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:52:20.504700",
+  "adversarial_rounds": "1",
+  "domain": "sdr",
+  "_source": "cua_gym"
+}

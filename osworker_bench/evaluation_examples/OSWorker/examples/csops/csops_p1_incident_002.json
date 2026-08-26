@@ -1,0 +1,79 @@
+{
+  "instruction": "In Slack #incidents, Contoso Bank has explicitly declared a customer P1: their VP of IT says production SSO login is completely down since 14:05 UTC, about 4,000 users are locked out, and executive banking operations are blocked. Stand up the full incident record across our tools: create a top-urgency Jira defect for the Contoso SSO outage and assign it to Raj Patel, escalate the existing Contoso Salesforce case to Critical/Escalated, publish a company-readable Notion incident summary with impact, timeline, owner, and next update time, then reply in the Slack P1 thread with the Jira key and the incident record so everyone works from one source of truth.",
+  "instruction_zh": "Slack #incidents 中 Contoso Bank 已明确声明客户 P1：其 VP of IT 表示生产 SSO 登录自 14:05 UTC 起完全不可用，约 4,000 名用户被锁定，且高管银行业务受阻。请在各工具中建立完整事件记录：为 Contoso SSO 故障创建最高紧急度的 Jira 缺陷并分配给 Raj Patel，将现有 Contoso Salesforce case 升级为 Critical/Escalated，发布一份全公司可读的 Notion 事件摘要，包含影响、时间线、负责人和下一次更新时间，然后在 Slack P1 线程中回复 Jira key 和 incident record，让所有人基于单一事实来源开展工作。",
+  "id": "csops_p1_incident_002",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:26:51.888520",
+  "adversarial_rounds": "1",
+  "domain": "csops",
+  "_source": "cua_gym"
+}

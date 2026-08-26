@@ -1,0 +1,79 @@
+{
+  "instruction": "Candidate Nina Patel (nina.patel@gmail.com) passed her recruiter screen for the Software Engineer role. In Greenhouse, move her application to the 'Hiring Manager Interview' stage and add a scorecard note stating she has 6 years of relevant experience and strong communication. Then send her an email from Gmail letting her know the next step is a hiring-manager interview, and post a message in Slack #hiring that @mentions the hiring manager Greg asking him to review Nina's profile.",
+  "id": "recruit_screen_002",
+  "app_type": "recruiter_cross_app",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T19:06:56.005566",
+  "adversarial_rounds": "2",
+  "domain": "recruit",
+  "_source": "minicua",
+  "instruction_zh": "候选人 Nina Patel（nina.patel@gmail.com）通过了 Software Engineer 职位的招聘官筛选。在 Greenhouse 中，将她的申请移至 'Hiring Manager Interview' 阶段，并添加一条评分卡备注，说明她具备 6 年相关经验且沟通能力强。然后通过 Gmail 给她发送一封邮件，告知她下一步是招聘经理面试，并在 Slack #hiring 频道发布一条消息，@提及招聘经理 Greg，请他查看 Nina 的档案。"
+}

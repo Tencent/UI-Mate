@@ -1,0 +1,77 @@
+{
+  "id": "ar_billing_exception_012__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nThe 'Billing Exceptions' Google Sheet (tab 'Exceptions', rows 2+: Customer, Exception Type, Amount, Invoice #) lists customers the billing system flagged this week. Work through every row and take the corrective action that its Exception Type calls for, but ONLY when the item is not already in the target state (verify current state first and skip anything already resolved):\n- 'Duplicate charge': refund the matching Stripe payment (match by customer and amount). If that payment has already been refunded, leave it alone.\n- 'Churn - downgrade': cancel the matching Stripe subscription for that customer at the END of the current billing period (do NOT cancel it immediately). If it is already set to cancel at period end (or already canceled), leave it alone.\n- 'Payment received': in QuickBooks, record payment on the invoice whose number is in the Invoice # column so it becomes Paid. If it is already Paid, leave it alone.\n- 'On hold' or 'Under review': do NOT act on these rows -- they are pending and must be left untouched.\nSkip any row whose customer has no matching Stripe payment/subscription or QuickBooks invoice.\n\nWhen you have handled every actionable row, add a new tab named 'Reconciliation Summary' to the 'Billing Exceptions' sheet and record how many exceptions you resolved (a count). Finally, post a one-line summary of the reconciliation to the Slack '#finance' channel and pin that message.",
+  "app_type": "stripe_dashboard_mock,quickbooks_mock,google_sheets_mock,slack_mock",
+  "domain": "ar",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

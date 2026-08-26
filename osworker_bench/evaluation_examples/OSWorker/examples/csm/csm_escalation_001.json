@@ -1,0 +1,79 @@
+{
+  "instruction": "I'm the CSM and one of my key customers, Vertex Manufacturing, just raised something serious in their Slack channel — their integration is down and it's blocking their team. Turn that into a tracked engineering issue in Jira with the right severity, the customer named, and the reproduction steps they gave us. Create or flag an escalation case on their Salesforce account with high priority and an available status in the app; don't worry about setting an owner if the UI doesn't offer one. Update our Customer Health Tracker so this account now shows the risk in red and has a risk note. Then reply in their Slack channel to acknowledge the issue and tell them when we'll update them next.",
+  "instruction_zh": "我是客户成功经理，我的一位重要客户 Vertex Manufacturing 刚刚在他们的 Slack 频道中反馈了一个严重问题——他们的集成中断，团队工作因此受阻。请将其创建为 Jira 中一个已跟踪的工程事项，设置正确的严重程度，注明客户名称，并附上他们提供的复现步骤。在 Salesforce 中为该账户创建或标记一个升级 case，设置为高优先级，并使用应用中可选的状态；如果界面没有提供所有者字段，不需要强行设置所有者。更新我们的 Customer Health Tracker，使该账户的风险显示为红色，并填写 Risk Note。然后在他们的 Slack 频道中回复，确认已收到该问题，并告知下次更新时间。",
+  "id": "csm_escalation_001",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:25:47.665812",
+  "adversarial_rounds": "1",
+  "domain": "csm",
+  "_source": "cua_gym"
+}

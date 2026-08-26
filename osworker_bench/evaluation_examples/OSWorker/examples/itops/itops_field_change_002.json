@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Business Systems Administrator at Meridian Labs. The sales operations team has requested a change to a Salesforce picklist value and a follow-up field-help text update in HubSpot. You must apply the configuration change in Salesforce, document it in the change runbook in Google Docs, log it in the changes tracker sheet, and notify the requester in Slack.\n\nStep 1 — In Salesforce (salesforce_mock), open the 'Lead' object configuration and locate the 'Lead Source' picklist. It currently contains these values: 'Web', 'Referral', 'Event', 'Partner', 'Outbound'. Add a new picklist value 'Webinar' (label exactly 'Webinar', API name 'Webinar') so the picklist now reads: 'Web', 'Referral', 'Event', 'Partner', 'Outbound', 'Webinar'. Do not remove or rename any existing value.\n\nStep 2 — In HubSpot (hubspot_mock), open the 'Contact' object and locate the 'Lifecycle Stage' property description field. Update its help text (description) from 'Indicates the stage of the contact in the marketing/sales funnel.' to 'Indicates the stage of the contact in the marketing/sales funnel. Webinar-attended contacts should be set to MQL.' Save the property.\n\nStep 3 — In Google Docs (google_docs_mock), open the document titled 'Configuration Change Runbook'. Under the 'Q3 2026 Changes' heading add a new bullet:\n'- CHG-2026-0701: Added Salesforce Lead Source picklist value \"Webinar\" (Lead object). Updated HubSpot Contact \"Lifecycle Stage\" help text to note Webinar-attended -> MQL. Requested by Sales Ops (Linda Hess). Verified by sysadmin.'\nIf the 'Q3 2026 Changes' heading does not exist, create it as a Heading 2 first.\n\nStep 4 — In Google Sheets (google_sheets_mock), open the 'Config Changes' workbook and the 'Change Log' sheet. Add a new row at the next available row (currently row 4) with these exact values:\n- Column A (Change ID): 'CHG-2026-0701'\n- Column B (Date): '2026-07-01'\n- Column C (System): 'Salesforce + HubSpot'\n- Column D (Object): 'Lead Source picklist / Lifecycle Stage property'\n- Column E (Change Summary): 'Added Webinar to Salesforce Lead Source; updated HubSpot Lifecycle Stage help text'\n- Column F (Requested By): 'Linda Hess'\n- Column G (Status): 'Completed'\n\nStep 5 — In Slack (slack_mock), open the #sysadmin-updates channel and post exactly this message:\n'Change completed: CHG-2026-0701. Added \"Webinar\" to the Salesforce Lead Source picklist and updated the HubSpot Lifecycle Stage help text (Webinar-attended -> MQL). Logged in Config Changes tracker and Configuration Change Runbook. Verified by sysadmin. @l.hess please confirm on your side.'\n\nDo NOT modify any other Salesforce picklist, HubSpot property, or runbook heading. Only the described changes are in scope.",
+  "instruction_zh": "标签中输出最终译文。 </think> <translation>\n你是 Meridian Labs 的业务系统管理员。销售运营团队请求修改 Salesforce 的一个 picklist 值，并在 HubSpot 中跟进更新字段帮助文本。你必须在 Salesforce 中应用该配置变更，在 Google Docs 的变更运行手册中记录，在变更跟踪表格中登记，并在 Slack 中通知请求人。\n\n步骤 1 — 在 Salesforce（salesforce_mock）中，打开 'Lead' 对象配置，找到 'Lead Source' picklist。该 picklist 当前包含以下值：'Web'、'Referral'、'Event'、'Partner'、'Outbound'。添加一个新的 picklist 值 'Webinar'（标签必须完全为 'Webinar'，API 名称为 'Webinar'），使 picklist 变为：'Web'、'Referral'、'Event'、'Partner'、'Outbound'、'Webinar'。请勿删除或重命名任何现有值。\n\n步骤 2 — 在 HubSpot（hubspot_mock）中，打开 'Contact' 对象，找到 'Lifecycle Stage' 属性的描述字段。将其帮助文本（描述）从 'Indicates the stage of the contact in the marketing/sales funnel.' 更新为 'Indicates the stage of the contact in the marketing/sales funnel. Webinar-attended contacts should be set to MQL.'。保存该属性。\n\n步骤 3 — 在 Google Docs（google_docs_mock）中，打开标题为 'Configuration Change Runbook' 的文档。在 'Q3 2026 Changes' 标题下添加一个新项目符号：\n'- CHG-2026-0701: Added Salesforce Lead Source picklist value \"Webinar\" (Lead object). Updated HubSpot Contact \"Lifecycle Stage\" help text to note Webinar-attended -> MQL. Requested by Sales Ops (Linda Hess). Verified by sysadmin.'\n如果 'Q3 2026 Changes' 标题不存在，请先将其创建为 Heading 2。\n\n步骤 4 — 在 Google Sheets（google_sheets_mock）中，打开 'Config Changes' 工作簿和 'Change Log' 工作表。在下一个可用行（当前为第 4 行）添加一行，填入以下精确值：\n- A 列（Change ID）：'CHG-2026-0701'\n- B 列（Date）：'2026-07-01'\n- C 列（System）：'Salesforce + HubSpot'\n- D 列（Object）：'Lead Source picklist / Lifecycle Stage property'\n- E 列（Change Summary）：'Added Webinar to Salesforce Lead Source; updated HubSpot Lifecycle Stage help text'\n- F 列（Requested By）：'Linda Hess'\n- G 列（Status）：'Completed'\n\n步骤 5 — 在 Slack（slack_mock）中，打开 #sysadmin-updates 频道，并准确发布以下消息：\n'Change completed: CHG-2026-0701. Added \"Webinar\" to the Salesforce Lead Source picklist and updated the HubSpot Lifecycle Stage help text (Webinar-attended -> MQL). Logged in Config Changes tracker and Configuration Change Runbook. Verified by sysadmin. @l.hess please confirm on your side.'\n\n请勿修改任何其他 Salesforce picklist、HubSpot 属性或运行手册标题。仅上述描述的变更在范围内。",
+  "id": "itops_field_change_002",
+  "app_type": "mock_websites",
+  "generated_at": "2026-07-02T06:16:35.390677",
+  "adversarial_rounds": "1",
+  "domain": "itops",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,2 @@
+# Keep pyproject.toml as the single dependency source.
+-e .[full]

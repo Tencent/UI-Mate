@@ -1,0 +1,77 @@
+{
+  "id": "ae_deal_handoff_002__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nToday is 2026-06-29. Sales just closed a batch of deals -- hand off every qualifying opportunity in Salesforce to the delivery team. An opportunity qualifies only if its stage is Closed Won AND it is NOT already owned by 'Delivery Lead' (opps still in Negotiation or already owned by Delivery Lead should be skipped). For every qualifying opportunity, first reassign its Owner to 'Delivery Lead' in Salesforce. Then classify by amount and take these actions:\n  - Tier-1 (amount >= $100,000): also log a follow-up Task titled 'Kickoff - <Opp>' on the opportunity's Activity Timeline; add a Trello card 'Handoff: <Opp>' to the 'Delivery Queue' list of the 'Delivery Handoffs' board with the 'Tier-1' label and a due date of 2026-07-02; apply the 'Handoff' label to the account contact's inbound email in Gmail; and send that contact a kickoff email with subject 'Kickoff for <Opp>'.\n  - Tier-2 ($25,000..$99,999): add a Trello card 'Handoff: <Opp>' with the 'Tier-2' label and a due date of 2026-07-04. No task, no email.\n  - Tier-3 (< $25,000): add a Trello card 'Handoff: <Opp>' with the 'Tier-3' label and a due date of 2026-07-06. No task, no email.\nFinally, post a one-line summary to the Slack '#delivery' channel that includes how many opportunities you handed off, and pin that message.",
+  "app_type": "salesforce_mock,trello_mock,gmail_mock,slack_mock",
+  "domain": "ae",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

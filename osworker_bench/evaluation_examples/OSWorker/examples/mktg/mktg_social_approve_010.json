@@ -1,0 +1,79 @@
+{
+  "instruction": "You are the Social Media Manager at Northwind Co. A new LinkedIn post draft needs to move into the legal review stage before it can be published.\n\nIn Trello (trello_mock), open the 'Content Pipeline' board. Find the card titled 'Post: Q3 Product Launch Teaser (LinkedIn)' which is currently in the 'Draft' list. Move that card from the 'Draft' list to the 'Legal Review' list.\n\nDo NOT move or modify any other card on the board. Only the single card 'Post: Q3 Product Launch Teaser (LinkedIn)' should be changed.",
+  "instruction_zh": "你是 Northwind Co. 的社交媒体经理。一篇新的 LinkedIn 帖子草稿在发布前需要进入法务审核阶段。\n\n在 Trello（trello_mock）中，打开 'Content Pipeline' 看板。找到标题为 'Post: Q3 Product Launch Teaser (LinkedIn)' 的卡片，该卡片当前位于 'Draft' 列表中。将该卡片从 'Draft' 列表移动到 'Legal Review' 列表。\n\n请勿移动或修改看板上的任何其他卡片。只应更改单张卡片 'Post: Q3 Product Launch Teaser (LinkedIn)'。",
+  "id": "mktg_social_approve_010",
+  "app_type": "mock_websites",
+  "generated_at": "2026-07-02T03:20:07.177376",
+  "adversarial_rounds": "1",
+  "domain": "mktg",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

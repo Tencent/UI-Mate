@@ -1,0 +1,79 @@
+{
+  "instruction": "Marcus Bell over at Cedar Grove Health is a brand-new lead in our CRM and I want to get the first touch out today. Use the computer's current local date as the reference: \"this Friday\" means the upcoming Friday in local time, or today if today is Friday. Send him a short cold outreach email — keep it to about three sentences that speak to his role running operations — then update his contact record to reflect that we've now attempted to reach him, log a quick note recording the outreach, and set yourself a follow-up reminder for this Friday in case he doesn't reply.",
+  "instruction_zh": "Cedar Grove Health 的 Marcus Bell 是我们 CRM 中的全新线索，我想今天就完成首次触达。以电脑当前本地日期为基准：“本周五”表示本地时间即将到来的周五；如果今天就是周五，则表示今天。给他发一封简短的冷邮件——控制在三句话左右，内容要针对他负责运营的角色——然后更新他的联系人记录，表明我们已尝试联系过他；快速记一条备注，记录这次外联；并给自己设置一个本周五的跟进提醒，以防他没有回复。",
+  "id": "sdr_cold_outreach_001",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:31:20.961871",
+  "adversarial_rounds": "1",
+  "domain": "sdr",
+  "_source": "cua_gym"
+}

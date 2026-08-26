@@ -1,0 +1,79 @@
+{
+  "instruction": "Carlos Mendez just completed signing the Remote Work Policy in DocuSign. Mark the 'Policy Acknowledgement' item complete on his onboarding checklist in Workday, and reply in the Slack #hr-ops thread where the policy send-out was originally announced to confirm it's signed and recorded.",
+  "id": "hr_policy_ack_002",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T18:36:36.017866",
+  "adversarial_rounds": "1",
+  "domain": "hr",
+  "_source": "minicua",
+  "instruction_zh": "Carlos Mendez 刚刚在 DocuSign 中完成了 Remote Work Policy 的签署。请在 Workday 中将他入职清单上的 'Policy Acknowledgement' 项标记为已完成，并在 Slack #hr-ops 的原始发布线程中回复，确认该政策已签署并记录。"
+}

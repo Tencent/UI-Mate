@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "mktg_webinar_guide_011",
+  "difficulty": "hard",
+  "instruction": "Prepare next month's customer webinar on our reporting module. In Notion, create a page titled 'Reporting Webinar Guide' whose body lays out five run-of-show steps: Intro, Live demo, Q&A, Resources, and Follow-up. Schedule the webinar on Google Calendar titled 'Reporting Module Webinar' for July 9. Add a Trello card 'Send webinar follow-up' to the To Do list so we don't forget the recap. Finally, email the customer community contact (community@company.com) announcing the July 9 webinar.",
+  "instruction_zh": "筹备下个月关于我们报告模块的客户网络研讨会。在 Notion 中创建一个标题为 'Reporting Webinar Guide' 的页面，在正文中列出五个流程步骤：开场介绍、现场演示、问答环节、资料资源和后续跟进。在 Google Calendar 中安排一场标题为 'Reporting Module Webinar' 的网络研讨会，日期为 July 9。在 Trello 的 To Do 列表中添加一张名为 'Send webinar follow-up' 的卡片，以免忘记发送会后回顾。最后，给客户社区联系人（community@company.com）发送邮件，宣布 July 9 的网络研讨会。",
+  "app_type": "notion_mock",
+  "persona": "You are an office worker acting as a product manager. Your tools for this task are: the Notion workspace, the team calendar, the Trello board, the shared email inbox.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Notion workspace with pages 'Knowledge Base'; an empty Google Calendar; Trello 'Project Alpha' board with lists To Do, Doing, Done; Gmail inbox with 1 email(s): \"Next webinar?\" from community@company.com. GROUND TRUTH — the agent earns partial credit for each checkpoint: webinar guide page created (+0.15); guide has the 5 run-of-show steps (+0.25); cal_new_event (+0.1); webinar on July 9 (+0.1); follow-up Trello card (+0.1); card in To Do (+0.1); gmail_new_sent (+0.05); emailed community contact (+0.1); names the July 9 webinar (+0.05). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "mktg",
+  "_source": "cua_gym"
+}

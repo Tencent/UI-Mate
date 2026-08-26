@@ -1,0 +1,77 @@
+{
+  "id": "ops_inventory_reorder_001__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nThe Airtable base 'Inventory' has a 'Stock' table. A product needs reordering when OnHand < ReorderPoint. For every such product, compute the reorder quantity = the smallest multiple of CaseSize that brings OnHand up to at least ReorderPoint (i.e. ceil((ReorderPoint - OnHand)/CaseSize) * CaseSize), and set the row's 'OrderQty' field to that number (add the field/value in Airtable). Then, group the products needing reorder by Supplier and send ONE email per supplier via Gmail to its SupplierEmail, Subject 'Purchase Order - <Supplier>', body listing each product as a line '<SKU> x<OrderQty>' (one per line, in the order the rows appear in the table). After sending, label each of those Purchase Order emails 'Work' and star them so replies are easy to track. Do not email suppliers that have no products needing reorder, and do not set OrderQty on products that are sufficiently stocked.\n\nFinally, in Slack open the existing '#purchasing' channel and post one summary message there listing every SKU that needs reordering (one '<SKU> x<OrderQty>' line per product, in the order the rows appear in the table), and @mention the warehouse lead (Dana Okafor) in that message.",
+  "app_type": "airtable_mock,gmail_mock,slack_mock",
+  "domain": "ops",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

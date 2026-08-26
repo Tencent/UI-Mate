@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Marketing Campaign Manager running the post-campaign performance pull. Step 1: Open HubSpot ('Campaign Performance' report for 'Spring Nurture 2026'). Read the three metrics: MQLs = 312, Open Rate = 38.4%, Conversion Rate = 4.9%. Step 2: Open Google Sheets (workbook 'Campaign Reports 2026', sheet 'Performance'). Row 2 is the header; row 3 is the 'Spring Nurture 2026' row with columns A 'Campaign', B 'MQLs', C 'Open Rate', D 'Conversion Rate', E 'Source'. Set B3 = 312, C3 = 38.4%, D3 = 4.9%, E3 = 'HubSpot'. Step 3: In Airtable (base 'Campaign Ops', table 'Campaigns') find the record 'Spring Nurture 2026' and set its 'Status' field to 'Reported'. Step 4: In Slack post to #campaign-reporting: 'Spring Nurture 2026 performance — MQLs: 312, Open Rate: 38.4%, Conversion: 4.9% (source: HubSpot). Logged to Campaign Reports 2026 sheet.'. Step 5: Send a Gmail to cmo@northwindcloud.com with subject 'Spring Nurture 2026 — Performance Summary' and body 'Hi — Spring Nurture 2026 closed with 312 MQLs, 38.4% open rate, and 4.9% conversion (per HubSpot). Full numbers are in the Campaign Reports 2026 sheet. Best, Marketing Campaign Mgmt.'. Do not alter any other rows in the sheet or other Airtable records.",
+  "instruction_zh": "标签包裹。 </think> <translation>你是一名营销活动经理，正在执行营销活动结束后的绩效数据提取。步骤1：打开 HubSpot，查看 'Spring Nurture 2026' 的 'Campaign Performance' 报告。读取三个指标：MQLs = 312、Open Rate = 38.4%、Conversion Rate = 4.9%。步骤2：打开 Google Sheets（工作簿 'Campaign Reports 2026'，工作表 'Performance'）。第2行为表头；第3行为 'Spring Nurture 2026' 所在行，其中A列是 'Campaign'、B列是 'MQLs'、C列是 'Open Rate'、D列是 'Conversion Rate'、E列是 'Source'。设置 B3 = 312、C3 = 38.4%、D3 = 4.9%、E3 = 'HubSpot'。步骤3：在 Airtable（数据库 'Campaign Ops'，表格 'Campaigns'）中找到记录 'Spring Nurture 2026'，并将其 'Status' 字段设置为 'Reported'。步骤4：在 Slack中向 #campaign-reporting 频道发送消息：'Spring Nurture 2026 performance — MQLs: 312, Open Rate: 38.4%, Conversion: 4.9% (source: HubSpot). Logged to Campaign Reports 2026 sheet.'。步骤5：通过 Gmail向 cmo@northwindcloud.com 发送邮件，主题为 'Spring Nurture 2026 — Performance Summary'，正文为 'Hi — Spring Nurture 2026 closed with 312 MQLs, 38.4% open rate, and 4.9% conversion (per HubSpot). Full numbers are in the Campaign Reports 2026 sheet. Best, Marketing Campaign Mgmt.'。请勿修改表格中的其他行或其他 Airtable 记录。",
+  "id": "mktg_perf_report_005",
+  "app_type": "libreoffice_calc",
+  "generated_at": "2026-07-02T08:47:13.624356",
+  "adversarial_rounds": "2",
+  "domain": "mktg",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

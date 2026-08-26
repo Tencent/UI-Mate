@@ -1,0 +1,79 @@
+{
+  "instruction": "I'm prospecting on LinkedIn. Find Priya Nair, the VP of Engineering at NorthBeam Logistics, and send her a connection request with a brief personalized note that mentions Priya and either NorthBeam or her engineering/logistics context. Then add her to Salesforce as a new lead — capture her name, company, and title, mark the lead source as LinkedIn, give it a Warm rating, keep the status New, and assign it to yourself. Finally, using the computer's current local date as the anchor, add an open Salesforce task assigned to yourself and related to that new lead to send Priya an intro email two days from now.",
+  "instruction_zh": "我正在 LinkedIn 上寻找潜在客户。找到 NorthBeam Logistics 的工程副总裁 Priya Nair，向她发送连接请求并附上简短的个性化备注，备注需提到 Priya，并结合 NorthBeam 或她的工程/物流相关背景。然后将她作为新线索添加到 Salesforce——录入她的姓名、公司和职位，将线索来源标记为 LinkedIn，评级设为 Warm，状态保持为 New，并分配给你自己。最后以电脑当前本地日期为基准，在 Salesforce 中添加一个未完成任务，任务分配给你自己、关联到这条新线索，并提醒你两天后给 Priya 发送介绍邮件。",
+  "id": "sdr_source_lead_003",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:24:04.405369",
+  "adversarial_rounds": "1",
+  "domain": "sdr",
+  "_source": "cua_gym"
+}

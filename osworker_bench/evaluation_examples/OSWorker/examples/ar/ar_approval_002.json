@@ -1,0 +1,79 @@
+{
+  "instruction": "The AE on the Hooli deal is asking for a 20% discount, which is over our 15% limit and needs sign-off. Pull the list price and proposed price from the Salesforce opportunity and post a structured approval request in Slack #finance-approvals with the customer, original amount, adjusted amount, discount %, and who's requesting it.",
+  "id": "ar_approval_002",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T17:39:12.548622",
+  "adversarial_rounds": "1",
+  "domain": "ar",
+  "_source": "minicua",
+  "instruction_zh": "Hooli 交易的 AE 要求 20% 的折扣，这超出了我们 15% 的限额，需要审批。请从 Salesforce 商机中拉取标价和拟议价格，并在 Slack #finance-approvals 发布一份结构化的审批请求，包含客户、原始金额、调整后金额、折扣百分比以及申请人。"
+}

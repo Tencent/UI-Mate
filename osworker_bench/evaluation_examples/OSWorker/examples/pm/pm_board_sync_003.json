@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "pm_board_sync_003",
+  "difficulty": "hard",
+  "instruction": "Keep the PMO board in sync with engineering. In Jira, the 'Payments API hardening' story (KAN-7) is now In Progress. Reflect that on the Trello PMO board: move the 'Payments API hardening' card from the To Do list into the Doing list. Don't move the unrelated 'Marketing site refresh' card. Then mark KAN-7 itself as 'In Progress' if it isn't already, and post in #general that payments hardening is underway and tracked in both tools.",
+  "instruction_zh": "保持 PMO board 与工程团队同步。在 Jira 中，'Payments API hardening' 故事（KAN-7）当前已是 In Progress 状态。请在 Trello 的 PMO board 上同步这一状态：将 'Payments API hardening' 卡片从 To Do 列表移到 Doing 列表。不要移动无关的 'Marketing site refresh' 卡片。随后，如果 KAN-7 本身还未标记为 In Progress，请将其标记为 In Progress，并在 #general 频道发帖说明 payments hardening 正在进行，且已在两个工具中同步跟踪。",
+  "app_type": "trello_mock",
+  "persona": "You are an office worker acting as a project coordinator. Your tools for this task are: the Trello board, the Jira project board, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): Trello 'Project Alpha' board with lists To Do, Doing, Done; Jira Kanban project with issues KAN-1(Done), KAN-7(To Do); Slack workspace with channels #general, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: Payments card moved to Doing (+0.45); KAN-7 set to In Progress (+0.3); slack_new_msg (+0.1); announces payments hardening (+0.15). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "pm",
+  "_source": "cua_gym"
+}

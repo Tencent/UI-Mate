@@ -1,0 +1,77 @@
+{
+  "id": "recruit_onsite_decision_005__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Greenhouse, Gmail, Google Calendar, and Slack). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou are the recruiter making onsite decisions for the 'Senior Backend Engineer' job in Greenhouse. For every active application currently in the Onsite stage, read the submitted interview scorecards and decide whether to advance, reject, or leave the candidate. The exact decision rule is NOT repeated here: read it in the Slack #hiring channel (see the pinned message) and apply it. Note that if an interviewer submitted more than one scorecard, only their most recent one counts, and pending (unsubmitted) scorecards are ignored.\n\nWhen you ADVANCE a candidate: move their application to the Offer stage, and book a Google Calendar debrief event titled 'Debrief - <Candidate Name>' scheduled on 2026-05-03 with the hiring manager (Omar Farouk, omar.farouk@company.com) as a guest -- a debrief is an internal review, so invite the hiring manager, not the candidate. When you REJECT a candidate: set the application status to rejected and send the candidate a rejection email -- addressed to the candidate's own email, with the subject exactly 'Update on your application - <Candidate Name>'. Leave everyone else as-is.\n\nFinally, post a one-line summary of your decisions to Slack #hiring.",
+  "app_type": "greenhouse_mock,gmail_mock,google_calendar_mock,slack_mock",
+  "domain": "recruit",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

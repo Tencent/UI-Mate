@@ -1,0 +1,79 @@
+{
+  "instruction": "You are a Marketing Operations / Growth Analyst at a 200-person B2B SaaS company. We keep our target account list in Google Sheets and our working lead records in HubSpot. Compare the two and fix the lifecycle-stage gaps. In Google Sheets (workbook 'Target Accounts Q3'), the 'Accounts' sheet lists 12 target accounts in rows 2-13 with columns A 'Company', B 'Domain', C 'Lifecycle Stage'. In HubSpot, the 'Leads' view has 12 lead records keyed by the same domains. Three leads are missing a Lifecycle Stage value in HubSpot that the Sheets list already has: northwindcloud.com (should be 'Lead'), lumendata.io ('MQL'), and vectorlabs.ai ('SQL'). For each of those three, open the HubSpot lead record by domain and set its Lifecycle Stage dropdown to the value shown in the Sheets 'Accounts' sheet (northwindcloud.com -> Lead, lumendata.io -> MQL, vectorlabs.ai -> SQL). Leave all other lead records unchanged. Do not edit the Sheets file.",
+  "instruction_zh": "你是一家200人规模的B2B SaaS公司的营销运营/增长分析师。我们的目标账户列表保存在 Google Sheets 中，工作线索记录保存在 HubSpot 中。请对比两者并修复生命周期阶段的缺口。在 Google Sheets（工作簿名为 'Target Accounts Q3'）中，'Accounts' 工作表在第2-13行列出了12个目标账户，其中A列是 'Company'，B列是 'Domain'，C列是 'Lifecycle Stage'。在 HubSpot中，'Leads' 视图中有12条以相同域名为键的线索记录。有三条线索在 HubSpot 中缺少生命周期阶段值，而 Sheets 列表中已有：northwindcloud.com（应为 'Lead'）、lumendata.io（'MQL'）和 vectorlabs.ai（'SQL'）。对这三条线索中的每一条，在 HubSpot 中按域名打开线索记录，并将其生命周期阶段下拉菜单设置为 Sheets 'Accounts' 工作表中显示的值（northwindcloud.com -> Lead，lumendata.io -> MQL，vectorlabs.ai -> SQL）。其余线索记录均保持不变。不要编辑 Sheets 文件。",
+  "id": "mktg_field_reconcile_006",
+  "app_type": "libreoffice_calc",
+  "generated_at": "2026-07-02T08:28:39.103157",
+  "adversarial_rounds": "1",
+  "domain": "mktg",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

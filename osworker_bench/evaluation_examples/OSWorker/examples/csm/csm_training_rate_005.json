@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "csm_training_rate_005",
+  "difficulty": "hard",
+  "instruction": "Close out the Q2 enablement cohort. The 'Training Attendance' sheet lists four customer accounts in rows 2-5 with a 'Completed' column (D) marked Yes/No; three are Yes and one is No. Compute the completion rate as a percentage and write it into cell B8 (label already in A8). Then in Salesforce, move the 'TechVentures Expansion' opportunity to the 'Closed Won' stage to reflect they're fully enabled, and post the completion rate in #general.",
+  "instruction_zh": "关闭 Q2 enablement cohort。'Training Attendance' 工作表在第 2-5 行列出了四个客户账户，'Completed' 列（D 列）标记为 Yes/No，其中三个为 Yes，一个为 No。请将完成率计算为百分比，并写入单元格 B8（A8 中已有标签）。然后在 Salesforce 中，将 'TechVentures Expansion' 商机移至 'Closed Won' 阶段，以反映其已完全启用，并将完成率发布到 #general。",
+  "app_type": "google_sheets_mock",
+  "persona": "You are an office worker acting as a finance analyst. Your tools for this task are: shared spreadsheets, the Salesforce CRM, team communications.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): a Google Sheet with seeded tabular data; Salesforce CRM with 1 opp(s), 0 case(s); Slack workspace with channels #general, #random. GROUND TRUTH — the agent earns partial credit for each checkpoint: completion rate computed as 75% (+0.4); TechVentures opp -> Closed Won (+0.3); slack_new_msg (+0.1); reports the 75% rate (+0.2). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "csm",
+  "_source": "cua_gym"
+}

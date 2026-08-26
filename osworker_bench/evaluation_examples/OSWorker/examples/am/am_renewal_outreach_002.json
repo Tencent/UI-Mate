@@ -1,0 +1,79 @@
+{
+  "instruction": "Account: Northwind Traders — their renewal closes July 15, 2026 and I want to get ahead of it. Please log a renewal check-in task on the Northwind renewal in Salesforce due July 1, send their VP Operations Karen Walsh a short, friendly email with the exact subject \"Northwind Traders renewal call before July 15\" proposing a renewal call before the renewal date, and then drop a note in our #customer-success Slack channel so the CS team knows the outreach is underway.",
+  "instruction_zh": "客户：Northwind Traders — 他们的续约将于 July 15, 2026 到期，我想提前跟进。请在 Salesforce 中为 Northwind 的续约记录创建一项续约检查任务，截止日期设为 July 1；给他们的 VP Operations Karen Walsh 发送一封简短友好的邮件，邮件主题必须准确写为 \"Northwind Traders renewal call before July 15\"，提议在续约日期前安排一次续约通话；然后在我们的 #customer-success Slack 频道中发一条消息，让 CS 团队知道 outreach 已启动。",
+  "id": "am_renewal_outreach_002",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:09:26.735740",
+  "adversarial_rounds": "1",
+  "domain": "am",
+  "_source": "cua_gym"
+}

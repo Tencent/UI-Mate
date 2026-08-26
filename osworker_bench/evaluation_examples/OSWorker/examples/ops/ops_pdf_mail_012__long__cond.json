@@ -1,0 +1,145 @@
+{
+  "id": "ops_pdf_mail_012__long__cond",
+  "snapshot": "thunderbird",
+  "instruction": "On the Desktop, the folder \"to_send/\" contains two files: a spreadsheet \"mail_info.xlsx\" with the recipient / subject / body of the email, and an attachment source file. Convert the attachment source file into a PDF (saved next to it in the same folder, using the same base name), then open Thunderbird and send a new email exactly as described in \"mail_info.xlsx\", with the PDF attached.\n\nThunderbird is already configured; sending is captured locally, so you do not need real network access.",
+  "source": "authors",
+  "config": [
+    {
+      "type": "download",
+      "parameters": {
+        "files": [
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/b2d9c649-7e4a-49a3-bc2e-000000b2d9/b2d9report-thunderbird-profile.tar.gz",
+            "path": "/home/user/b2d9report-thunderbird-profile.tar.gz"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/b2d9c649-7e4a-49a3-bc2e-000000b2d9/fake_smtpd.py",
+            "path": "/home/user/fake_smtpd.py"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/c0ndpdf0-eea1-49a3-bc2e-c0ndbr020001/mail_info.xlsx",
+            "path": "/home/user/Desktop/to_send/mail_info.xlsx"
+          },
+          {
+            "url": "https://huggingface.co/datasets/faker-w/ubuntu_osworld_file_cache/resolve/main/multi_apps/c0ndpdf0-eea1-49a3-bc2e-c0ndbr020001/weekly_summary.pptx",
+            "path": "/home/user/Desktop/to_send/weekly_summary.pptx"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "tar",
+          "-xzv",
+          "--recursive-unlink",
+          "-f",
+          "/home/user/b2d9report-thunderbird-profile.tar.gz",
+          "-C",
+          "/home/user/"
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "mkdir",
+          "-p",
+          "/home/user/fake_smtp_mail"
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": [
+          "sh",
+          "-c",
+          "rm -f /home/user/fake_smtp_mail/*.eml; nohup python3 /home/user/fake_smtpd.py >/home/user/fake_smtpd.log 2>&1 & disown; sleep 1"
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "/usr/bin/thunderbird"
+        ]
+      }
+    },
+    {
+      "type": "launch",
+      "parameters": {
+        "command": [
+          "nautilus",
+          "/home/user/Desktop/to_send"
+        ]
+      }
+    }
+  ],
+  "trajectory": "trajectories/",
+  "related_apps": [
+    "libreoffice_calc",
+    "libreoffice_impress",
+    "thunderbird",
+    "os"
+  ],
+  "evaluator": {
+    "postconfig": [
+      {
+        "type": "command",
+        "parameters": {
+          "command": [
+            "sh",
+            "-c",
+            "tar -czf /home/user/cond_pdfemail_artifacts.tar.gz -C /home/user Desktop/to_send fake_smtp_mail 2>/dev/null; ls -la /home/user/cond_pdfemail_artifacts.tar.gz"
+          ],
+          "stdout": "cond_pdfemail_artifacts.ls"
+        }
+      }
+    ],
+    "func": "evaluate_pdf_email_condition",
+    "result": {
+      "type": "vm_file",
+      "path": "/home/user/cond_pdfemail_artifacts.tar.gz",
+      "dest": "cond_pdfemail_artifacts.tar.gz"
+    },
+    "expected": {},
+    "options": {
+      "branch": "branch02",
+      "expected_pdf_basename": "weekly_summary.pdf",
+      "must_contain_branch01": [
+        "Weekly Operations Report",
+        "Week 19",
+        "Active Users",
+        "1,380",
+        "Conversion",
+        "3.5"
+      ],
+      "must_contain_branch02": [
+        "Weekly Operations Report",
+        "Week 19",
+        "Active Users",
+        "1,380",
+        "Conversion",
+        "3.5"
+      ],
+      "attachment_min_size_bytes": 1024,
+      "expected_to": "team.lead@company.test",
+      "expected_subject": "Weekly Operations Report - Week 19",
+      "expected_body_keywords": [
+        "please find attached",
+        "weekly"
+      ],
+      "to_send_dir": "Desktop/to_send",
+      "eml_dir": "fake_smtp_mail"
+    }
+  },
+  "proxy": false,
+  "fixed_ip": false,
+  "possibility_of_env_change": "low",
+  "domain": "ops",
+  "app_type": "democua_condition"
+}

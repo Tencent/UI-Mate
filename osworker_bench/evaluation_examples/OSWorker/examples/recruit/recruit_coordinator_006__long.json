@@ -1,0 +1,77 @@
+{
+  "id": "recruit_coordinator_006__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Greenhouse, Gmail, Google Sheets, and Slack). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou are the recruiting coordinator processing the outstanding offer approvals for the 'Senior Backend Engineer' job in Greenhouse. The Google Sheet 'Offer Decisions' (tab 'Offers') lists each candidate with their Recommended Salary, the role's Band Max, and a Decision. For every candidate, route them by these rules:\n- HIRE if the Decision is 'Approved' AND the Recommended Salary is at or below the Band Max: move the candidate's application to the 'Hired' stage in Greenhouse, send them an email via Gmail with Subject 'Offer confirmed - <Candidate Name>', and add a note on the candidate recording the decision (mention it was hired / the offer was approved) and pin that note.\n- REJECT if the Decision is 'Declined', OR the Recommended Salary is above the Band Max (over band): reject the candidate's application in Greenhouse with the rejection reason 'Compensation expectations', send an email with Subject 'Update on your offer - <Candidate Name>', and add a note recording the rejection (mention 'Compensation expectations') and pin that note.\n- If the Decision is 'Pending', leave the candidate unchanged.\n\nSkip any candidate who is already in the 'Hired' stage, and do not touch candidates who are not applicants for the 'Senior Backend Engineer' job (a look-alike from another job may appear in an offer stage -- leave it alone).\n\nRecord the approved offers: in the 'Offer Decisions' workbook, create a new tab named 'Approved Offers' with the columns Name, Email, Salary, and add one row for each candidate you hired (their name, their email, and their Recommended Salary from the Offers tab).\n\nWhen you have processed all the offer approvals, post a one-line summary to the Slack #recruiting channel stating how many offers you confirmed and how many you rejected, and pin that message to the channel.\n\nDo not email, move, reject, or note candidates you leave or skip.",
+  "app_type": "greenhouse_mock,gmail_mock,google_sheets_mock,slack_mock",
+  "domain": "recruit",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "instruction": "We're launching the 'Summer Product Webinar' campaign. In Airtable, create a new record in the 'Campaigns' table with target audience 'Mid-market SaaS marketers', channels 'Email + LinkedIn', and launch date 2026-07-20. Then in Asana, create three execution tasks under the 'Q3 Campaigns' project — 'Draft webinar landing page', 'Build email sequence', and 'Design social assets' — and post a kickoff note in Slack #marketing.",
+  "id": "mktg_campaign_001",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T16:48:49.218385",
+  "adversarial_rounds": "1",
+  "domain": "mktg",
+  "_source": "minicua",
+  "instruction_zh": "我们要启动\"Summer Product Webinar\"活动。在 Airtable 的\"Campaigns\"表格中新建一条记录，目标受众为\"Mid-market SaaS marketers\"，渠道为\"Email + LinkedIn\"，启动日期为 2026-07-20。然后在 Asana 的\"Q3 Campaigns\"项目下创建三个执行任务——\"Draft webinar landing page\"、\"Build email sequence\"和\"Design social assets\"——并在 Slack #marketing 发布一条启动通知。"
+}

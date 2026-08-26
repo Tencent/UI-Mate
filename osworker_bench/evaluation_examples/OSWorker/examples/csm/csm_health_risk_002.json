@@ -1,0 +1,79 @@
+{
+  "instruction": "I'm Jordan Rivera, the Customer Success Manager for our enterprise book of business. Open my Customer Health Tracker and find the account in Jordan Rivera's book that has slipped into the red — the one whose health is Red with declining usage. Write a short risk note on that customer's row capturing why they're at risk. Then log that same risk against their account over in Salesforce, owned/assigned to Jordan Rivera, so the account team has a record, and give everyone a heads-up from Jordan Rivera in that customer's Slack channel with what's happening and the next step. Leave the yellow accounts and anything that isn't in Jordan Rivera's book alone.",
+  "instruction_zh": "我是 Jordan Rivera，我们企业客户群的 Customer Success Manager。打开我的 Customer Health Tracker，找到 Jordan Rivera 负责客户群中状态变为红色的那个账户——即健康度为 Red 且使用量正在下降的账户。在该客户所在行写一条简短的风险备注，说明其处于风险中的原因。然后在 Salesforce 中针对该账户记录同样的风险，并确保该记录归属于/分配给 Jordan Rivera，以便账户团队留有记录；再以 Jordan Rivera 的身份在该客户的 Slack 频道中向大家通报当前情况及下一步行动。不要碰黄色状态的账户以及任何不属于 Jordan Rivera 负责范围的内容。",
+  "id": "csm_health_risk_002",
+  "app_type": "mock_websites",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097 28.7.184.198",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-24T21:14:15.581384",
+  "adversarial_rounds": "1",
+  "domain": "csm",
+  "_source": "cua_gym"
+}

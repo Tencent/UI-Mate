@@ -1,0 +1,80 @@
+{
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "id": "qa_pr_latency_002",
+  "difficulty": "hard",
+  "instruction": "Review latency is our sprint-health risk this week. Today is June 23, 2026. Look at the open PRs in hello-world: PR #12 'Add caching layer to API' was opened June 20 and is still unreviewed; PR #13 'Fix typo in README' was opened today. Our rule flags any PR open more than 2 days without review. Log the flagged PR into the 'Review Latency' sheet at row 2 (PR number in column A, title in column B, days open in column C). Then nudge the reviewer in #engineering naming the flagged PR number so it gets reviewed today, and in Lattice leave written feedback for James Kim about keeping review latency down ahead of our 1:1. Don't flag the PR opened today.",
+  "instruction_zh": "代码评审延迟是我们本周冲刺健康度的风险所在。今天是 June 23, 2026。查看 hello-world 中尚未关闭的 PR：PR #12 'Add caching layer to API' 于 June 20 开启，至今仍未被评审；PR #13 'Fix typo in README' 于今天开启。按照我们的规则，任何开启超过 2 天且未被评审的 PR 都会被标记。将被标记的 PR 录入 'Review Latency' 表格的第 2 行（A 列填 PR 编号，B 列填标题，C 列填开启天数）。然后在 #engineering 频道提醒评审人，报出被标记的 PR 编号，以便今天完成评审，并在 Lattice 中给 James Kim 留下书面反馈，提醒他在我们的 1:1 之前降低评审延迟。不要标记今天开启的 PR。",
+  "app_type": "github_mock",
+  "persona": "You are an office worker acting as a release engineer. Your tools for this task are: the GitHub repositories, shared spreadsheets, team communications, Lattice performance management.",
+  "context": "Initial environment (seeded via a single shared session id across all mocks): GitHub repo with 0 issue(s) and 2 PR(s); a Google Sheet with seeded tabular data; Slack workspace with channels #general, #engineering, #random; Lattice with 12 goals and feedback history. GROUND TRUTH — the agent earns partial credit for each checkpoint: latency log lists PR #12 (+0.25); log has the PR title (+0.15); slack_new_msg (+0.1); nudge names PR #12 (+0.2); does NOT flag the PR opened today (+0.1); Lattice 1:1 feedback to James Kim (user_4) on review latency (+0.2). Scoring is absolute over each mock's current_state; new objects exclude the seeded IDs, so an untouched environment scores 0.0 and fully completing every checkpoint scores 1.0.",
+  "domain": "qa",
+  "_source": "cua_gym"
+}

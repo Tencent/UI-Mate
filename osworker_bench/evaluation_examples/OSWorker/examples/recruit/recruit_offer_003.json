@@ -1,0 +1,79 @@
+{
+  "instruction": "We're extending an offer to candidate Sofia Rossi for the Marketing Manager role. Move her to the 'Offer' stage in Greenhouse, create an offer in Greenhouse with a base salary of $120,000 and start date 2026-08-03, send her a personalized offer email from Outlook, and announce in Slack #hiring that an offer has gone out (without disclosing the salary number).",
+  "id": "recruit_offer_003",
+  "app_type": "libreoffice_calc",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  },
+  "generated_at": "2026-06-30T19:18:14.659630",
+  "adversarial_rounds": "1",
+  "domain": "recruit",
+  "_source": "minicua",
+  "instruction_zh": "我们拟向候选人Sofia Rossi发出营销经理职位的录用通知。请在Greenhouse中将她移至'Offer'阶段，在Greenhouse中创建一份录用通知，基本年薪为$120,000，入职日期为2026-08-03，通过Outlook向她发送一封个性化的录用通知邮件，并在Slack #hiring频道中宣布录用通知已发出（不透露薪资数字）。"
+}

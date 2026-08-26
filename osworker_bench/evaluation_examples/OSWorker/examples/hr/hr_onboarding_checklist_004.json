@@ -1,0 +1,79 @@
+{
+  "instruction": "You are an HR Generalist at Northwind Cloud (a 600-person SaaS company). A new software engineer 'Ava Thompson' (role: Backend Engineer, team: Platform, manager: Daniel Okafor, start date: 2026-07-13) has accepted her offer and needs onboarding setup. Step 1: Open Workday and create a new onboarding checklist for employee 'Ava Thompson' on the 'Onboarding' page with the following checklist items (each as a checkbox task): 'Submit I-9 and W-4', 'Order laptop (MacBook Pro 14\")', 'Assign Platform team Slack channel', 'Schedule Day-1 orientation', 'Grant GitHub access'. Set the checklist assignee to 'Ava Thompson' and due date to '2026-07-13'. Step 2: Open Google Calendar and create an event titled 'Day-1 Orientation — Ava Thompson' on 2026-07-13 from 09:30 to 11:00, invite Ava Thompson (ava.thompson@northwindcloud.com) and her manager Daniel Okafor (daniel.okafor@northwindcloud.com), with description 'New-hire orientation for Ava Thompson (Backend Engineer, Platform team, manager Daniel Okafor). Onboarding checklist owner: HR.'. Do not create or modify any other Workday records or calendar events.",
+  "instruction_zh": "你是 Northwind Cloud（一家 600 人的 SaaS 公司）的人力资源通才。一名新软件工程师 Ava Thompson（职位：Backend Engineer，团队：Platform，经理：Daniel Okafor，入职日期：2026-07-13）已接受录用通知，需要完成入职设置。步骤 1：打开 Workday，在 Onboarding 页面为员工 Ava Thompson 创建一份新的入职清单，包含以下清单项（每项均为复选框任务）：Submit I-9 and W-4、Order laptop (MacBook Pro 14\")、Assign Platform team Slack channel、Schedule Day-1 orientation、Grant GitHub access。将清单负责人设为 Ava Thompson，截止日期设为 2026-07-13。步骤 2：打开 Google Calendar，创建一个标题为 Day-1 Orientation — Ava Thompson 的活动，日期为 2026-07-13，时间从 09:30 到 11:00，邀请 Ava Thompson（ava.thompson@northwindcloud.com）及其经理 Daniel Okafor（daniel.okafor@northwindcloud.com），描述填写为 New-hire orientation for Ava Thompson (Backend Engineer, Platform team, manager Daniel Okafor). Onboarding checklist owner: HR.。请勿创建或修改任何其他 Workday 记录或日历活动。",
+  "id": "hr_onboarding_checklist_004",
+  "app_type": "libreoffice_calc",
+  "generated_at": "2026-07-02T09:43:23.752693",
+  "adversarial_rounds": "1",
+  "domain": "hr",
+  "_source": "cua_gym",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

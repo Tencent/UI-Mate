@@ -1,0 +1,77 @@
+{
+  "id": "ops_region_consolidate_002__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nConsolidate all six Region tabs (East/West/North/South/Central/Intl) of the Google Sheet into the 'Master' tab, whose columns are Date, Rep, Amount. The tabs use different column orders and header names (e.g., 'Sales Rep' for Rep; 'Total'/'Revenue'/'Sum' for Amount) and some have an extra column you should drop. Map each source's columns to the Master schema, append all rows, and remove exact duplicate rows (same Date+Rep+Amount). Then add a new base in Airtable called \"Sales\", in its table 1, ignore the titles of the fields (columns), add new columns so that the number of columns match that in Master. Fill in the fields with the Master rows where the first row should be the titles in Master. Post 'Consolidated {n} rows' in the Slack channel #ops.",
+  "app_type": "google_sheets_mock,airtable_mock,slack_mock",
+  "domain": "ops",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

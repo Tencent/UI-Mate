@@ -11,7 +11,7 @@ Tencent HY Frontier
 [![Project Page](https://img.shields.io/badge/Project%20Page-ui--mate.github.io-2456e6?logo=googlechrome&logoColor=white)](https://ui-mate.github.io)
 [![arXiv](https://img.shields.io/badge/arXiv-b31b1b?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2608.15930)
 [![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-tencent%2Fui--mate-ffd21e)](https://huggingface.co/collections/tencent/ui-mate)
-[![OSWorkerBench](https://img.shields.io/badge/%F0%9F%A4%97%20OSWorkerBench-Coming%20Soon-ff8f00)]()
+[![OSWorkerBench](https://img.shields.io/badge/%F0%9F%A4%97%20OSWorkerBench-osworker__bench-ff8f00)](osworker_bench/)
 
 </div>
 
@@ -135,7 +135,9 @@ It provides:
 ## 🧪 OSWorkerBench
 
 We introduce **OSWorkerBench**, an office-centric benchmark for realistic,
-long-horizon workflows and one-shot procedural learning.
+long-horizon workflows and one-shot procedural learning. The evaluation
+harness, tasks, demonstrations, and evaluators live in
+[`osworker_bench/`](osworker_bench/).
 
 
 | 100 tasks                     | 41 applications                             | 10 job families                | 33 + 45 demonstrations              |
@@ -400,7 +402,7 @@ UI-Mate provides a standalone desktop application for automated GUI interactions
 | ------------------------------------------------------------- | ----------------------------------------------- |
 | UI-Mate technical report                                      | [arXiv](https://arxiv.org/abs/2608.15930)       |
 | Desktop application                                           | [Download Link](https://ui-mate.github.io/#app) |
-| OSWorkerBench tasks, demonstrations, metadata, and evaluators | Coming soon                                     |
+| OSWorkerBench tasks, demonstrations, metadata, and evaluators | [`osworker_bench/`](osworker_bench/)            |
 
 
 ## 🛡️ Safety
