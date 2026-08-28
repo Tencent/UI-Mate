@@ -1,0 +1,21 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 0, // Will use random available port
+    strictPort: false,
+    allowedHosts: ['asana-app.app.msh.work'],
+    watch: {
+      usePolling: true,
+      interval: 1000
+    },
+    hmr: {
+      port: 0 // Random port for HMR
+    }
+  },
+  preview: {
+    port: 0 // Random port for preview
+  }
+})

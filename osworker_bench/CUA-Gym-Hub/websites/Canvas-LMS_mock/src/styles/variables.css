@@ -1,0 +1,65 @@
+:root {
+  /* Global Nav */
+  --nav-bg: #394B58;
+  --nav-bg-hover: #4a5e6d;
+  --nav-active-border: #0374B5;
+
+  /* Primary */
+  --primary: #0374B5;
+  --primary-hover: #0B6CA3;
+  --primary-light: #E8F5FD;
+
+  /* Backgrounds */
+  --bg-page: #F5F5F5;
+  --bg-content: #FFFFFF;
+  --bg-module-header: #F5F5F5;
+
+  /* Text */
+  --text-primary: #2D3B45;
+  --text-secondary: #6B7780;
+  --text-link: #0374B5;
+  --text-white: #FFFFFF;
+
+  /* Borders */
+  --border-color: #C7CDD1;
+  --border-light: #E5E5E5;
+
+  /* Status Colors */
+  --success: #0B874B;
+  --success-light: #E8F8EF;
+  --warning: #FC5E13;
+  --danger: #EE0612;
+  --danger-light: #FDE8E8;
+
+  /* Course Colors */
+  --course-blue: #0374B5;
+  --course-red: #EE0612;
+  --course-green: #0B874B;
+  --course-orange: #FC5E13;
+  --course-purple: #6B3FA0;
+
+  /* Typography */
+  --font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-size-title: 28px;
+  --font-size-section: 20px;
+  --font-size-body: 14px;
+  --font-size-small: 12px;
+  --font-size-nav: 10px;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Spacing */
+  --nav-width: 80px;
+  --course-nav-width: 200px;
+  --sidebar-width: 280px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.2);
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+}

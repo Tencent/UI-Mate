@@ -26,8 +26,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+/lib/
+/lib64/
 parts/
 sdist/
 var/
@@ -275,3 +275,6 @@ evaluation_examples/OSWorker/ID_MAPPING_PROPOSAL.md
 enable_internet_proxy.sh
 replace_mock_ip.sh
 scripts/cua_gym/cua_gym_convert/replace_mock_ip.py
+
+# Vendored CUA-Gym-Hub front-end data dirs, excluded by the generic **/data/**/* rule above
+!CUA-Gym-Hub/**/data/**

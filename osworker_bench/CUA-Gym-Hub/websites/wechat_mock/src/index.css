@@ -1,0 +1,148 @@
+
+:root {
+  --xechat-green: #07c160;
+  --xechat-green-dark: #06ad56;
+  --xechat-self-bubble: #95ec69;
+  --xechat-other-bubble: #ffffff;
+  --xechat-bg: #ededed;
+  --xechat-bg-light: #f5f5f5;
+  --xechat-text-primary: #333333;
+  --xechat-text-secondary: #999999;
+  --xechat-text-link: #576b95;
+  --xechat-divider: #e0e0e0;
+  --xechat-red-badge: #f44336;
+  --xechat-hongbao: #fa9d3b;
+  --xechat-tab-inactive: #999999;
+  --xechat-header-bg: #ededed;
+  --xechat-input-bg: #f5f5f5;
+  --xechat-pinned-bg: #f7f7f7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--xechat-bg);
+  overflow-x: hidden;
+  color: var(--xechat-text-primary);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+#root {
+  max-width: 414px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: var(--xechat-bg);
+  position: relative;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  color: var(--xechat-text-primary);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Common XeChat toggle switch style */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ddd;
+  transition: .3s;
+  border-radius: 24px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: var(--xechat-green);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(20px);
+}
+
+/* Common modal overlay */
+.modal-overlay,
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

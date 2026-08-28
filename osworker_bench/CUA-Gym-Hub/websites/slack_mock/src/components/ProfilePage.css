@@ -1,0 +1,273 @@
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.profile-header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.edit-profile-btn {
+  padding: 8px 16px;
+  background: #1264A3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit-profile-btn:hover {
+  background: #0d4d80;
+}
+
+.profile-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+  max-width: 600px;
+}
+
+.profile-avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.profile-avatar-large {
+  width: 128px;
+  height: 128px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+.profile-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.profile-status-text {
+  font-weight: 600;
+  color: #1d1c1d;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1d1c1d;
+}
+
+.form-group input {
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #1264A3;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.save-btn {
+  padding: 10px 24px;
+  background: #007A5A;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 15px;
+}
+
+.save-btn:hover {
+  background: #148567;
+}
+
+.cancel-btn {
+  padding: 10px 24px;
+  background: #f8f8f8;
+  color: #1d1c1d;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  background: #e0e0e0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #616061;
+}
+
+.info-value {
+  font-size: 15px;
+  color: #1d1c1d;
+}
+
+.info-value em {
+  color: #616061;
+}
+
+/* Status Emoji Picker */
+.status-emoji-picker {
+  position: relative;
+}
+
+.status-emoji-current {
+  margin-bottom: 8px;
+}
+
+.selected-status-emoji {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 24px;
+  padding: 4px 8px;
+  background: #F0F0F0;
+  border-radius: 6px;
+}
+
+.clear-emoji-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #616061;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.clear-emoji-btn:hover {
+  color: #E01E5A;
+}
+
+.no-emoji-placeholder {
+  font-size: 13px;
+  color: #616061;
+  font-style: italic;
+}
+
+.popular-emojis {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.popular-emoji-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  background: #F8F8F8;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.popular-emoji-btn:hover {
+  background: #E8E8E8;
+  transform: scale(1.1);
+}
+
+.popular-emoji-btn.selected {
+  border-color: #1264A3;
+  background: #E8F5FE;
+}
+
+.more-emoji-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F8F8F8;
+  border: 1px dashed #BBBBBB;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #616061;
+  transition: all 0.15s;
+}
+
+.more-emoji-btn:hover {
+  background: #E8E8E8;
+  color: #1D1C1D;
+}
+
+.status-emoji-picker-popup {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  margin-top: 4px;
+}
+
+.profile-status-emoji {
+  margin-right: 4px;
+}
+
+.profile-display-emoji {
+  font-size: 16px;
+}

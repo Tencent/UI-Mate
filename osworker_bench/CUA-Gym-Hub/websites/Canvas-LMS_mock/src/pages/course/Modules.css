@@ -1,0 +1,341 @@
+.modules-page {
+}
+
+.modules-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.modules-header h1 {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-light);
+}
+
+.modules-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.modules-empty p {
+  margin-bottom: 8px;
+}
+
+/* Module section */
+.module-section {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+  background: var(--bg-content);
+  overflow: hidden;
+}
+
+.module-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--bg-module-header);
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  user-select: none;
+}
+
+.module-header-bar:hover {
+  background: #EDEDEE;
+}
+
+.module-header-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.module-drag-handle {
+  color: var(--text-secondary);
+  cursor: grab;
+  display: flex;
+  align-items: center;
+}
+
+.module-caret {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.module-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.module-header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.module-publish-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.module-publish-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.module-kebab-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: var(--text-secondary);
+}
+
+.module-kebab-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
+}
+
+.module-menu-wrapper {
+  position: relative;
+}
+
+.module-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-content);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  min-width: 120px;
+  z-index: 100;
+  padding: 4px 0;
+}
+
+.module-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.module-dropdown-item:hover {
+  background: var(--bg-page);
+}
+
+.module-dropdown-danger {
+  color: var(--danger);
+}
+
+.module-dropdown-danger:hover {
+  background: var(--danger-light);
+}
+
+/* Module items */
+.module-items-list {
+  border-top: none;
+}
+
+.module-empty-items {
+  padding: 16px 20px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.module-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  padding-right: 12px;
+  border-bottom: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.module-item:hover {
+  background: rgba(3, 116, 181, 0.04);
+}
+
+.module-item.sub-header {
+  cursor: default;
+  background: none;
+}
+
+.module-item.sub-header .item-title {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.item-drag-handle {
+  color: var(--text-secondary);
+  opacity: 0.4;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.module-item:hover .item-drag-handle {
+  opacity: 0.8;
+}
+
+.item-type-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.item-title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.item-link {
+  color: var(--text-link);
+}
+
+.item-link:hover {
+  text-decoration: underline;
+}
+
+.item-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.item-due-date,
+.item-points {
+  font-size: var(--font-size-small);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.item-publish-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.item-publish-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* Add item row */
+.module-add-item-row {
+  padding: 6px 16px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-module-header);
+}
+
+.module-add-item-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.module-add-item-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
+}
+
+/* Modules Modals */
+.modules-modal {
+  background: var(--bg-content);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  width: 420px;
+  max-width: 90vw;
+}
+
+.modules-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.modules-modal-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modules-modal-body {
+  padding: 20px;
+}
+
+.modal-field {
+  margin-bottom: 14px;
+}
+
+.modal-field:last-child {
+  margin-bottom: 0;
+}
+
+.modal-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.modal-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-body);
+  color: var(--text-primary);
+  outline: none;
+  background: var(--bg-content);
+  transition: border-color 0.15s;
+}
+
+.modal-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(3, 116, 181, 0.15);
+}
+
+.modules-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-light);
+}

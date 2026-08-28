@@ -1,0 +1,46 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / front-end
+node_modules/
+*/node_modules/
+dist/
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+
+# Env / tooling
+.env
+.env.*
+.turbo/
+
+# Claude Code runtime
+.claude/scheduled_tasks.lock
+
+# Test artifacts
+**/TEST.md
+**/REVIEW_TODOS.md
+**/AUDIT.md
+**/test_*.mjs
+**/test_*.js
+**/tests/
+**/test-results/
+**/test_results.json
+*.backup
+
+# Mock runtime state
+**/.mock-states/
+**/.mock-files/
+**/.mock-state*.json
+
+# Local scripts / docs (not for version control)
+PORT_MAPPING.txt
+deploy-all-local.sh
+fix.md
+
+# Local debug / temp files
+websites/_mock_*.txt
+websites/_vite_cfg.txt

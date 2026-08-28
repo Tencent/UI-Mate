@@ -1,0 +1,81 @@
+:root {
+  /* Primary Colors */
+  --color-primary: #FF5000;
+  --color-primary-hover: #FF6A00;
+  --color-primary-light: #FFF7E6;
+  --color-primary-border: #FFD591;
+
+  /* Background Colors */
+  --color-bg-page: #F5F5F5;
+  --color-bg-card: #FFFFFF;
+  --color-bg-header: #FFFFFF;
+  --color-bg-sidebar: #FFFFFF;
+  --color-bg-table-header: #FAFAFA;
+  --color-bg-hover: #FAFAFA;
+
+  /* Text Colors */
+  --color-text-primary: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #999999;
+  --color-text-link: #1890FF;
+  --color-text-white: #FFFFFF;
+
+  /* Border Colors */
+  --color-border: #E8E8E8;
+  --color-border-light: #F0F0F0;
+
+  /* Status Colors */
+  --color-success: #52C41A;
+  --color-success-bg: #F6FFED;
+  --color-success-border: #B7EB8F;
+  --color-warning: #FAAD14;
+  --color-warning-bg: #FFFBE6;
+  --color-warning-border: #FFE58F;
+  --color-danger: #FF4D4F;
+  --color-danger-bg: #FFF2F0;
+  --color-danger-border: #FFCCC7;
+  --color-info: #1890FF;
+  --color-info-bg: #E6F7FF;
+  --color-info-border: #91D5FF;
+
+  /* Sidebar */
+  --sidebar-width: 220px;
+  --header-height: 56px;
+
+  /* Typography */
+  --font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 28px;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-round: 50%;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+}

@@ -1,0 +1,187 @@
+.files-page {}
+
+.files-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.files-header h1 {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-light);
+}
+
+.files-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.files-layout {
+  display: flex;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-content);
+  min-height: 400px;
+}
+
+/* Tree Panel */
+.files-tree-panel {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-color);
+  padding: 8px 0;
+  overflow-y: auto;
+}
+
+.files-tree-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary);
+  transition: background 0.1s;
+}
+
+.files-tree-item:hover {
+  background: rgba(3, 116, 181, 0.05);
+}
+
+.files-tree-item.selected {
+  background: rgba(3, 116, 181, 0.1);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.files-tree-toggle {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.files-tree-spacer {
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.files-tree-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.files-tree-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* List Panel */
+.files-list-panel {
+  flex: 1;
+  overflow-x: auto;
+}
+
+.files-breadcrumb {
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.files-new-folder {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border-light);
+  background: rgba(3, 116, 181, 0.03);
+}
+
+.files-new-folder input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  outline: none;
+}
+
+.files-new-folder input:focus {
+  border-color: var(--primary);
+}
+
+.files-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.files-table thead {
+  background: var(--bg-module-header);
+}
+
+.files-table th {
+  text-align: left;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.files-table td {
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.files-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.files-table tbody tr:hover {
+  background: rgba(3, 116, 181, 0.03);
+}
+
+.files-row-folder {
+  cursor: pointer;
+}
+
+.files-row-folder:hover {
+  background: rgba(3, 116, 181, 0.06);
+}
+
+.files-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.files-icon-folder {
+  color: var(--primary);
+}
+
+.files-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.files-size {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.files-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}

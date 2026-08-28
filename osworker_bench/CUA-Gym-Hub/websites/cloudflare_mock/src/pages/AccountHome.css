@@ -1,0 +1,144 @@
+.account-home {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.account-home-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.zones-search-bar {
+  margin-bottom: 16px;
+}
+
+.search-input-wrap {
+  position: relative;
+  max-width: 400px;
+}
+
+.zones-list {
+  overflow: hidden;
+}
+
+.zone-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--cf-border-light);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.zone-row:last-child {
+  border-bottom: none;
+}
+
+.zone-row:hover {
+  background: var(--cf-bg-secondary);
+}
+
+.zone-row-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.zone-domain {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cf-orange);
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zone-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.zone-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--cf-text-secondary);
+}
+
+.zone-stats {
+  display: flex;
+  gap: 28px;
+  flex-shrink: 0;
+}
+
+.zone-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.zone-stat-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cf-text-primary);
+}
+
+.zone-stat-label {
+  font-size: 11px;
+  color: var(--cf-text-muted);
+  white-space: nowrap;
+}
+
+.zone-row-actions {
+  flex-shrink: 0;
+}
+
+.overflow-menu-wrap {
+  position: relative;
+}
+
+.overflow-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  background: white;
+  border: 1px solid var(--cf-border);
+  border-radius: var(--cf-radius-sm);
+  box-shadow: var(--cf-shadow-md);
+  z-index: 10;
+  min-width: 120px;
+}
+
+.overflow-menu-item {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  color: var(--cf-text-primary);
+}
+
+.overflow-menu-item:hover {
+  background: var(--cf-bg-secondary);
+}
+
+.overflow-menu-item.danger {
+  color: var(--cf-error);
+}
+
+.zones-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--cf-text-muted);
+  font-size: 14px;
+}

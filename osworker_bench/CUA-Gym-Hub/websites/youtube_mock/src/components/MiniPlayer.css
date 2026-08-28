@@ -1,0 +1,76 @@
+
+.mini-player {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 400px;
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2000;
+  cursor: move;
+}
+
+.mini-player-video {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: #000;
+  object-fit: contain;
+}
+
+.mini-player-controls {
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-player-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mini-player-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-channel {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.mini-player-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.mini-player-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.mini-player-button:hover {
+  background-color: var(--hover-bg);
+}
+
+@media (max-width: 768px) {
+  .mini-player {
+    width: calc(100% - 32px);
+    bottom: 8px;
+    right: 8px;
+    left: 8px;
+  }
+}
+  

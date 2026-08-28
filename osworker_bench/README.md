@@ -32,8 +32,8 @@ resource sets:
   Alternatively, provide an existing OpenAI-compatible vLLM endpoint.
 - Network access to the benchmark assets on
   [Hugging Face](https://huggingface.co/datasets/SamuelGuo/OSworker_cache).
-- A separately deployed mock-application host reachable from every benchmark
-  VM, as described below.
+- A mock-application host reachable from every benchmark VM, deployed from
+  the bundled `CUA-Gym-Hub/` as described below.
 
 Install all dependencies from the requirements file:
 
@@ -53,13 +53,17 @@ pip install -e ".[full]"
 
 ### Deploy the mock applications
 
-The mock applications come from
-[CUA-Gym-Hub](https://github.com/xlang-ai/cua-gym-hub); follow its
-[deployment guide](https://github.com/xlang-ai/cua-gym-hub/blob/main/DEPLOY.md).
-This repository neither ships nor starts the 98 mock applications. They must be
-deployed separately, or you must obtain a compatible host from your benchmark
-operator. Of the 100 benchmark tasks, 88 require these applications; the other
-12 are local-file tasks.
+The 98 mock applications ship with this repository under `CUA-Gym-Hub/`, a
+modified fork of [CUA-Gym-Hub](https://github.com/xlang-ai/cua-gym-hub). Of the 100
+benchmark tasks, 88 require these applications; the other 12 are local-file
+tasks.
+
+The benchmark launcher does not start them. Deploy them once on a host that
+every benchmark VM can reach:
+
+```bash
+cd CUA-Gym-Hub && bash deploy-all.sh # npm 10.8.2, node v20.20.2 
+```
 
 `MOCK_APP_BASE_URL` supplies the common scheme and host used with the app-to-port
 mapping in `.MOCK_HOST`. The endpoint synchronizer reads it from the process
@@ -198,9 +202,13 @@ mini-osworld/
 │   └── OSWorker/            # 100 tasks across 17 domains
 ├── osworker_cache/          # Per-task setup, reward, and asset cache
 ├── workflow/                # OSWorker workflow runtime required by UI-Mate
-└── scripts/
-    ├── osworker_benchmark/  # Supported benchmark launcher
-    └── cua_gym/             # Mock-endpoint synchronization utilities
+├── scripts/
+│   ├── osworker_benchmark/  # Supported benchmark launcher
+│   └── cua_gym/             # Mock-endpoint synchronization utilities
+└── CUA-Gym-Hub/             # Vendored mock applications
+    ├── websites/            # 98 Vite apps served on ports 8100-8197
+    ├── icons/               # Shared icon assets
+    └── deploy-all.sh        # Installs, builds, and serves every app
 ```
 
 ## 🧪 Benchmark Tasks
@@ -312,6 +320,9 @@ python scripts/cua_gym/cua_gym_convert/sync_mock_endpoints_v2.py --help
   runtime loads its demonstration trajectories through `run.demo_dir`.
 - Docker, vLLM startup, and mock-host connectivity depend on the local
   deployment and should be smoke-tested before a benchmark run.
+- `CUA-Gym-Hub/` is a modified fork of the mock applications, distributed
+  under its own Apache-2.0 `LICENSE` and `NOTICE`; `CUA-Gym-Hub/TRADEMARKS.md`
+  lists the acknowledged third-party marks.
 
 Build source releases only from tracked files:
 

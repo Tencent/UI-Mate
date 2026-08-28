@@ -1,0 +1,258 @@
+
+.channel-view-wrapper {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.channel-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.channel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #DDDDDD;
+  background: white;
+  min-height: 50px;
+}
+
+.channel-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.channel-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1D1C1D;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.channel-title-hash {
+  font-weight: 400;
+  color: #616061;
+}
+
+.star-btn {
+  font-size: 16px;
+  color: #616061;
+  padding: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.star-btn:hover {
+  background: #F0F0F0;
+  color: #1D1C1D;
+}
+
+.star-btn.starred {
+  color: #F2C744;
+}
+
+.channel-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+  font-size: 13px;
+  color: #616061;
+  min-width: 0;
+}
+
+.channel-header-meta .meta-divider {
+  color: #DDDDDD;
+}
+
+.channel-topic {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 300px;
+  cursor: pointer;
+}
+
+.channel-topic:hover {
+  color: #1264A3;
+}
+
+.channel-topic-placeholder {
+  color: #AAAAAA;
+  font-style: italic;
+}
+
+.channel-topic-input {
+  border: 1px solid #1264A3;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #1D1C1D;
+  outline: none;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.channel-header-right {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.header-btn {
+  padding: 4px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #616061;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header-btn:hover {
+  background: #F0F0F0;
+  color: #1D1C1D;
+}
+
+.header-btn-text {
+  font-size: 13px;
+}
+
+.channel-description {
+  padding: 8px 20px;
+  background: #FAFAFA;
+  border-bottom: 1px solid #EEEEEE;
+  font-size: 13px;
+  color: #616061;
+  line-height: 1.4;
+}
+
+.members-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 340px;
+  background: white;
+  border-left: 1px solid #DDDDDD;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.members-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.members-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1D1C1D;
+}
+
+.members-header button {
+  font-size: 18px;
+  color: #616061;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.members-header button:hover {
+  background: #F0F0F0;
+}
+
+.members-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.member-item:hover {
+  background: #F0F0F0;
+}
+
+.member-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.member-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.member-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1D1C1D;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member-title {
+  font-size: 13px;
+  color: #616061;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.member-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.search-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 340px;
+  background: white;
+  border-left: 1px solid #DDDDDD;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
+}

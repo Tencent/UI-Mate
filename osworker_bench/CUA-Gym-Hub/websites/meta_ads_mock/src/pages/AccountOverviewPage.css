@@ -1,0 +1,131 @@
+.overview-page { padding: 0; }
+
+.overview-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 4px;
+}
+
+.overview-subtitle {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 16px;
+}
+
+.metric-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.metric-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 16px 20px;
+  box-shadow: var(--shadow-card);
+}
+
+.metric-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.metric-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.metric-trend {
+  font-size: 11px;
+  color: var(--green);
+}
+
+.metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.metric-spark { display: flex; }
+
+.overview-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.overview-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.overview-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.overview-card-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.chart-container {
+  padding: 16px 16px 8px;
+}
+
+.daily-chart { overflow: visible; }
+
+.overview-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.overview-table th {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+  background: #FAFBFC;
+}
+
+.overview-table td {
+  font-size: 13px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.overview-table tr:last-child td { border-bottom: none; }
+
+.overview-camp-name { font-weight: 500; }
+
+.status-pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pill--active { background: #E6F4EA; color: var(--green); }
+.status-pill--paused { background: #F0F2F5; color: var(--text-secondary); }
+.status-pill--draft { background: #F0F2F5; color: var(--text-muted); }
+.status-pill--completed { background: #F0F2F5; color: var(--text-secondary); }

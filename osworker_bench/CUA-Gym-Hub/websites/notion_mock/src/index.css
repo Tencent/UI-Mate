@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-xotion-text bg-xotion-bg antialiased;
+    font-size: var(--xotion-font-size, 16px);
+  }
+
+  /* Dark mode overrides */
+  html.dark body {
+    background-color: #191919;
+    color: #e9e9e7;
+  }
+
+  html.dark .bg-white {
+    background-color: #252525 !important;
+  }
+
+  html.dark .bg-gray-50 {
+    background-color: #2f2f2f !important;
+  }
+
+  html.dark .bg-gray-100 {
+    background-color: #383838 !important;
+  }
+
+  html.dark .border-gray-200 {
+    border-color: #3d3d3d !important;
+  }
+
+  html.dark .text-gray-500,
+  html.dark .text-gray-600,
+  html.dark .text-gray-700 {
+    color: #9a9a97 !important;
+  }
+
+  html.dark .text-gray-400 {
+    color: #6b6b68 !important;
+  }
+
+  html.dark .text-gray-900 {
+    color: #e9e9e7 !important;
+  }
+
+  html.dark .hover\:bg-gray-100:hover {
+    background-color: #383838 !important;
+  }
+
+  html.dark .hover\:bg-gray-50:hover {
+    background-color: #2f2f2f !important;
+  }
+
+  html.dark .shadow-xl {
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5), 0 8px 10px -6px rgba(0,0,0,0.4);
+  }
+
+  /* Font size variants */
+  html.font-small body {
+    --xotion-font-size: 14px;
+  }
+
+  html.font-default body {
+    --xotion-font-size: 16px;
+  }
+
+  html.font-large body {
+    --xotion-font-size: 18px;
+  }
+}
+
+/* Custom Scrollbar for Sidebar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.sidebar-scroll:hover::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #D3D1CB;
+  border-radius: 4px;
+}
+
+/* Content Editable Placeholder */
+[contenteditable]:empty:before {
+  content: attr(placeholder);
+  color: #9CA3AF;
+  pointer-events: none;
+  display: block; /* For Firefox */
+}
+
+.ProseMirror {
+  outline: none;
+}
+
+/* Hide number input arrows */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

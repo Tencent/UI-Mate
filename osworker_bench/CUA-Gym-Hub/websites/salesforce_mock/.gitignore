@@ -1,0 +1,5 @@
+# Session state files
+.mock-states/
+
+# Uploaded/generated mock files
+.mock-files/

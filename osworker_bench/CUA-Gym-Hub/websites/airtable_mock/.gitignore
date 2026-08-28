@@ -1,0 +1,3 @@
+# Session state files
+.mock-states/
+.mock-files/

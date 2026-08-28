@@ -1,0 +1,333 @@
+.search-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-gray);
+}
+
+.search-content {
+  flex: 1;
+  padding: 16px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.search-header-bar {
+  background: white;
+  border-radius: 4px;
+  padding: 14px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.search-route-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.search-from, .search-to {
+  color: var(--primary-blue);
+}
+
+.search-arrow {
+  color: var(--text-gray);
+  font-size: 16px;
+}
+
+.search-result-count {
+  font-size: 13px;
+  color: var(--text-gray);
+}
+
+.date-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.date-nav-btn {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 3px;
+  font-size: 13px;
+  color: var(--primary-blue);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.date-nav-btn:hover {
+  background: var(--light-blue-bg);
+  border-color: var(--primary-blue);
+}
+
+.date-nav-current {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--text-dark);
+  min-width: 160px;
+  text-align: center;
+}
+
+.date-week {
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-left: 4px;
+  font-weight: normal;
+}
+
+/* Filter bar */
+.filter-bar {
+  background: white;
+  border-radius: 4px;
+  padding: 12px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 13px;
+  color: var(--text-gray);
+  white-space: nowrap;
+  min-width: 70px;
+}
+
+.filter-group {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.filter-chip {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 4px 14px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-chip:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.filter-chip.active {
+  background: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: white;
+}
+
+/* Results table */
+.results-table-wrap {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow-x: auto;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 1000px;
+}
+
+.results-table thead tr {
+  background: #F0F5FA;
+  border-bottom: 2px solid #D8E4EE;
+}
+
+.results-table th {
+  padding: 10px 6px;
+  text-align: center;
+  color: var(--text-dark);
+  font-weight: 600;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.th-train {
+  min-width: 80px;
+}
+
+.sort-th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.sort-th:hover {
+  color: var(--primary-blue);
+}
+
+.results-table tbody tr {
+  border-bottom: 1px solid #F0F0F0;
+  transition: background 0.15s;
+}
+
+.results-table tbody tr:hover {
+  background: #F7FBFF;
+}
+
+.row-soldout {
+  opacity: 0.55;
+}
+
+.results-table td {
+  padding: 10px 6px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Train number cell */
+.train-no-cell {
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+.train-no-link {
+  font-weight: bold;
+  font-size: 14px;
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.train-no-link:hover {
+  text-decoration: underline;
+}
+
+/* Station names cell */
+.station-names-cell {
+  min-width: 80px;
+}
+
+.station-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.dep-station {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.arr-station {
+  color: var(--text-gray);
+}
+
+/* Time cells */
+.time-cell {
+  min-width: 60px;
+}
+
+.time-big {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.dep-time-cell .time-big {
+  color: var(--available-green);
+}
+
+.arr-time-cell .time-big {
+  color: var(--price-red);
+}
+
+/* Duration */
+.duration-cell {
+  color: var(--text-gray);
+  font-size: 12px;
+  min-width: 65px;
+}
+
+/* Availability cell */
+.avail-cell {
+  min-width: 52px;
+  text-align: center;
+}
+
+.avail-price {
+  font-size: 11px;
+  color: var(--accent-orange);
+  margin-top: 2px;
+}
+
+/* Book button */
+.book-btn {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 3px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.book-btn:hover {
+  background: var(--dark-blue);
+}
+
+.book-btn-soldout {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.book-btn-soldout:hover {
+  background: #bbb;
+}
+
+.book-btn-waitlist {
+  background: var(--waitlist-orange);
+}
+
+.book-btn-waitlist:hover {
+  background: #e07a00;
+}
+
+/* No results */
+.no-results {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.no-results-text {
+  font-size: 16px;
+  color: var(--text-dark);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.no-results-hint {
+  font-size: 13px;
+  color: var(--text-gray);
+}

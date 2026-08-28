@@ -1,0 +1,16 @@
+.shell {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.shell-main {
+  margin-top: var(--topbar-height);
+  margin-left: var(--sidebar-width);
+  padding: 16px;
+  min-height: calc(100vh - var(--topbar-height));
+  transition: margin-left 0.2s ease;
+}
+
+.shell-main--collapsed {
+  margin-left: 56px;
+}

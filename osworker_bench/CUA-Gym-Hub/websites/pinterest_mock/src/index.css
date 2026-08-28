@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Xinterest Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  color: #111;
+  background: #fff;
+}
+
+/* Hide scrollbar for clean UI but allow scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Masonry grid using CSS columns */
+.masonry-grid {
+  column-count: 5;
+  column-gap: 16px;
+  padding: 0 16px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1400px) {
+  .masonry-grid { column-count: 4; }
+}
+@media (max-width: 1100px) {
+  .masonry-grid { column-count: 3; }
+}
+@media (max-width: 768px) {
+  .masonry-grid { column-count: 2; }
+}
+@media (max-width: 480px) {
+  .masonry-grid { column-count: 1; }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 16px;
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-full font-semibold transition-colors duration-200 cursor-pointer flex items-center justify-center gap-2;
+  }
+  .btn-primary {
+    @apply bg-xinterest-red text-white hover:bg-xinterest-hover;
+  }
+  .btn-secondary {
+    @apply bg-[#e5e5e0] text-black hover:bg-[#d5d5d0];
+  }
+  .btn-ghost {
+    @apply hover:bg-gray-100;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-2xl border-2 border-gray-200 focus:border-gray-400 focus:outline-none transition-colors;
+  }
+}
+
+/* Xinterest-style transitions */
+.pin-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pin-card-hover:hover {
+  transform: scale(1.02);
+}
+
+/* Board cover mosaic */
+.board-mosaic {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  height: 100%;
+  width: 100%;
+}
+.board-mosaic > :first-child {
+  grid-row: 1 / 3;
+}
+
+/* Smooth scrolling for the explore categories */
+.category-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Xinterest Red Save button pulse */
+@keyframes save-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+.save-pulse {
+  animation: save-pulse 0.3s ease;
+}

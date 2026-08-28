@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar for Grid */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Marching ants animation for clipboard selection */
+@keyframes marchingAnts {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -20; }
+}
+
+@keyframes marchingAntsBorder {
+  0% { background-position: 0 0, 100% 0, 100% 100%, 0 100%; }
+  100% { background-position: 20px 0, 100% 20px, calc(100% - 20px) 100%, 0 calc(100% - 20px); }
+}
+
+.marching-ants {
+  position: relative;
+}
+
+.marching-ants::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(90deg, #0F9D58 0, #0F9D58 6px, transparent 6px, transparent 12px) top / 12px 2px no-repeat,
+    repeating-linear-gradient(180deg, #0F9D58 0, #0F9D58 6px, transparent 6px, transparent 12px) right / 2px 12px no-repeat,
+    repeating-linear-gradient(90deg, #0F9D58 0, #0F9D58 6px, transparent 6px, transparent 12px) bottom / 12px 2px no-repeat,
+    repeating-linear-gradient(180deg, #0F9D58 0, #0F9D58 6px, transparent 6px, transparent 12px) left / 2px 12px no-repeat;
+  animation: marchingAntsBorder 0.4s linear infinite;
+  z-index: 5;
+}

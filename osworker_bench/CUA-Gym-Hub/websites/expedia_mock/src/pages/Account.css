@@ -1,0 +1,300 @@
+.account-page {
+  background: var(--color-bg-light);
+  min-height: 100vh;
+}
+
+.account-section {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.account-section h2 {
+  color: var(--color-navy);
+  margin-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+}
+
+/* Profile */
+.profile-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.profile-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.profile-field span {
+  font-size: 12px;
+  color: var(--color-medium-gray);
+}
+
+.profile-field strong {
+  font-size: 14px;
+  color: var(--color-dark-text);
+}
+
+/* One Key */
+.one-key-card {
+  border: 1px solid var(--color-golden-yellow);
+  border-radius: 12px;
+  padding: 20px;
+  background: linear-gradient(135deg, #FFF9EE 0%, #FFFAF0 100%);
+}
+
+/* Form elements */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  margin-bottom: 4px;
+}
+
+.form-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-gray);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  background: var(--color-white);
+  font-family: inherit;
+}
+
+.form-input:focus {
+  border-color: var(--color-action-blue);
+  box-shadow: 0 0 0 2px var(--color-action-blue-light);
+}
+
+.form-select {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-gray);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: var(--color-white);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Travelers */
+.travelers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.traveler-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border-gray);
+  border-radius: 12px;
+}
+
+.traveler-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-action-blue);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.traveler-info {
+  flex: 1;
+}
+
+.traveler-name {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.traveler-details {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--color-medium-gray);
+  margin-top: 2px;
+}
+
+.add-traveler-form {
+  padding: 16px;
+  background: var(--color-bg-light);
+  border-radius: 12px;
+  border: 1px dashed var(--color-border-gray);
+}
+
+.add-traveler-form h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+/* Saved hotels */
+.saved-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.saved-card {
+  border: 1px solid var(--color-border-gray);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.saved-card:hover {
+  box-shadow: var(--shadow-2);
+}
+
+.saved-img-wrap {
+  position: relative;
+  height: 130px;
+}
+
+.saved-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.saved-unsave {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.saved-info {
+  padding: 12px;
+}
+
+.saved-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-dark-text);
+  margin-bottom: 2px;
+}
+
+.saved-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-medium-gray);
+  margin-bottom: 4px;
+}
+
+.saved-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.saved-reviews {
+  font-weight: 400;
+  color: var(--color-medium-gray);
+  font-size: 12px;
+}
+
+/* Traveler action buttons */
+.traveler-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.traveler-action-btn.edit {
+  color: var(--color-action-blue);
+}
+
+.traveler-action-btn.edit:hover {
+  background: var(--color-action-blue-light);
+}
+
+.traveler-action-btn.delete {
+  color: var(--color-error);
+}
+
+.traveler-action-btn.delete:hover {
+  background: #FFF0F0;
+}
+
+/* Recent searches */
+.recent-searches {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recent-search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border-gray);
+  border-radius: 12px;
+}
+
+.recent-search-info {
+  flex: 1;
+}
+
+.recent-search-dest {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.recent-search-dates {
+  font-size: 12px;
+  color: var(--color-medium-gray);
+  margin-top: 2px;
+}

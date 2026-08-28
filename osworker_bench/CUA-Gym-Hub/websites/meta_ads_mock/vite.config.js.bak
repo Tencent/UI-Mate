@@ -1,0 +1,151 @@
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import fs from 'fs';
+import path from 'path';
+
+const STATE_DIR = path.resolve('.mock-states');
+
+function ensureStateDir() {
+  if (!fs.existsSync(STATE_DIR)) {
+    fs.mkdirSync(STATE_DIR, { recursive: true });
+  }
+}
+
+function sanitizeSid(sid) {
+  return (sid || '').replace(/[^a-zA-Z0-9_-]/g, '');
+}
+
+function getStatePath(sid) {
+  return path.join(STATE_DIR, `${sid}.json`);
+}
+
+function readState(sid) {
+  const p = getStatePath(sid);
+  if (fs.existsSync(p)) {
+    try {
+      return JSON.parse(fs.readFileSync(p, 'utf8'));
+    } catch (e) {
+      return null;
+    }
+  }
+  return null;
+}
+
+function writeState(sid, data) {
+  ensureStateDir();
+  fs.writeFileSync(getStatePath(sid), JSON.stringify(data), 'utf8');
+}
+
+function computeDiff(initial, current, prefix = '') {
+  const diff = {};
+  if (!initial || !current) return diff;
+  const allKeys = new Set([...Object.keys(initial), ...Object.keys(current)]);
+  for (const key of allKeys) {
+    const path = prefix ? `${prefix}.${key}` : key;
+    const a = initial[key];
+    const b = current[key];
+    if (JSON.stringify(a) === JSON.stringify(b)) continue;
+    if (a !== null && b !== null && typeof a === 'object' && typeof b === 'object' && !Array.isArray(a) && !Array.isArray(b)) {
+      Object.assign(diff, computeDiff(a, b, path));
+    } else {
+      diff[path] = { old: a, new: b };
+    }
+  }
+  return diff;
+}
+
+function deepMerge(target, source) {
+  if (source === null || source === undefined) return target;
+  if (typeof source !== 'object' || Array.isArray(source)) return source;
+  const result = { ...target };
+  for (const key of Object.keys(source)) {
+    if (source[key] === null || source[key] === undefined) continue;
+    if (typeof source[key] === 'object' && !Array.isArray(source[key]) &&
+        typeof result[key] === 'object' && !Array.isArray(result[key])) {
+      result[key] = deepMerge(result[key], source[key]);
+    } else {
+      result[key] = source[key];
+    }
+  }
+  return result;
+}
+
+export default defineConfig({
+  plugins: [
+    react(),
+    {
+      name: 'mock-api',
+      configureServer(server) {
+        server.middlewares.use(async (req, res, next) => {
+          const url = new URL(req.url, 'http://localhost');
+          const sid = sanitizeSid(url.searchParams.get('sid') || '');
+
+          // POST /post?sid=xxx
+          if (req.method === 'POST' && url.pathname === '/post') {
+            let body = '';
+            req.on('data', chunk => { body += chunk; });
+            req.on('end', () => {
+              try {
+                const { action, state } = JSON.parse(body);
+                let current = readState(sid) || {};
+
+                if (action === 'set') {
+                  const newState = { initial: state, current: state };
+                  writeState(sid, newState);
+                  res.writeHead(200, { 'Content-Type': 'application/json' });
+                  res.end(JSON.stringify({ ok: true }));
+                } else if (action === 'set_current') {
+                  current.current = deepMerge(current.current || {}, state);
+                  writeState(sid, current);
+                  res.writeHead(200, { 'Content-Type': 'application/json' });
+                  res.end(JSON.stringify({ ok: true }));
+                } else if (action === 'reset') {
+                  if (current.initial) {
+                    current.current = JSON.parse(JSON.stringify(current.initial));
+                    writeState(sid, current);
+                  }
+                  res.writeHead(200, { 'Content-Type': 'application/json' });
+                  res.end(JSON.stringify({ ok: true }));
+                } else {
+                  res.writeHead(400, { 'Content-Type': 'application/json' });
+                  res.end(JSON.stringify({ error: 'Unknown action' }));
+                }
+              } catch (e) {
+                res.writeHead(400, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ error: e.message }));
+              }
+            });
+            return;
+          }
+
+          // GET /state?sid=xxx
+          if (req.method === 'GET' && url.pathname === '/state') {
+            const data = sid ? readState(sid) : null;
+            res.writeHead(200, {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache'
+            });
+            res.end(JSON.stringify(data ? data.current || null : null));
+            return;
+          }
+
+          // GET /go?sid=xxx
+          if (req.method === 'GET' && url.pathname === '/go') {
+            const data = sid ? readState(sid) : null;
+            const initial_state = data ? data.initial || null : null;
+            const current_state = data ? data.current || null : null;
+            const state_diff = initial_state && current_state ? computeDiff(initial_state, current_state) : {};
+            res.writeHead(200, {
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache'
+            });
+            res.end(JSON.stringify({ initial_state, current_state, state_diff }));
+            return;
+          }
+
+          next();
+        });
+      }
+    }
+  ]
+});

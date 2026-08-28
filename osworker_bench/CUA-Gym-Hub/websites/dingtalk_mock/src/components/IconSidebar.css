@@ -1,0 +1,169 @@
+.icon-sidebar {
+  width: 54px;
+  min-width: 54px;
+  height: 100%;
+  background: #F5F6F7;
+  border-right: 1px solid #E8E8E8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0;
+  gap: 0;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.user-avatar-btn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.avatar-circle {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-family: var(--font-family);
+  letter-spacing: 0;
+  flex-shrink: 0;
+}
+
+.avatar-sm {
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+}
+
+.avatar-md {
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.avatar-lg {
+  width: 80px;
+  height: 80px;
+  font-size: 28px;
+}
+
+.status-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #F5F6F7;
+}
+
+.status-online { background: #52C41A; }
+.status-busy { background: #FF4D4F; }
+.status-away { background: #FA8C16; }
+.status-offline { background: #C4C9D4; }
+
+.nav-icons {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.nav-icon-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-icon-btn {
+  width: 54px;
+  height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 0;
+  position: relative;
+  transition: background 0.15s ease;
+  color: var(--text-secondary);
+}
+
+.nav-icon-btn:hover {
+  background: rgba(24, 144, 255, 0.08);
+  color: var(--primary);
+}
+
+.nav-icon-active {
+  color: var(--primary) !important;
+  background: rgba(24, 144, 255, 0.1) !important;
+}
+
+.nav-icon-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 24px;
+  background: var(--primary);
+  border-radius: 0 2px 2px 0;
+}
+
+.nav-icon-emoji {
+  font-size: 20px;
+  line-height: 1;
+  filter: grayscale(0.2);
+}
+
+.nav-icon-active .nav-icon-emoji {
+  filter: none;
+}
+
+.nav-icon-label {
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  background: var(--unread-red);
+  color: white;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.sidebar-bottom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+}

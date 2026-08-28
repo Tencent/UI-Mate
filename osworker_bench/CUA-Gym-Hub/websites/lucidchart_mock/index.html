@@ -1,0 +1,44 @@
+
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>LucidMock Diagramming</title>
+        <style>
+          #error-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            color: red;
+            z-index: 9999;
+            padding: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="root"></div>
+        <div id="error-overlay"></div>
+        <script>
+          window.onerror = function(message, source, lineno, colno, error) {
+            const overlay = document.getElementById('error-overlay');
+            overlay.style.display = 'block';
+            overlay.textContent = `Error: ${message}\nSource: ${source}:${lineno}:${colno}\nStack: ${error ? error.stack : 'N/A'}`;
+          };
+          window.addEventListener('unhandledrejection', function(event) {
+            const overlay = document.getElementById('error-overlay');
+            overlay.style.display = 'block';
+            overlay.textContent = `Unhandled Promise Rejection: ${event.reason}`;
+          });
+        </script>
+        <script type="module" src="/src/main.jsx"></script>
+      </body>
+    </html>
+  

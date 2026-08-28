@@ -1,0 +1,19 @@
+.page-editor-page {}
+
+.page-editor-topbar {
+  margin-bottom: 12px;
+}
+
+.page-editor-page h1 {
+  margin-bottom: 16px;
+}
+
+.page-editor-form {
+  max-width: 800px;
+}
+
+.page-editor-body {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  min-height: 300px;
+}

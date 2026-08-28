@@ -1,0 +1,36 @@
+
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        <title>XWS Console Mock</title>
+        <style>
+          #global-error {
+            display: none;
+            padding: 20px;
+            background: #fee;
+            color: #c00;
+            font-family: monospace;
+            white-space: pre-wrap;
+          }
+        </style>
+      </head>
+      <body>
+        <div id="global-error"></div>
+        <div id="root"></div>
+        <script>
+          window.onerror = function(msg, url, line, col, error) {
+            const el = document.getElementById('global-error');
+            el.style.display = 'block';
+            el.innerText = `Error: ${msg}\nLine: ${line}:${col}\nURL: ${url}\n${error?.stack || ''}`;
+          };
+        </script>
+        <script type="module" src="/src/main.jsx"></script>
+      </body>
+    </html>
+  

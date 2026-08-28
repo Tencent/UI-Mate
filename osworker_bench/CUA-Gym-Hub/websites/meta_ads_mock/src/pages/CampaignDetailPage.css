@@ -1,0 +1,112 @@
+.detail-page { padding: 0; }
+
+.detail-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--blue);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font);
+  background: none;
+  border: none;
+  padding: 0;
+}
+.back-btn:hover { text-decoration: underline; }
+
+.breadcrumb-sep { color: var(--text-secondary); }
+.breadcrumb-current { color: var(--text-secondary); }
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.detail-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.detail-badges { display: flex; gap: 8px; align-items: center; }
+
+.detail-status-badge {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.detail-obj-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  background: var(--bg);
+  color: var(--text-secondary);
+  border-radius: 10px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.detail-metrics {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.detail-metric-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.detail-metric-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.detail-metric-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.detail-section {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.detail-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.link-btn {
+  color: var(--blue);
+  background: none;
+  border: none;
+  font-family: var(--font);
+  font-size: 13px;
+  cursor: pointer;
+}
+.link-btn:hover { text-decoration: underline; }

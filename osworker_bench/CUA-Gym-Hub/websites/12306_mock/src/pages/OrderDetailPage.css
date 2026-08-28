@@ -1,0 +1,460 @@
+.order-detail-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.detail-content {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.status-banner {
+  border-radius: 6px;
+  padding: 14px 20px;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid;
+}
+
+.status-icon {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.status-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.status-sub {
+  font-size: 13px;
+  margin-left: 8px;
+  opacity: 0.8;
+}
+
+.detail-train-card {
+  background: linear-gradient(135deg, #2B6CB0 0%, #1A4B80 100%);
+  border-radius: 8px;
+  padding: 20px 28px;
+  color: white;
+  margin-bottom: 14px;
+}
+
+.detail-date {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 12px;
+}
+
+.detail-route {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detail-station {
+  text-align: center;
+}
+
+.detail-time {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.detail-station-name {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+}
+
+.detail-center {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.detail-train-no {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.detail-duration {
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+}
+
+.detail-section {
+  background: white;
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.detail-section-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-bottom: 14px;
+}
+
+.passenger-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.passenger-table th {
+  padding: 8px 12px;
+  background: var(--light-blue-bg);
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-dark);
+  border-bottom: 1px solid var(--border);
+}
+
+.passenger-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dark);
+}
+
+.passenger-table tr:last-child td {
+  border-bottom: none;
+}
+
+.order-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  gap: 8px;
+}
+
+.info-key {
+  font-size: 13px;
+  color: var(--text-gray);
+  white-space: nowrap;
+}
+
+.info-val {
+  font-size: 13px;
+  color: var(--text-dark);
+}
+
+.price-red {
+  color: #f5222d;
+  font-weight: bold;
+  font-size: 16px !important;
+}
+
+.detail-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 4px 0;
+}
+
+.action-back {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-gray);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.action-back:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.action-pay {
+  background: var(--accent-orange);
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.action-pay:hover { background: #e07a10; }
+
+.action-cancel {
+  background: none;
+  border: 1px solid #f5222d;
+  color: #f5222d;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.action-cancel:hover { background: #fff1f0; }
+
+.action-change {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.action-change:hover { background: var(--dark-blue); }
+
+.action-refund {
+  background: none;
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.action-refund:hover { background: var(--light-blue-bg); }
+
+.action-buy-again {
+  background: var(--accent-orange);
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.action-buy-again:hover { background: #e07a10; }
+
+/* Payment view */
+.payment-content {
+  padding: 40px 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.payment-card {
+  background: white;
+  border-radius: 8px;
+  padding: 28px 32px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.payment-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.payment-timer {
+  background: #fff7e6;
+  border: 1px solid #ffd591;
+  border-radius: 4px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #fa8c16;
+}
+
+.timer-value {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.payment-summary {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.payment-row:last-child { border-bottom: none; }
+
+.total-row {
+  background: #f9f9f9;
+  font-weight: 500;
+}
+
+.payment-total {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f5222d;
+}
+
+.payment-methods h4 {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.payment-method-list {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.payment-method-card {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.payment-method-card:hover {
+  border-color: var(--primary-blue);
+  background: var(--light-blue-bg);
+}
+
+.payment-method-icon {
+  font-size: 24px;
+}
+
+.confirm-payment-btn {
+  width: 100%;
+  height: 46px;
+  background: var(--accent-orange);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: background 0.2s;
+}
+
+.confirm-payment-btn:hover { background: #e07a10; }
+
+.cancel-order-link {
+  text-align: center;
+  color: var(--text-gray);
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9000;
+}
+
+.modal-box {
+  background: white;
+  border-radius: 8px;
+  padding: 24px 28px;
+  min-width: 320px;
+  max-width: 460px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+
+.refund-info {
+  background: #f9f9f9;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 2;
+  color: var(--text-dark);
+}
+
+.refund-amount {
+  font-size: 16px;
+  color: #f5222d;
+  margin-top: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.modal-confirm {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 8px 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-confirm:hover { background: var(--dark-blue); }
+
+.modal-cancel {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-gray);
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-cancel:hover { border-color: var(--text-gray); color: var(--text-dark); }
+
+.back-btn {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}

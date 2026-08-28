@@ -1,0 +1,134 @@
+.ding-page {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ding-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  padding: 0 12px;
+}
+
+.ding-tab {
+  flex: 1;
+  padding: 10px 8px;
+  font-size: 13px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--font-family);
+}
+
+.ding-tab:hover { color: var(--primary); }
+.ding-tab-active {
+  color: var(--primary) !important;
+  border-bottom-color: var(--primary) !important;
+  font-weight: 600;
+}
+
+.ding-card {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.ding-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.ding-card-info {
+  flex: 1;
+}
+
+.ding-sender {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ding-time {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.ding-content {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.5;
+  padding-left: 36px;
+}
+
+.confirm-btn {
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid var(--primary);
+  background: var(--primary);
+  color: white;
+  font-family: var(--font-family);
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.confirm-btn.confirmed {
+  background: white;
+  color: var(--text-secondary);
+  border-color: var(--border);
+  cursor: default;
+}
+
+.expand-btn {
+  font-size: 11px;
+  color: var(--primary);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: var(--font-family);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ding-receipt {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.receipt-col {
+  flex: 1;
+}
+
+.receipt-header {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.receipt-user-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+  font-size: 11px;
+}

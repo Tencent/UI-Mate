@@ -1,0 +1,242 @@
+.projects-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.projects-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  align-content: start;
+}
+
+.project-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+  overflow: hidden;
+}
+.project-card:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); }
+
+.project-card-top {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.project-card-icon {
+  font-size: 16px;
+}
+
+.project-card-body {
+  padding: 12px;
+}
+
+.project-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.project-card-name {
+  font-size: 14px;
+  font-weight: 510;
+  color: var(--text-primary);
+}
+
+.project-status-badge {
+  font-size: 11px;
+  font-weight: 510;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.project-card-desc {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.project-card-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.project-progress-text {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  min-width: 30px;
+}
+
+.project-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.project-card-lead {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.project-health {
+  font-size: 11px;
+  font-weight: 510;
+}
+
+.project-target-date {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-left: auto;
+}
+
+.projects-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-muted);
+  font-size: 14px;
+  grid-column: 1/-1;
+}
+
+/* Project detail */
+.project-detail-page {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.project-detail-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid var(--border-subtle);
+}
+
+.project-detail-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.project-name-input {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 590;
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 2px 8px;
+  font-family: inherit;
+}
+
+.project-progress-header {
+  padding: 8px 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-issues {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 8px;
+}
+
+.project-detail-sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--bg-base);
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.project-desc-textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+  padding: 6px 10px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.project-desc-display {
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: text;
+  line-height: 1.5;
+  min-height: 32px;
+}
+
+.project-teams-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.project-team-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 510;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.prop-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.prop-row:last-child { border-bottom: none; }
+
+.prop-label {
+  font-size: 11px;
+  font-weight: 510;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-tertiary);
+}
+
+.prop-date-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 13px;
+  padding: 5px 8px;
+  font-family: inherit;
+}
+.prop-date-input:focus { border-color: var(--accent); outline: none; }

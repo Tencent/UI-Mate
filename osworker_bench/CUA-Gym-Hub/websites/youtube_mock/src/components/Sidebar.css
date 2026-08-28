@@ -1,0 +1,240 @@
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 56px;
+  bottom: 0;
+  width: 240px;
+  background-color: var(--sidebar-bg);
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: transform 0.2s ease, width 0.2s ease;
+  z-index: 1000;
+  padding-bottom: 16px;
+}
+
+.sidebar.mini {
+  width: 72px;
+}
+
+.sidebar.closed {
+  transform: translateX(-240px);
+  width: 0;
+}
+
+.sidebar-section {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-section:last-child {
+  border-bottom: none;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 12px;
+  height: 40px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.15s;
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 0 12px;
+  font-size: 14px;
+}
+
+.sidebar-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.sidebar-item.active {
+  background-color: var(--hover-bg);
+  font-weight: 500;
+}
+
+.sidebar-item-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-item-text {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+}
+
+/* Mini sidebar */
+.sidebar.mini .sidebar-item {
+  flex-direction: column;
+  gap: 6px;
+  justify-content: center;
+  padding: 16px 0 14px;
+  height: auto;
+  margin: 0 4px;
+  border-radius: 10px;
+}
+
+.sidebar.mini .sidebar-item-text {
+  font-size: 10px;
+  text-align: center;
+  line-height: 1;
+}
+
+.sidebar.mini .sidebar-section {
+  border-bottom: none;
+  padding: 0;
+}
+
+.sidebar-section-title {
+  padding: 6px 24px 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sidebar.mini .sidebar-section-title {
+  display: none;
+}
+
+.subscription-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 12px;
+  height: 40px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.15s;
+  text-decoration: none;
+  border-radius: 10px;
+  margin: 0 12px;
+}
+
+.subscription-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.subscription-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.subscription-name {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+}
+
+.sidebar.mini .subscription-item {
+  justify-content: center;
+  padding: 12px 0;
+  margin: 0 4px;
+}
+
+.sidebar.mini .subscription-name {
+  display: none;
+}
+
+.show-more-button {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 12px;
+  height: 40px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 0.15s;
+  font-size: 14px;
+  width: calc(100% - 24px);
+  text-align: left;
+  border-radius: 10px;
+  margin: 0 12px;
+}
+
+.show-more-button:hover {
+  background-color: var(--hover-bg);
+}
+
+.sidebar.mini .show-more-button {
+  display: none;
+}
+
+/* Footer links in sidebar */
+.sidebar-footer {
+  padding: 16px 24px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 18px;
+}
+
+.sidebar-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-bottom: 8px;
+}
+
+.sidebar-footer-links span {
+  cursor: pointer;
+}
+
+.sidebar-footer-links span:hover {
+  text-decoration: underline;
+}
+
+.sidebar.mini .sidebar-footer {
+  display: none;
+}
+
+@media (max-width: 1312px) {
+  .sidebar:not(.mini) {
+    width: 72px;
+  }
+  .sidebar:not(.mini) .sidebar-item {
+    flex-direction: column;
+    gap: 6px;
+    justify-content: center;
+    padding: 16px 0 14px;
+    height: auto;
+    margin: 0 4px;
+  }
+  .sidebar:not(.mini) .sidebar-item-text {
+    font-size: 10px;
+    text-align: center;
+  }
+  .sidebar:not(.mini) .sidebar-section-title,
+  .sidebar:not(.mini) .show-more-button,
+  .sidebar:not(.mini) .subscription-item,
+  .sidebar:not(.mini) .sidebar-footer {
+    display: none;
+  }
+  .sidebar:not(.mini) .sidebar-section {
+    border-bottom: none;
+    padding: 0;
+  }
+  /* Only show first 4 items in collapsed sidebar */
+  .sidebar:not(.mini) .sidebar-section:nth-child(n+3) {
+    display: none;
+  }
+}
+
+@media (max-width: 792px) {
+  .sidebar {
+    transform: translateX(-240px);
+    width: 0;
+  }
+}

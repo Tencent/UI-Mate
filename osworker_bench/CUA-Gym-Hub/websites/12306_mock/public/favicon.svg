@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- Red circle background — China Railway brand color -->
+  <circle cx="24" cy="24" r="24" fill="#C0392B"/>
+  <!-- Thin white ring -->
+  <circle cx="24" cy="24" r="21" fill="none" stroke="white" stroke-width="1.5"/>
+  <!-- "中国铁路" label -->
+  <text x="24" y="19" text-anchor="middle" fill="white" font-size="7.5" font-weight="bold" font-family="'Microsoft YaHei','PingFang SC',sans-serif" letter-spacing="1">中国铁路</text>
+  <!-- Horizontal divider -->
+  <line x1="10" y1="22" x2="38" y2="22" stroke="white" stroke-width="0.8" opacity="0.7"/>
+  <!-- "Y2306" number -->
+  <text x="24" y="34" text-anchor="middle" fill="white" font-size="13" font-weight="bold" font-family="Arial,'Helvetica Neue',sans-serif" letter-spacing="0.5">Y2306</text>
+</svg>

@@ -1,0 +1,428 @@
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 2000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 200px;
+}
+
+.header-icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-primary);
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+
+.header-icon-btn:hover {
+  background-color: var(--hover-bg);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 18px 14px 18px 0;
+}
+
+.header-center {
+  flex: 0 1 728px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.search-form {
+  flex: 1;
+  max-width: 640px;
+  position: relative;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 40px;
+  overflow: hidden;
+  background: var(--input-bg);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-container.focused {
+  border-color: #3EA6FF;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.search-icon-left {
+  padding: 0 0 0 16px;
+  display: flex;
+  align-items: center;
+  color: var(--text-primary);
+}
+
+.search-input {
+  flex: 1;
+  height: 40px;
+  padding: 2px 6px 2px 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 16px;
+  outline: none;
+  min-width: 0;
+}
+
+.search-container.focused .search-input {
+  padding-left: 4px;
+}
+
+.search-input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search-button {
+  width: 64px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--hover-bg);
+  border-left: 1px solid var(--border-color);
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.search-button:hover {
+  background-color: var(--active-bg);
+}
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 64px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+  z-index: 2002;
+}
+
+.search-suggestion {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 16px;
+  color: var(--text-primary);
+  font-size: 15px;
+  text-align: left;
+  background: var(--bg-primary);
+}
+
+.search-suggestion:hover,
+.search-suggestion:focus {
+  background: var(--hover-bg);
+}
+
+.search-suggestion span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voice-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text-primary);
+  background-color: var(--hover-bg);
+  flex-shrink: 0;
+}
+
+.voice-button:hover {
+  background-color: var(--active-bg);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+  justify-content: flex-end;
+}
+
+.header-right-btn-group {
+  position: relative;
+}
+
+.create-btn svg {
+  fill: currentColor;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background-color: var(--yt-red);
+  color: white;
+  font-size: 10px;
+  font-weight: 500;
+  padding: 1px 4px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+  line-height: 14px;
+}
+
+.avatar-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Dropdown shared */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2001;
+  min-width: 256px;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: background-color 0.15s;
+  text-decoration: none;
+}
+
+.dropdown-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 8px 0;
+}
+
+/* User menu */
+.user-menu {
+  width: 300px;
+}
+
+.user-menu-header {
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+.user-menu-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.user-menu-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.user-menu-name {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 22px;
+}
+
+.user-menu-handle {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 20px;
+}
+
+.user-menu-channel-link {
+  font-size: 14px;
+  color: var(--blue-link);
+  text-decoration: none;
+  display: block;
+  margin-top: 4px;
+  line-height: 20px;
+}
+
+.user-menu-channel-link:hover {
+  text-decoration: none;
+}
+
+/* Notifications panel */
+.notifications-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: -40px;
+  width: 480px;
+  max-height: 600px;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 2001;
+}
+
+.notifications-header {
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.notifications-header h3 {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.notifications-mark-read {
+  color: var(--blue-link);
+  font-size: 14px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.notifications-mark-read:hover {
+  background-color: var(--hover-bg);
+}
+
+.notifications-list {
+  max-height: 520px;
+  overflow-y: auto;
+}
+
+.notifications-empty {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.notification-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  position: relative;
+  align-items: flex-start;
+}
+
+.notification-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.notification-item.unread {
+  background-color: var(--hover-bg);
+}
+
+.notification-dot {
+  position: absolute;
+  left: 8px;
+  top: 24px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--blue-link);
+}
+
+.notification-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-text {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 20px;
+  margin-bottom: 4px;
+}
+
+.notification-time {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.notification-thumbnail {
+  width: 86px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+@media (max-width: 656px) {
+  .header-center {
+    display: none;
+  }
+  .header-left {
+    min-width: auto;
+  }
+  .header-right {
+    min-width: auto;
+  }
+}

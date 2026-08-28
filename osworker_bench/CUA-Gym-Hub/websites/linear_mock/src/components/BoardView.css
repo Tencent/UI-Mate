@@ -1,0 +1,129 @@
+.board-view {
+  display: flex;
+  gap: 0;
+  height: 100%;
+  overflow-x: auto;
+  padding: 0;
+}
+
+.board-column {
+  min-width: 280px;
+  width: 280px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+.board-column:last-child {
+  border-right: none;
+}
+
+.board-column-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.board-column-name {
+  font-size: 12px;
+  font-weight: 510;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.board-column-count {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  background: rgba(255,255,255,0.06);
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.board-column-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.board-column-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  height: 80px;
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+
+.board-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s;
+  position: relative;
+}
+.board-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: var(--border);
+}
+.board-card[draggable]:active {
+  opacity: 0.6;
+}
+
+.board-card-id {
+  font-size: 11px;
+  font-family: ui-monospace, SF Mono, Menlo, monospace;
+  color: var(--text-tertiary);
+  margin-bottom: 5px;
+}
+
+.board-card-title {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.board-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.board-card-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.board-card-estimate {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 10px;
+  font-weight: 510;
+  color: var(--text-tertiary);
+  background: rgba(255,255,255,0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+}

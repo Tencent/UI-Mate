@@ -1,0 +1,123 @@
+.dns-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.dns-table .type-badge {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--cf-font-mono);
+  background: var(--cf-bg-secondary);
+  color: var(--cf-text-primary);
+}
+
+.type-a, .type-aaaa { background: #DBEAFE; color: #1E40AF; }
+.type-cname { background: #D1FAE5; color: #065F46; }
+.type-mx { background: #FEF3C7; color: #92400E; }
+.type-txt { background: #EDE9FE; color: #4C1D95; }
+.type-srv, .type-ns, .type-caa { background: var(--cf-bg-secondary); color: var(--cf-text-secondary); }
+
+.proxy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.proxy-badge.proxied { color: #C2410C; }
+.proxy-badge.dns-only { color: var(--cf-text-muted); }
+
+.record-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dns-row:hover .record-actions {
+  visibility: visible;
+}
+
+.record-form-row td {
+  padding: 0 !important;
+  background: var(--cf-blue-light) !important;
+}
+
+.record-form {
+  padding: 16px 12px;
+}
+
+.record-form-fields {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  align-items: flex-end;
+}
+
+.record-form-fields .form-group {
+  min-width: 100px;
+}
+
+.record-form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.field-error {
+  font-size: 12px;
+  color: var(--cf-error);
+}
+
+.input-error {
+  border-color: var(--cf-error) !important;
+}
+
+.proxy-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.proxy-toggle input {
+  display: none;
+}
+
+.proxy-toggle-btn {
+  padding: 5px 10px;
+  border-radius: var(--cf-radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--cf-border);
+  background: white;
+}
+
+.proxy-toggle-btn.proxied {
+  background: #FFF7ED;
+  border-color: #F97316;
+  color: #C2410C;
+}
+
+.proxy-toggle-btn.dns-only {
+  background: white;
+  color: var(--cf-text-secondary);
+}
+
+.proxy-toggle-inline {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: var(--cf-radius-sm);
+  transition: background 0.15s;
+}
+
+.proxy-toggle-inline:hover {
+  background: var(--cf-bg-secondary);
+}

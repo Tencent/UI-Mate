@@ -1,0 +1,135 @@
+.package-card {
+  display: flex;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-gray);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  transition: box-shadow 0.2s;
+}
+
+.package-card:hover {
+  box-shadow: var(--shadow-2);
+}
+
+.package-img-wrap {
+  width: 240px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.package-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.package-img-wrap .deal-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.package-content {
+  display: flex;
+  flex: 1;
+  padding: 16px;
+  gap: 16px;
+}
+
+.package-info {
+  flex: 1;
+}
+
+.package-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 4px;
+}
+
+.package-dest {
+  font-size: 13px;
+  color: var(--color-medium-gray);
+  margin-bottom: 6px;
+}
+
+.package-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.package-includes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.package-include-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-success);
+  background: #F0FFF4;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.package-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--color-medium-gray);
+  margin-bottom: 8px;
+}
+
+.package-details span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.package-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.package-highlight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--color-action-blue);
+}
+
+.package-price-area {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 150px;
+}
+
+.package-original {
+  font-size: 14px;
+  color: var(--color-medium-gray);
+  text-decoration: line-through;
+}
+
+.package-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.package-price-label {
+  font-size: 12px;
+  color: var(--color-medium-gray);
+}

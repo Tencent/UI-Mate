@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #262626;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide scrollbar for stories but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Xnstagram gradient for story rings */
+.ig-gradient {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+}
+
+.ig-story-ring {
+  background: conic-gradient(from 0deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #f09433);
+}
+
+/* Slide-in animation for panels */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.25s ease-out;
+}
+
+/* Marquee animation for audio text */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 8s linear infinite;
+}
+
+/* Line clamp utility */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Snap scrolling for reels */
+.snap-y {
+  scroll-snap-type: y mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
+}
+
+/* Custom scrollbar for main areas */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0,0.25);
+}
+
+/* Heart animation on double-tap */
+@keyframes heartBurst {
+  0% { transform: scale(0); opacity: 1; }
+  15% { transform: scale(1.3); }
+  30% { transform: scale(0.95); }
+  45% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+.animate-heart-burst {
+  animation: heartBurst 1s ease-in-out forwards;
+}
+
+/* Like button press */
+@keyframes likePop {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.animate-like-pop {
+  animation: likePop 0.35s ease-in-out;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Scale in animation for modals */
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
+
+/* Online indicator pulse */
+@keyframes onlinePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-online-pulse {
+  animation: onlinePulse 2s ease-in-out infinite;
+}
+
+/* Story progress bar animation */
+@keyframes storyProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Thin separator line like Xnstagram */
+.ig-separator {
+  border-color: rgb(219, 219, 219);
+}
+
+/* Xnstagram blue button */
+.ig-btn-primary {
+  background-color: #0095F6;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+.ig-btn-primary:hover {
+  background-color: #1877F2;
+}
+.ig-btn-primary:disabled {
+  opacity: 0.3;
+}
+
+/* Xnstagram secondary button */
+.ig-btn-secondary {
+  background-color: #EFEFEF;
+  color: #262626;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 7px 16px;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+.ig-btn-secondary:hover {
+  background-color: #DBDBDB;
+}
+
+/* Emoji reaction animation */
+@keyframes emojiFloat {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
+}
+
+.animate-emoji-float {
+  animation: emojiFloat 1s ease-out forwards;
+}

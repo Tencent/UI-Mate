@@ -1,0 +1,134 @@
+/* XACS Viewer — Dark Radiology Workstation Theme */
+
+:root {
+  /* Backgrounds */
+  --color-bg-viewport: #000000;
+  --color-bg-shell: #090c29;
+  --color-bg-panel: #0a1628;
+  --color-bg-toolbar: #1a1a2e;
+  --color-bg-header: #0d1117;
+  --color-bg-input: #0a1628;
+  --color-bg-row-hover: #1e2a3a;
+  --color-bg-dropdown: #1a1a2e;
+
+  /* Borders */
+  --color-border-panel: #1a2a3a;
+  --color-border-toolbar: #2a3a4a;
+  --color-border-input: #1a2a3a;
+  --color-border-viewport: #1a2a3a;
+  --color-border: #1a2a3a;
+
+  /* Accent */
+  --color-accent-primary: #05d8e6;
+  --color-accent-secondary: #00bcd4;
+  --color-accent: #05d8e6;
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #8899aa;
+  --color-text-overlay: #e0e0e0;
+  --color-text-muted: #556677;
+  --color-text-placeholder: #556677;
+
+  /* Modality badges */
+  --color-modality-ct: #2196f3;
+  --color-modality-mr: #4caf50;
+  --color-modality-cr: #ff9800;
+  --color-modality-us: #9c27b0;
+  --color-modality-nm: #ff5722;
+  --color-modality-pt: #e91e63;
+
+  /* Status colors */
+  --color-status-unread: #f44336;
+  --color-status-in-progress: #ffeb3b;
+  --color-status-read: #2196f3;
+  --color-status-reported: #4caf50;
+
+  /* Measurement colors */
+  --color-measurement-target: #ffeb3b;
+  --color-measurement-nontarget: #05d8e6;
+  --color-danger: #f44336;
+  --color-success: #4caf50;
+
+  /* Fonts */
+  --font-body: 'Inter', 'Roboto', sans-serif;
+  --font-overlay: 'Roboto Mono', 'Consolas', monospace;
+
+  /* Spacing */
+  --toolbar-height: 48px;
+  --left-panel-width: 240px;
+  --right-panel-width: 280px;
+}
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg-shell);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-panel);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-toolbar);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Utility */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.flex-1 { flex: 1; }
+.gap-1 { gap: 4px; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Button reset */
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+button:focus-visible {
+  outline: 1px solid var(--color-accent-primary);
+  outline-offset: 2px;
+}
+
+input, select {
+  font-family: var(--font-body);
+}
+
+a {
+  color: var(--color-accent-primary);
+  text-decoration: none;
+}

@@ -1,0 +1,514 @@
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--xechat-bg, #ededed);
+  overflow-y: auto;
+}
+
+.profile-header {
+  padding: 12px 16px;
+  background-color: var(--xechat-header-bg, #ededed);
+  border-bottom: 0.5px solid var(--xechat-divider);
+}
+
+.profile-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--xechat-text-primary);
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 16px;
+  background-color: #fff;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.profile-card:active {
+  background-color: #f5f5f5;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--xechat-text-primary);
+}
+
+.profile-id {
+  font-size: 14px;
+  color: var(--xechat-text-secondary);
+}
+
+.qr-code-icon {
+  font-size: 20px;
+  color: var(--xechat-text-secondary);
+  margin-right: 4px;
+}
+
+.arrow {
+  font-size: 20px;
+  color: #ccc;
+}
+
+.profile-menu {
+  margin-top: 8px;
+  background-color: #fff;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:active {
+  background-color: #ececec;
+}
+
+.menu-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.menu-icon {
+  font-size: 24px;
+}
+
+.menu-label {
+  flex: 1;
+  font-size: 16px;
+  color: var(--xechat-text-primary);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f7f7f7;
+  border-bottom: 0.5px solid #e5e5e5;
+}
+
+.modal-header .back-btn {
+  font-size: 28px;
+  color: var(--xechat-text-primary);
+  padding: 0 8px;
+  margin-right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-header h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--xechat-text-primary);
+  margin: 0;
+}
+
+/* Services Modal */
+.services-modal {
+  flex: 1;
+  background-color: var(--xechat-bg-light, #f5f5f5);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.services-content {
+  padding: 12px;
+}
+
+.service-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.service-section h4 {
+  font-size: 13px;
+  color: var(--xechat-text-secondary);
+  margin-bottom: 14px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.service-item:active {
+  background-color: #f5f5f5;
+}
+
+.service-icon {
+  width: 44px;
+  height: 44px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.service-item span {
+  font-size: 12px;
+  color: var(--xechat-text-primary);
+  text-align: center;
+}
+
+/* Wallet Modal */
+.wallet-modal {
+  flex: 1;
+  background-color: var(--xechat-bg-light, #f5f5f5);
+  display: flex;
+  flex-direction: column;
+}
+
+.wallet-content {
+  padding: 12px;
+}
+
+.wallet-section {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wallet-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.wallet-item:active {
+  background-color: #f5f5f5;
+}
+
+.wallet-item:last-child {
+  border-bottom: none;
+}
+
+.wallet-icon {
+  font-size: 22px;
+}
+
+.wallet-label {
+  flex: 1;
+  font-size: 16px;
+  color: var(--xechat-text-primary);
+}
+
+.wallet-count {
+  font-size: 14px;
+  color: var(--xechat-text-secondary);
+}
+
+/* Favorites Modal */
+.favorites-modal {
+  flex: 1;
+  background-color: var(--xechat-bg-light, #f5f5f5);
+  display: flex;
+  flex-direction: column;
+}
+
+.favorites-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.favorites-list {
+  background-color: #fff;
+}
+
+.favorite-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #f0f0f0;
+}
+
+.favorite-item:last-child {
+  border-bottom: none;
+}
+
+.fav-type-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+}
+
+.fav-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.fav-preview {
+  font-size: 15px;
+  color: var(--xechat-text-primary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fav-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.fav-source {
+  font-size: 12px;
+  color: var(--xechat-text-secondary);
+}
+
+.fav-time {
+  font-size: 12px;
+  color: var(--xechat-text-secondary);
+}
+
+.favorites-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 60px 40px;
+}
+
+.favorites-empty .empty-icon {
+  font-size: 56px;
+  opacity: 0.4;
+}
+
+.favorites-empty p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+}
+
+.favorites-empty .empty-hint {
+  font-size: 14px;
+  color: var(--xechat-text-secondary);
+}
+
+/* Stickers Modal */
+.stickers-modal {
+  flex: 1;
+  background-color: var(--xechat-bg-light, #f5f5f5);
+  display: flex;
+  flex-direction: column;
+}
+
+.stickers-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sticker-packs-list {
+  background-color: #fff;
+}
+
+.sticker-pack-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.sticker-pack-item:last-child {
+  border-bottom: none;
+}
+
+.sticker-pack-item:active {
+  background-color: #f5f5f5;
+}
+
+.pack-thumbnail {
+  font-size: 36px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+}
+
+.pack-info {
+  flex: 1;
+}
+
+.pack-name {
+  font-size: 16px;
+  color: var(--xechat-text-primary);
+}
+
+.pack-status {
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background-color: var(--xechat-green, #07c160);
+  color: #fff;
+}
+
+.pack-status.added {
+  background-color: #e5e5e5;
+  color: var(--xechat-text-secondary);
+}
+
+.sticker-pack-detail {
+  padding: 16px;
+}
+
+.sticker-pack-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.sticker-item {
+  font-size: 36px;
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sticker-item:active {
+  background-color: #f0f0f0;
+}
+
+.back-to-packs {
+  margin-top: 16px;
+  width: 100%;
+  padding: 12px;
+  background-color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--xechat-text-link, #576b95);
+  text-align: center;
+  cursor: pointer;
+}
+
+.back-to-packs:active {
+  background-color: #f5f5f5;
+}
+
+/* Settings Modal */
+.settings-modal {
+  flex: 1;
+  background-color: var(--xechat-bg-light, #f5f5f5);
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 8px;
+}
+
+.settings-section {
+  background-color: #fff;
+  margin-bottom: 8px;
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 0.5px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-item:active {
+  background-color: #ececec;
+}
+
+.settings-label {
+  flex: 1;
+  font-size: 16px;
+  color: var(--xechat-text-primary);
+}
+
+.settings-desc {
+  font-size: 14px;
+  color: var(--xechat-text-secondary);
+  margin-right: 8px;
+}

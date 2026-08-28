@@ -1,0 +1,192 @@
+
+:root {
+  --bg-main: #f6f8f9;
+  --bg-card: #ffffff;
+  --bg-hover: #f6f8f9;
+  --text-primary: #1f1f1f;
+  --text-secondary: #6d6e6f;
+  --text-muted: #a2a0a2;
+  --border: #e0e0e0;
+  --border-light: #f0f0f0;
+}
+
+[data-theme="dark"] {
+  --bg-main: #1e1f21;
+  --bg-card: #2e2e30;
+  --bg-hover: #3e3f42;
+  --text-primary: #ffffff;
+  --text-secondary: #a2a0a2;
+  --text-muted: #6d6e6f;
+  --border: #3e3f42;
+  --border-light: #2e2e30;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1e1f21;
+  color: #1f1f1f;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+/* Dark theme overrides for main content */
+[data-theme="dark"] .layout-main {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .layout-main h1,
+[data-theme="dark"] .layout-main h2,
+[data-theme="dark"] .layout-main h3 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .project-section,
+[data-theme="dark"] .task-section,
+[data-theme="dark"] .dashboard-card,
+[data-theme="dark"] .settings-panel,
+[data-theme="dark"] .search-task-list,
+[data-theme="dark"] .search-project-list,
+[data-theme="dark"] .notifications-list,
+[data-theme="dark"] .proj-calendar-container,
+[data-theme="dark"] .timeline-container,
+[data-theme="dark"] .my-calendar-container,
+[data-theme="dark"] .project-card-main,
+[data-theme="dark"] .board-task-card,
+[data-theme="dark"] .my-board-card {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .board-column {
+  background-color: #252628;
+}
+
+[data-theme="dark"] .task-detail-panel {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .task-detail-title-input,
+[data-theme="dark"] .task-detail-description-input {
+  color: var(--text-primary);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .field-dropdown {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .field-dropdown-item {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .field-dropdown-item:hover {
+  background-color: var(--bg-hover);
+}
+
+[data-theme="dark"] .task-detail-field-btn {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .project-task-item:hover,
+[data-theme="dark"] .notification-item:hover,
+[data-theme="dark"] .search-task-row:hover,
+[data-theme="dark"] .search-project-row:hover {
+  background-color: var(--bg-hover);
+}
+
+[data-theme="dark"] .project-section-header,
+[data-theme="dark"] .board-column-header {
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .notification-item {
+  border-bottom-color: var(--border);
+}
+
+[data-theme="dark"] .project-task-name-link,
+[data-theme="dark"] .search-task-name,
+[data-theme="dark"] .notification-text,
+[data-theme="dark"] .board-task-card-title,
+[data-theme="dark"] .my-board-card-title {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .filter-bar select,
+[data-theme="dark"] .form-group input,
+[data-theme="dark"] .form-group select {
+  background-color: var(--bg-card);
+  border-color: var(--border);
+  color: var(--text-primary);
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea, button, select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d0d0d0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b0b0b0;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.react-datepicker__input-container input:focus {
+  outline: none;
+  border-color: #f06a6a;
+}

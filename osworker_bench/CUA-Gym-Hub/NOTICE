@@ -1,0 +1,31 @@
+CUA-Gym-Hub
+Copyright 2026 XLang Lab, The University of Hong Kong, and contributors.
+
+This product is part of CUA-Gym (https://github.com/xlang-ai/CUA-Gym) and is
+distributed under the Apache License, Version 2.0 (LICENSE).
+
+────────────────────────────────────────────────────────────────────────────
+Trademark Notice
+────────────────────────────────────────────────────────────────────────────
+
+This repository contains mock web applications whose visual design and
+interactive structure are inspired by real third-party products. The
+names, logos, and trade dress of those products are trademarks of their
+respective holders.
+
+Mock app names rendered in the UI are intentionally altered (e.g.,
+"Xmail" rather than "Gmail") to avoid implying any affiliation,
+endorsement, or sponsorship by the trademark holders. Where original
+brand names appear in this repository (in directory names, comments,
+or documentation), they are used solely for identification under
+nominative fair use.
+
+See TRADEMARKS.md for the full list of acknowledged third-party marks
+and the takedown procedure for rights holders.
+
+────────────────────────────────────────────────────────────────────────────
+Apache 2.0 § 4(d) Notice Inclusion
+────────────────────────────────────────────────────────────────────────────
+
+This NOTICE file MUST be included with any derivative works of this
+project, as required by Section 4(d) of the Apache License 2.0.

@@ -1,0 +1,177 @@
+
+.mentions-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+}
+
+.mentions-header {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mentions-header h2 {
+  margin: 0 0 16px 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.mentions-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.mentions-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.mentions-section-label {
+  padding: 12px 20px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #616061;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #F0F0F0;
+  background: #FAFAFA;
+}
+
+.mention-item {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  transition: background 0.2s;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.mention-item:hover {
+  background: #F8F8F8;
+}
+
+.mention-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.mention-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.mention-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.mention-sender {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1d1c1d;
+}
+
+.mention-location {
+  font-size: 13px;
+  color: #616061;
+}
+
+.mention-time {
+  font-size: 12px;
+  color: #616061;
+  margin-left: auto;
+}
+
+.mention-text-full {
+  font-size: 15px;
+  color: #1d1c1d;
+  line-height: 22px;
+  margin-bottom: 8px;
+  word-wrap: break-word;
+}
+
+.mention-highlight {
+  display: inline;
+  padding: 1px 4px;
+  background: #E8F5FE;
+  color: #1264A3;
+  border-radius: 3px;
+  font-weight: 600;
+}
+
+.mention-highlight-self {
+  background: #FFF3CD;
+  color: #B65C00;
+}
+
+.mention-view-link {
+  background: none;
+  border: none;
+  color: #1264A3;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: text-decoration 0.15s;
+}
+
+.mention-view-link:hover {
+  text-decoration: underline;
+}
+
+/* Reaction items */
+.reaction-item {
+  align-items: flex-start;
+}
+
+.reaction-description {
+  font-size: 14px;
+  color: #1D1C1D;
+  line-height: 20px;
+  margin-bottom: 6px;
+}
+
+.reaction-actor-name {
+  font-weight: 700;
+}
+
+.reaction-emoji-display {
+  font-size: 16px;
+}
+
+.reaction-original-message {
+  font-size: 14px;
+  color: #616061;
+  line-height: 20px;
+  padding: 8px 12px;
+  background: #F8F8F8;
+  border-radius: 6px;
+  border-left: 3px solid #DDDDDD;
+  margin-bottom: 8px;
+}
+
+.no-mentions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #616061;
+  gap: 8px;
+}
+
+.no-mentions p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1D1C1D;
+}
+
+.no-mentions-hint {
+  font-size: 14px;
+  color: #616061;
+}

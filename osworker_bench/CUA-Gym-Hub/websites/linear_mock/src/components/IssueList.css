@@ -1,0 +1,70 @@
+.issue-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.issue-list-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.issue-group {
+  border-bottom: 1px solid var(--border-subtle);
+}
+.issue-group:last-child {
+  border-bottom: none;
+}
+
+.issue-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  height: 36px;
+  width: 100%;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 510;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  transition: background 0.1s;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.issue-group-header:hover {
+  background: rgba(255,255,255,0.02);
+}
+
+.issue-group-chevron {
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+}
+
+.issue-group-label {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 510;
+}
+
+.issue-group-count {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-tertiary);
+  font-size: 11px;
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+
+.issue-group-body {
+  /* no special styles needed */
+}
+
+.issue-group-empty {
+  padding: 12px 32px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}

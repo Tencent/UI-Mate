@@ -1,0 +1,55 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #1A73E8;
+  --blue-light: #E8F0FE;
+  --sidebar-dark: #202124;
+  --sidebar-icon-inactive: #9AA0A6;
+  --content-bg: #F8F9FA;
+  --card-bg: #FFFFFF;
+  --border: #DADCE0;
+  --text-primary: #202124;
+  --text-secondary: #5F6368;
+  --success: #188038;
+  --error: #D93025;
+  --warning: #F9AB00;
+  --hover-bg: #F1F3F4;
+  --font: 'Google Sans', 'Roboto', sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--content-bg);
+  overflow: hidden;
+  height: 100vh;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--font); }
+input, select, textarea { font-family: var(--font); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #DADCE0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #BDC1C6; }
+
+/* Table numbers */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* Status colors */
+.status-enabled { color: var(--success); }
+.status-paused { color: var(--text-secondary); }
+.status-removed { color: var(--error); }
+
+/* Utility */
+.ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

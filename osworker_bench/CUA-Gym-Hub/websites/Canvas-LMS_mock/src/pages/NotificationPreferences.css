@@ -1,0 +1,122 @@
+.notif-prefs-page {
+  max-width: 800px;
+}
+
+.notif-prefs-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.notif-prefs-header svg {
+  color: var(--text-secondary);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.notif-prefs-header h1 {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-light);
+  margin-bottom: 4px;
+}
+
+.notif-prefs-desc {
+  font-size: var(--font-size-body);
+  color: var(--text-secondary);
+}
+
+.notif-prefs-table-wrapper {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-content);
+}
+
+.notif-prefs-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.notif-prefs-table thead {
+  background: var(--bg-module-header);
+}
+
+.notif-prefs-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.notif-type-col {
+  width: 50%;
+}
+
+.notif-channel-col {
+  width: 25%;
+  text-align: center !important;
+}
+
+.channel-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.notif-prefs-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
+  text-align: center;
+}
+
+.notif-prefs-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.notif-prefs-table tbody tr:hover {
+  background: rgba(3, 116, 181, 0.03);
+}
+
+.notif-type-cell {
+  text-align: left !important;
+}
+
+.notif-type-label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.notif-type-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.notif-freq-select {
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--bg-content);
+  outline: none;
+  min-width: 130px;
+}
+
+.notif-freq-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(3, 116, 181, 0.15);
+}
+
+.notif-prefs-footer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}

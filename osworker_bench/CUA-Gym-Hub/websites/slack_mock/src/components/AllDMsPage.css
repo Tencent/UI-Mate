@@ -1,0 +1,139 @@
+
+.all-dms-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: white;
+}
+
+.all-dms-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.all-dms-header h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1D1C1D;
+}
+
+.dm-search {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #BBBBBB;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.dm-search:focus {
+  outline: none;
+  border-color: #1264A3;
+  box-shadow: 0 0 0 1px #1264A3;
+}
+
+.dms-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.dm-list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.dm-list-item:hover {
+  background: #F8F8F8;
+}
+
+.dm-list-item.has-unread .dm-list-name {
+  color: #1D1C1D;
+  font-weight: 900;
+}
+
+.dm-list-item.has-unread .dm-list-message {
+  color: #1D1C1D;
+  font-weight: 600;
+}
+
+.dm-list-avatar-container {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.dm-list-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.dm-list-status-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.dm-list-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.dm-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+
+.dm-list-name {
+  font-weight: 700;
+  font-size: 15px;
+  color: #1D1C1D;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dm-list-time {
+  font-size: 12px;
+  color: #616061;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.dm-list-message {
+  font-size: 14px;
+  color: #616061;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.dm-list-unread {
+  background: #E01E5A;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 1px 7px;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

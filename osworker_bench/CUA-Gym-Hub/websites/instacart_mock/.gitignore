@@ -1,0 +1,6 @@
+.mock-states/
+.mock-state.json
+.mock-state.initial.json
+.mock-files/
+dist/
+node_modules/

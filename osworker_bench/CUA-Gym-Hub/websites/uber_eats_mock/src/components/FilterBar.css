@@ -1,0 +1,134 @@
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0 20px;
+  align-items: center;
+}
+
+.filter-bar__pill {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  background: var(--color-gray-100);
+  color: var(--color-black);
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  border: 1px solid transparent;
+}
+
+.filter-bar__pill:hover {
+  background: var(--color-gray-200);
+}
+
+.filter-bar__pill--active {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.filter-bar__pill--active:hover {
+  background: var(--color-gray-900);
+}
+
+.filter-bar__dropdown-wrap {
+  position: relative;
+}
+
+.filter-bar__dropdown-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.filter-bar__dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--color-white);
+  border-radius: 12px;
+  box-shadow: var(--shadow-dropdown);
+  z-index: 11;
+  min-width: 200px;
+  padding: 8px 0;
+}
+
+.filter-bar__dropdown--price {
+  padding: 16px;
+  min-width: 240px;
+}
+
+.filter-bar__price-grid {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-bar__price-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.15s;
+}
+
+.filter-bar__price-btn:hover {
+  border-color: var(--color-black);
+}
+
+.filter-bar__price-btn--active {
+  background: var(--color-black);
+  color: var(--color-white);
+  border-color: var(--color-black);
+}
+
+.filter-bar__dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  text-align: left;
+  padding: 10px 16px;
+  font-size: var(--fs-sm);
+  color: var(--color-black);
+  transition: background 0.1s ease;
+}
+
+.filter-bar__dropdown-item:hover {
+  background: var(--color-gray-100);
+}
+
+.filter-bar__dropdown-item--active {
+  font-weight: 700;
+}
+
+.filter-bar__check {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.filter-bar__clear {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-black);
+  white-space: nowrap;
+  padding: 8px 12px;
+  flex-shrink: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-gray-100);
+  transition: background 0.15s;
+}
+
+.filter-bar__clear:hover {
+  background: var(--color-gray-200);
+}
