@@ -1,0 +1,77 @@
+{
+  "id": "pm_sprint_planning_001__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou're Dana, the delivery manager running Sprint 24 planning. In Asana, the 'Sprint 24' project holds the candidate backlog. Decide which candidates the team is committing to this sprint, then set each committed task up across the tools.\n\nFor every task you commit to: assign it to the right owner and give it a due date in Asana; add a row for it to the 'Sprint Plan' database in Notion; and create a kickoff meeting in Google Calendar. Match each task to the engineer whose discipline fits the work: server-side or API work goes to the Backend Engineer, work in the mobile (iOS/Android) app goes to the Mobile Engineer, and web frontend or general work goes to the Senior Engineer. Each engineer's role is shown on their Slack profile.\n\nWhen you're done, post a summary of the sprint commitment to the Slack channel #delivery and pin it.",
+  "app_type": "asana_mock,notion_mock,slack_mock,google_calendar_mock",
+  "domain": "pm",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

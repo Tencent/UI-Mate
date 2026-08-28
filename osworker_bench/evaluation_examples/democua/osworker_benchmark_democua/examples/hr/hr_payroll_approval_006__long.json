@@ -1,0 +1,77 @@
+{
+  "id": "hr_payroll_approval_006__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou're Niko, the payroll specialist clearing today's approval queue in Workday. Your inbox has a batch of pending timesheet and leave approvals, each showing only the raw figures (a timesheet's per-day hours, or a leave request's dates and the employee's remaining balance). Work out each one against policy and approve only the ones that are in policy -- a timesheet is in policy if the week's hours total 40 or fewer, and a leave request is in policy if the hours requested stay within the employee's remaining balance for that leave type AND the dates do not overlap the month-end payroll blackout window (the exact blackout dates are announced in Workday and in the HR notice in your inbox -- check them). Anything that breaks policy (a week totalling over 40 hours, or leave that exceeds the balance or touches the blackout) must NOT be approved -- leave it pending.\n\nFor each request you do not approve, raise a chase task in the Asana 'Payroll Operations' project titled 'Follow up: <employee name>' (e.g. 'Follow up: Marcus Johnson'), and set its Priority to High for an over-hours timesheet or Medium for a non-compliant leave request.\n\nThen report out in Microsoft Teams and email. In the Teams 'Payroll' channel, post TWO separate messages: first a summary giving the exact number you approved and the number you flagged for follow-up, then a second message that is an exception list naming every employee you flagged. Finally send TWO emails: a summary to your manager Sandra Voss, the Director of Finance, stating the same approved and flagged counts, and a separate exception handoff to Tom Reed, the payroll analyst on your team, that names every flagged employee so he can chase them.",
+  "app_type": "workday_mock,asana_mock,microsoft_teams_mock,gmail_mock",
+  "domain": "hr",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

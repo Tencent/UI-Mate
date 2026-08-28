@@ -1,0 +1,77 @@
+{
+  "id": "ar_churn_refund_009__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Stripe, Google Sheets, and Gmail). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nFirst, read the churn-confirmation email in Gmail: it names the customer whose subscription has churned and must be canceled before you pull the report. Find that customer's subscription in Stripe and cancel it -- open the subscription's detail page, click Cancel, and choose 'Cancel immediately' so its status becomes 'canceled'. A canceled subscription must NOT appear in the MRR report.\n\nThen build a subscription MRR (monthly recurring revenue) report from Stripe into the 'MRR' tab of the Google Sheet. Consider only subscriptions whose status is 'active' or 'past_due' (skip canceled/trialing/paused -- including the one you just canceled). For each, compute its monthly amount in dollars: sum over its items of unit_amount(cents)/100 * quantity, then normalize to monthly -- if the price interval is 'year' divide by 12, if 'month' keep as is (round each subscription's MRR to cents). Fill columns Customer, Status, Interval, MRR -- one row per qualifying subscription, sorted by MRR descending. The Interval column must contain literally 'month' or 'year' (lowercase), matching the price's billing interval. Below the rows add: a 'Total MRR' row (col A label, col D = sum of all MRR), and an 'At Risk MRR' row (col A label, col D = sum of MRR for past_due subscriptions only). All money displayed with two decimals.",
+  "app_type": "stripe_dashboard_mock,google_sheets_mock,gmail_mock",
+  "domain": "ar",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

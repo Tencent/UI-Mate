@@ -255,6 +255,7 @@ examples_stirling_pdf
 
 cache_*
 !evaluation_examples/OSWorker/cache_manifest.json
+!scripts/cache_common.py
 osworld_cache.zip
 
 *.env

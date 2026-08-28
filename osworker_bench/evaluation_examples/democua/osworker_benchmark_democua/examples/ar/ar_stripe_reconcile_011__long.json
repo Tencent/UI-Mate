@@ -1,0 +1,77 @@
+{
+  "id": "ar_stripe_reconcile_011__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nReconcile all successfully captured Stripe payments in May 2026 (status = \"Succeeded\"). For each such payment, check whether a matching transaction (same amount and same date) already exists in QuickBooks under expenses. If yes, mark its Status as \"Matched\". If no, mark its Status as \"Unmatched\" AND create the missing expense in QuickBooks. Then, in the Recon tab of the Google Sheet, add one row per May payment with columns Payment (the payment description), StripeAmount, QBAmount, and Status. Note: Status reflects the QB state BEFORE your edits — an expense you create during this task is \"Unmatched\", not \"Matched\". QBAmount reflects the FINAL QB amount after your edits (for Unmatched rows, equal to StripeAmount). At the bottom of the sheet, compute the totals for StripeAmount and QBAmount.\n\nFinally, send an email to finance@company.com with subject \"Summary of May Payments\". The email body should follow this format (amounts in USD with two decimals):\n\ntotals:\nStripeAmount = <total>\nQBAmount = <total>\n\nIf there are unmatched payments, list them as: \"Unmatched payments:\" followed by one line per payment in the form \"<paymentDescription> = <amount>\". If everything matched, write a single line: \"No unmatched payments.\"",
+  "app_type": "stripe_dashboard_mock,quickbooks_mock,google_sheets_mock,gmail_mock",
+  "domain": "ar",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

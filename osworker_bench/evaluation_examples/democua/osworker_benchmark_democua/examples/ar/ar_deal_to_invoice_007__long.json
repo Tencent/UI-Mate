@@ -1,0 +1,77 @@
+{
+  "id": "ar_deal_to_invoice_007__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nGoal: For every HubSpot deal that is Closed Won and whose closeDate is in April 2026, create a QuickBooks invoice, email it to the deal's primary contact via Gmail, and append a confirmation line to the HubSpot deal's description. Skip all other deals.\n\nFor each qualifying deal d:\n\n1. Customer: select the deal's Associated Company in the QuickBooks invoice form. If a customer with that name does not yet exist, create it first via Sales -> Customers -> \"New customer\" (use the same name in both the Name and Company fields).\n\n2. Invoice header:\n   - Terms: Net 30.\n   - Invoice date: the deal's closeDate.\n   - Due date: invoice date + 30 calendar days (e.g., 2026-04-22 -> 2026-05-22).\n   - Message: leave empty.\n\n3. Line item: add a single line. In the Product/Service dropdown, pick the product whose name equals the part of the deal's name after \" - \" (e.g., for \"Acme - Enterprise License\" pick \"Enterprise License\"). Qty = 1. Do NOT modify the auto-filled Description and Rate.\n\n4. Save and close the invoice (its status becomes \"Sent\"). Note the invoice number assigned by QuickBooks.\n\n5. Email the invoice via Gmail to the deal's primary contact (the first entry in deals[].contactIds, resolving to contacts[].email).\n   Subject: \"Invoice #<number>\"\n   Body (use this exact layout):\n       INVOICE #<number>\n       Contact: <contact firstName lastName>\n       Date: <closeDate>  Due: <closeDate + 30 days>\n\n       <line description>   x<qty>   @$<rate>\n\n       Total: $<total>\n       Status: Sent\n\n6. In the HubSpot deal's Description, append a single new line at the very end: \"Invoiced INV-<number>.\" (keep all existing description text).",
+  "app_type": "hubspot_mock,quickbooks_mock,gmail_mock",
+  "domain": "ar",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

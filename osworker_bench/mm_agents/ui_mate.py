@@ -19,15 +19,7 @@ from PIL import Image
 
 from core.llm import GenParams, LLMClient, OpenAIClient
 from mm_agents.utils.vision_utils import smart_resize
-
-try:
-    from workflow.consume import apply_workflow_obs, patch_tools_schema
-except ImportError:  # demo-in-the-loop runtime is optional in this release
-    def apply_workflow_obs(messages, obs):
-        return messages
-
-    def patch_tools_schema(tools_def, obs):
-        return tools_def
+from workflow.consume import apply_workflow_obs, patch_tools_schema
 
 logger = None
 

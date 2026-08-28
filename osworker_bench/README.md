@@ -109,6 +109,27 @@ CONFIG_FILE=configs/osworker_benchmark/ui_mate.yaml \
 bash scripts/osworker_benchmark/start_osworker_benchmark_test.sh
 ```
 
+### Run the demonstration-guided (DemoCUA) suite
+
+A separate launcher runs the 33 self-demo tasks with demonstration guidance. It
+defaults to `configs/osworker_benchmark/ui_mate_democua.yaml`, which selects
+agent `ui_mate`, serves `tencent/UI-Mate-democua-27B`, and enables
+demonstration-guided mode. Each task is paired with a recorded trajectory under
+`evaluation_examples/democua/osworker_benchmark_democua/demos/`, and all 33 are
+verified before the run starts.
+
+These 33 tasks are a subset of the 100 benchmark tasks and use the same
+`osworker_cache`, since the demonstrations are an extra input to the agent and do
+not change setup or scoring:
+
+```bash
+MOCK_APP_BASE_URL=http://mock-host.example \
+bash scripts/osworker_benchmark/start_osworker_benchmark_democua_test.sh
+```
+
+The launcher accepts the same environment variables as the main one. See
+`evaluation_examples/democua/README.md` for the task layout and cache contents.
+
 ### Run the Python runner directly
 
 Direct runner invocation is only for a fully prepared environment: the VM image
@@ -176,6 +197,7 @@ mini-osworld/
 ├── evaluation_examples/
 │   └── OSWorker/            # 100 tasks across 17 domains
 ├── osworker_cache/          # Per-task setup, reward, and asset cache
+├── workflow/                # OSWorker workflow runtime required by UI-Mate
 └── scripts/
     ├── osworker_benchmark/  # Supported benchmark launcher
     └── cua_gym/             # Mock-endpoint synchronization utilities
@@ -228,6 +250,7 @@ Available benchmark configurations:
 | Configuration | Agent | Purpose |
 |---|---|---|
 | `configs/osworker_benchmark/ui_mate.yaml` | `ui_mate_promptv2` | Default benchmark configuration |
+| `configs/osworker_benchmark/ui_mate_democua.yaml` | `ui_mate` | Demonstration-guided 33-task suite |
 
 ## 🤖 Add an Agent
 
@@ -285,6 +308,8 @@ python scripts/cua_gym/cua_gym_convert/sync_mock_endpoints_v2.py --help
 - The public names are `UI-Mate`, `ui_mate`, and `ui_mate_promptv2`.
 - The registry advertises only the three agents included in this release.
 - Windows overlays and debug `draft/` artifacts are not distributed.
+- `evaluation_examples/democua/` is intentionally included; the workflow
+  runtime loads its demonstration trajectories through `run.demo_dir`.
 - Docker, vLLM startup, and mock-host connectivity depend on the local
   deployment and should be smoke-tested before a benchmark run.
 

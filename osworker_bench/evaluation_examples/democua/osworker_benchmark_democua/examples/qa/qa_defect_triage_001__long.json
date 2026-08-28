@@ -1,0 +1,77 @@
+{
+  "id": "qa_defect_triage_001__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou're Quinn, the QA engineer running defect triage for the 'Checkout & Payments' project in Jira. Each open defect carries a severity label, but they're scattered through a long backlog mixed in with already-resolved and non-defect items. Triage the open defects by severity: Critical defects should be set to priority Highest and assigned to Sarah Connor; Major defects should be set to priority High and assigned to John Smith.\n\nIn GitLab's 'web-checkout' project, for every high-risk security finding (Critical or High severity), raise a tracking issue from it and move that issue into the 'In Progress' column. Each of those findings corresponds to one of the open Jira defects -- once you've raised the tracking issue, record its issue number on the matching Jira defect so the two are linked.\n\nRecord each defect you triage in the 'Defect Triage' Google Sheet (its key, severity, new priority, and assignee); the first row, KAN-000, is a filled-in example showing the format. Finally, post a summary to the Discord #qa channel including the number of defects you triaged.",
+  "app_type": "jira_mock,gitlab_mock,discord_mock,google_sheets_mock",
+  "domain": "qa",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

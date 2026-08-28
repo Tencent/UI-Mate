@@ -1,0 +1,77 @@
+{
+  "id": "mktg_inbound_qualify_009__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou're Riley in marketing ops, qualifying this morning's inbound contacts in HubSpot Marketing. Each contact has an Original Source shown on its detail page. Use the 'Lead Tier Playbook' Google Doc as the single source of truth for tier assignment -- do not guess. The playbook says:\n\n- If the contact's Lifecycle Stage is already Customer, leave it completely untouched (not a fresh lead).\n- Otherwise, map Original Source to tier:\n  * demo_request  -> HOT\n  * gated_content -> WARM\n  * webinar       -> WARM\n  * newsletter    -> COLD\n\nRoute every one of these contacts by tier by inline-editing its properties on the contact's detail page:\n\n- HOT: set Lifecycle Stage to Sales Qualified Lead, and set Contact Owner to the Account Executive who owns that contact's company territory (see the AE Territory table in the Lead Tier Playbook).\n- WARM: set Lifecycle Stage to Marketing Qualified Lead, and set Contact Owner to the nurture rep (Nadia Cole).\n- COLD: leave the Lifecycle Stage as it is, and set Contact Owner to the Unassigned Queue.\n\nFor each HOT contact only: in the Google Docs 'AE Briefing' document, add a briefing row that includes the contact's full name and company, and share that document with the routed AE (type the AE's email into the Share dialog, editor access). Then, in Google Drive, move the 'AE Briefing' document into the 'Sales Handoff' folder.\n\nFinally, post a short routing summary to the Slack #marketing channel (how many contacts you routed as SQL, MQL, and unassigned) and pin that message.",
+  "app_type": "hubspot_marketing_mock,google_docs_mock,google_drive_mock,slack_mock",
+  "domain": "mktg",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

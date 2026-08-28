@@ -93,6 +93,7 @@ include = [
     "core*",
     "desktop_env*",
     "mm_agents*",
+    "workflow*",
 ]
 
 [tool.setuptools.package-data]

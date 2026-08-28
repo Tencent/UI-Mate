@@ -1,0 +1,77 @@
+{
+  "id": "pm_sprint_closeout_002__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou're Lena, the agile PM closing out the current sprint for the Apollo Platform project in Jira. Wrap up the sprint that is currently running: work that finished stays counted against this sprint. For the unfinished work, the team already talked through what to do with each item during the sprint standup discussion over in Discord -- follow those calls: whatever the team agreed to carry forward gets moved into the next sprint so they pick it up there, and whatever they decided to drop goes back to the backlog. Once the unfinished items are sorted the way the team decided, finish closing out the sprint.\n\nIn the 'Sprint Carryover' project in Asana, each unfinished item has a card waiting in the Triage column. File each card by the priority that Jira has on record for that item: High priority into 'Critical', Medium into 'Standard', and Low into 'Backlog'.\n\nRecord the outcome of every issue from the sprint in the 'Sprint Report' Google Sheet, marking each one 'Completed' or 'Carried Over' in the Disposition column. Finally, post a wrap-up in the Discord #standup channel stating how many issues were completed and how many were carried over.",
+  "app_type": "jira_mock,asana_mock,discord_mock,google_sheets_mock",
+  "domain": "pm",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

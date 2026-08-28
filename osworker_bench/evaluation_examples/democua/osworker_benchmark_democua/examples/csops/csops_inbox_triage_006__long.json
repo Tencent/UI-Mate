@@ -1,0 +1,77 @@
+{
+  "id": "csops_inbox_triage_006__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Gmail, Trello, Google Calendar, and Slack). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nAssume today is Tuesday, June 16, 2026. Triage the support inbox into the 'Support' Trello board. Each genuine support email must become ONE card placed in the list matching its component -- 'Bug', 'Billing', 'Feature Request', or 'Account' -- with the card title equal to the email Subject exactly. Classify each email's priority by severity keyword in the body: 'urgent'/'production down' -> red 'P1'; 'broken'/'error'/'cannot' -> orange 'P2'; everything else -> yellow 'P3'.\n\nApply the priority both in Gmail and on the Trello card. In Gmail, apply the matching priority label ('P1', 'P2', or 'P3') to each genuine support email -- the Label button only appears in the toolbar after you select an email with its checkbox. On the Trello card, set the same priority label and a due date from the SLA: P1 = today +1 day, P2 = today +3 days, P3 = today +7 days (due at 17:00 local). The Trello label and due-date controls are inside the card's detail view -- open the card to reach them.\n\nDo NOT create cards (or apply Gmail labels) for newsletters, auto-replies, thank-you notes, or emails whose thread already has a later reply saying it is resolved -- archive all of those instead.\n\nFor each P1 (urgent) ticket only, also create a Google Calendar event titled 'Follow-up: <email subject>' on the P1 due date.\n\nFinally, post a one-line summary to the Slack #support channel stating how many support tickets you triaged, and pin that message to the channel (the pin option is in the message's hover '...' more-actions menu).",
+  "app_type": "gmail_mock,trello_mock,google_calendar_mock,slack_mock",
+  "domain": "csops",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

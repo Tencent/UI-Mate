@@ -1,0 +1,77 @@
+{
+  "id": "recruit_resume_screen_004__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Greenhouse, Gmail, Google Calendar, and Slack). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nToday's date is Tuesday, June 23, 2026.\n\nYou are screening candidates in Greenhouse for the 'Senior Frontend Engineer' job. For each active application currently in the 'Onsite' stage, read its submitted scorecards and decide: ADVANCE the candidate to 'Offer' if the scorecards have NO 'no'/'strong_no' recommendations AND at least two 'strong_yes'/'yes'; REJECT (move application status to rejected with reason 'Not enough support') if there is any 'strong_no', or two or more 'no'; otherwise LEAVE in 'Onsite' (mixed/insufficient signal). The stage-move and reject controls are on the candidate's own detail page.\n\nAfter advancing a candidate, send them an email via Gmail with Subject 'Next steps - <Candidate Name>' AND create a Google Calendar event titled 'Offer discussion - <Candidate Name>' three days from today (i.e. on Friday, June 26, 2026), adding the candidate's email address as a guest (type it into the guest field; they are not in the autocomplete). After rejecting, send Subject 'Update on your application - <Candidate Name>'.\n\nFor every candidate you advance or reject, also add a note on that candidate recording the decision (for an advance, mention it was advanced to Offer; for a reject, mention 'Not enough support') and pin that note (use the pin control on the candidate's Notes tab).\n\nWhen you have processed all the onsite decisions, post a one-line summary to the Slack #recruiting channel stating how many onsite decisions you processed, and pin that message to the channel (the pin option is in the message's hover '...' more-actions menu).\n\nDo not email, move, schedule, or note candidates you leave in Onsite. Ignore applications not in the Onsite stage and pending (unsubmitted) scorecards.",
+  "app_type": "greenhouse_mock,gmail_mock,google_calendar_mock,slack_mock",
+  "domain": "recruit",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}
