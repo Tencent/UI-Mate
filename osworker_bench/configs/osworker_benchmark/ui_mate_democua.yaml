@@ -48,6 +48,9 @@ agent:
     include_observation_in_history: false
     include_thinking_in_history: true
     enable_thinking: true
+    # The demo suite keeps the collapse policy of the demonstration-augmented SFT
+    # stage, so the step-0 screenshot is not pinned; ui_mate.yaml pins it.
+    keep_first_image: false
     enable_traj_slice: false
     password: password
     # ---- what makes this a demo run ----

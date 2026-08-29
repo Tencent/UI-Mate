@@ -87,7 +87,7 @@ The Hugging Face `OSworker_cache` dataset also does not provide mock servers.
 The Bash wrapper is the supported first-run and full-orchestration path. If
 `CONFIG_FILE` is omitted, it loads
 `configs/osworker_benchmark/ui_mate.yaml`. That configuration selects
-agent `ui_mate_promptv2`, serves `tencent/UI-Mate-27B`, and exposes it as
+agent `ui_mate`, serves `tencent/UI-Mate-27B`, and exposes it as
 `UI_Mate` through the OpenAI-compatible API.
 
 On first launch, vLLM downloads the model from Hugging Face and stores it in the
@@ -194,7 +194,6 @@ mini-osworld/
 │   └── server/              # In-VM screenshot, input, and accessibility server
 ├── mm_agents/               # Multimodal agents registered by core/registry.py
 │   ├── ui_mate.py           # UI-Mate implementation
-│   ├── ui_mate_promptv2.py  # Default UI-Mate PromptV2 variant
 │   └── utils/               # Shared agent utilities
 ├── configs/
 │   └── osworker_benchmark/  # Benchmark configurations
@@ -257,8 +256,18 @@ Available benchmark configurations:
 
 | Configuration | Agent | Purpose |
 |---|---|---|
-| `configs/osworker_benchmark/ui_mate.yaml` | `ui_mate_promptv2` | Default benchmark configuration |
+| `configs/osworker_benchmark/ui_mate.yaml` | `ui_mate` | Default benchmark configuration |
 | `configs/osworker_benchmark/ui_mate_democua.yaml` | `ui_mate` | Demonstration-guided 33-task suite |
+
+Both configurations drive the same `ui_mate` agent and differ through
+`agent.extra`. The default configuration sets `keep_first_image: true`, so the
+step-0 screenshot survives history collapse and the launcher raises the vLLM
+per-prompt image limit to `images_to_keep + 1`; `recent_think_steps` bounds how
+far back `<think>` blocks are kept in history, and `null` keeps all of them. The
+demonstration-guided configuration leaves `keep_first_image` off and adds
+`enable_demo_in_the_loop`, which both attaches the workflow hook and drops the
+`IMPORTANT_NOTES` prompt additions, keeping the prompt that the
+demonstration-augmented SFT stage was trained on.
 
 ## 🤖 Add an Agent
 
@@ -313,8 +322,8 @@ python scripts/cua_gym/cua_gym_convert/sync_mock_endpoints_v2.py --help
 
 ## 🧹 Release scope
 
-- The public names are `UI-Mate`, `ui_mate`, and `ui_mate_promptv2`.
-- The registry advertises only the three agents included in this release.
+- The public names are `UI-Mate` and `ui_mate`.
+- The registry advertises only the agents included in this release.
 - Windows overlays and debug `draft/` artifacts are not distributed.
 - `evaluation_examples/democua/` is intentionally included; the workflow
   runtime loads its demonstration trajectories through `run.demo_dir`.

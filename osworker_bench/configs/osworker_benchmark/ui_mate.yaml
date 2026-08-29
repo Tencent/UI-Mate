@@ -1,4 +1,4 @@
-# Default OSWorker Benchmark configuration (UI-Mate PromptV2)
+# Default OSWorker Benchmark configuration (UI-Mate)
 # Usage:
 #   MOCK_APP_BASE_URL=http://<mock-host> bash scripts/osworker_benchmark/start_osworker_benchmark_test.sh
 #
@@ -22,7 +22,7 @@ environment:
   cache_dir: osworker_cache
 
 agent:
-  name: ui_mate_promptv2
+  name: ui_mate
   model: UI_Mate
   model_path: tencent/UI-Mate-27B
   action_space: pyautogui

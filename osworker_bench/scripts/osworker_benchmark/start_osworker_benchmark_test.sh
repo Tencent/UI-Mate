@@ -51,7 +51,7 @@ def get_nested(d, keys, default=''):
         else: return default
     return d if d is not None else default
 def q(v): return shlex.quote(str(v))
-print('AGENT_NAME=' + q(get_nested(config, ['agent', 'name'], 'ui_mate_promptv2')))
+print('AGENT_NAME=' + q(get_nested(config, ['agent', 'name'], 'ui_mate')))
 print('MODEL_NAME=' + q(get_nested(config, ['agent', 'model'], 'UI_Mate')))
 print('MODEL_PATH_OVERRIDE=' + q(get_nested(config, ['agent', 'model_path'], '')))
 print('REGION=' + q(get_nested(config, ['environment', 'region'], '')))
