@@ -32,8 +32,8 @@ resource sets:
   Alternatively, provide an existing OpenAI-compatible vLLM endpoint.
 - Network access to the benchmark assets on
   [Hugging Face](https://huggingface.co/datasets/SamuelGuo/OSworker_cache).
-- A separately deployed mock-application host reachable from every benchmark
-  VM, as described below.
+- A mock-application host reachable from every benchmark VM, deployed from
+  the bundled `CUA-Gym-Hub/` as described below.
 
 Install all dependencies from the requirements file:
 
@@ -53,13 +53,17 @@ pip install -e ".[full]"
 
 ### Deploy the mock applications
 
-The mock applications come from
-[CUA-Gym-Hub](https://github.com/xlang-ai/cua-gym-hub); follow its
-[deployment guide](https://github.com/xlang-ai/cua-gym-hub/blob/main/DEPLOY.md).
-This repository neither ships nor starts the 98 mock applications. They must be
-deployed separately, or you must obtain a compatible host from your benchmark
-operator. Of the 100 benchmark tasks, 88 require these applications; the other
-12 are local-file tasks.
+The 98 mock applications ship with this repository under `CUA-Gym-Hub/`, a
+modified fork of [CUA-Gym-Hub](https://github.com/xlang-ai/cua-gym-hub). Of the 100
+benchmark tasks, 88 require these applications; the other 12 are local-file
+tasks.
+
+The benchmark launcher does not start them. Deploy them once on a host that
+every benchmark VM can reach:
+
+```bash
+cd CUA-Gym-Hub && bash deploy-all.sh # npm 10.8.2, node v20.20.2 
+```
 
 `MOCK_APP_BASE_URL` supplies the common scheme and host used with the app-to-port
 mapping in `.MOCK_HOST`. The endpoint synchronizer reads it from the process
@@ -83,7 +87,7 @@ The Hugging Face `OSworker_cache` dataset also does not provide mock servers.
 The Bash wrapper is the supported first-run and full-orchestration path. If
 `CONFIG_FILE` is omitted, it loads
 `configs/osworker_benchmark/ui_mate.yaml`. That configuration selects
-agent `ui_mate_promptv2`, serves `tencent/UI-Mate-27B`, and exposes it as
+agent `ui_mate`, serves `tencent/UI-Mate-27B`, and exposes it as
 `UI_Mate` through the OpenAI-compatible API.
 
 On first launch, vLLM downloads the model from Hugging Face and stores it in the
@@ -108,6 +112,27 @@ MODEL_PATH=/path/to/checkpoint \
 CONFIG_FILE=configs/osworker_benchmark/ui_mate.yaml \
 bash scripts/osworker_benchmark/start_osworker_benchmark_test.sh
 ```
+
+### Run the demonstration-guided (DemoCUA) suite
+
+A separate launcher runs the 33 self-demo tasks with demonstration guidance. It
+defaults to `configs/osworker_benchmark/ui_mate_democua.yaml`, which selects
+agent `ui_mate`, serves `tencent/UI-Mate-democua-27B`, and enables
+demonstration-guided mode. Each task is paired with a recorded trajectory under
+`evaluation_examples/democua/osworker_benchmark_democua/demos/`, and all 33 are
+verified before the run starts.
+
+These 33 tasks are a subset of the 100 benchmark tasks and use the same
+`osworker_cache`, since the demonstrations are an extra input to the agent and do
+not change setup or scoring:
+
+```bash
+MOCK_APP_BASE_URL=http://mock-host.example \
+bash scripts/osworker_benchmark/start_osworker_benchmark_democua_test.sh
+```
+
+The launcher accepts the same environment variables as the main one. See
+`evaluation_examples/democua/README.md` for the task layout and cache contents.
 
 ### Run the Python runner directly
 
@@ -169,16 +194,20 @@ mini-osworld/
 │   └── server/              # In-VM screenshot, input, and accessibility server
 ├── mm_agents/               # Multimodal agents registered by core/registry.py
 │   ├── ui_mate.py           # UI-Mate implementation
-│   ├── ui_mate_promptv2.py  # Default UI-Mate PromptV2 variant
 │   └── utils/               # Shared agent utilities
 ├── configs/
 │   └── osworker_benchmark/  # Benchmark configurations
 ├── evaluation_examples/
 │   └── OSWorker/            # 100 tasks across 17 domains
 ├── osworker_cache/          # Per-task setup, reward, and asset cache
-└── scripts/
-    ├── osworker_benchmark/  # Supported benchmark launcher
-    └── cua_gym/             # Mock-endpoint synchronization utilities
+├── workflow/                # OSWorker workflow runtime required by UI-Mate
+├── scripts/
+│   ├── osworker_benchmark/  # Supported benchmark launcher
+│   └── cua_gym/             # Mock-endpoint synchronization utilities
+└── CUA-Gym-Hub/             # Vendored mock applications
+    ├── websites/            # 98 Vite apps served on ports 8100-8197
+    ├── icons/               # Shared icon assets
+    └── deploy-all.sh        # Installs, builds, and serves every app
 ```
 
 ## 🧪 Benchmark Tasks
@@ -227,7 +256,18 @@ Available benchmark configurations:
 
 | Configuration | Agent | Purpose |
 |---|---|---|
-| `configs/osworker_benchmark/ui_mate.yaml` | `ui_mate_promptv2` | Default benchmark configuration |
+| `configs/osworker_benchmark/ui_mate.yaml` | `ui_mate` | Default benchmark configuration |
+| `configs/osworker_benchmark/ui_mate_democua.yaml` | `ui_mate` | Demonstration-guided 33-task suite |
+
+Both configurations drive the same `ui_mate` agent and differ through
+`agent.extra`. The default configuration sets `keep_first_image: true`, so the
+step-0 screenshot survives history collapse and the launcher raises the vLLM
+per-prompt image limit to `images_to_keep + 1`; `recent_think_steps` bounds how
+far back `<think>` blocks are kept in history, and `null` keeps all of them. The
+demonstration-guided configuration leaves `keep_first_image` off and adds
+`enable_demo_in_the_loop`, which both attaches the workflow hook and drops the
+`IMPORTANT_NOTES` prompt additions, keeping the prompt that the
+demonstration-augmented SFT stage was trained on.
 
 ## 🤖 Add an Agent
 
@@ -282,11 +322,16 @@ python scripts/cua_gym/cua_gym_convert/sync_mock_endpoints_v2.py --help
 
 ## 🧹 Release scope
 
-- The public names are `UI-Mate`, `ui_mate`, and `ui_mate_promptv2`.
-- The registry advertises only the three agents included in this release.
+- The public names are `UI-Mate` and `ui_mate`.
+- The registry advertises only the agents included in this release.
 - Windows overlays and debug `draft/` artifacts are not distributed.
+- `evaluation_examples/democua/` is intentionally included; the workflow
+  runtime loads its demonstration trajectories through `run.demo_dir`.
 - Docker, vLLM startup, and mock-host connectivity depend on the local
   deployment and should be smoke-tested before a benchmark run.
+- `CUA-Gym-Hub/` is a modified fork of the mock applications, distributed
+  under its own Apache-2.0 `LICENSE` and `NOTICE`; `CUA-Gym-Hub/TRADEMARKS.md`
+  lists the acknowledged third-party marks.
 
 Build source releases only from tracked files:
 

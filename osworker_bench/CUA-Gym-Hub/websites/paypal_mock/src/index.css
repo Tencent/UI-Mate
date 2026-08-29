@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f5f7fa;
+  color: #2c2e2f;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide number input spinners */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd2d6;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6c7378;
+}
+
+/* XayPal button styles */
+@layer components {
+  .pp-btn-primary {
+    @apply bg-pp-btn-primary hover:bg-pp-btn-primary-hover text-white font-semibold py-2.5 px-6 rounded-full transition-colors duration-200;
+  }
+  .pp-btn-secondary {
+    @apply bg-white border border-pp-btn-primary text-pp-btn-primary font-semibold py-2.5 px-6 rounded-full transition-colors duration-200 hover:bg-blue-50;
+  }
+  .pp-btn-disabled {
+    @apply bg-pp-btn-disabled text-white font-semibold py-2.5 px-6 rounded-full cursor-not-allowed;
+  }
+  .pp-card {
+    @apply bg-white border border-pp-border rounded-pp shadow-pp-card;
+  }
+}

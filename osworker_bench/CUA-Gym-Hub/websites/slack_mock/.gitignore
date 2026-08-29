@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Mock state files
+.mock-state.json
+.mock-state.initial.json
+.mock-states/
+
+# Mock uploaded files
+.mock-files/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

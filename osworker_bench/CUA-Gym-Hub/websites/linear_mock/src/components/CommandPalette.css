@@ -1,0 +1,109 @@
+.command-palette {
+  width: 640px;
+  max-height: 480px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.command-palette-input-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.command-search-icon {
+  font-size: 18px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.command-palette-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 16px;
+  font-family: inherit;
+}
+.command-palette-input::placeholder { color: var(--text-tertiary); }
+
+.command-clear-btn {
+  color: var(--text-tertiary);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.command-clear-btn:hover { background: rgba(255,255,255,0.06); }
+
+.command-results {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.command-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+
+.command-result-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.1s;
+  text-align: left;
+}
+.command-result-item:hover, .command-result-item.selected {
+  background: rgba(255,255,255,0.06);
+}
+
+.cmd-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.cmd-identifier {
+  font-family: ui-monospace, SF Mono, Menlo, monospace;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  min-width: 52px;
+}
+
+.cmd-label {
+  flex: 1;
+  font-size: 14px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cmd-type {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  text-transform: capitalize;
+}

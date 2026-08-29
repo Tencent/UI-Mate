@@ -1,0 +1,264 @@
+
+.edit-profile-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.edit-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.edit-header .back-btn {
+  font-size: 32px;
+  color: #333;
+  padding: 0 8px;
+}
+
+.edit-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.save-btn {
+  color: #07c160;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 4px 8px;
+  transition: opacity 0.2s;
+}
+
+.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.edit-content {
+  padding-top: 12px;
+}
+
+.edit-section {
+  margin-bottom: 12px;
+  background-color: white;
+}
+
+.edit-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  background-color: white;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.edit-item:last-child {
+  border-bottom: none;
+}
+
+.edit-item.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-item.clickable:active {
+  background-color: #f5f5f5;
+}
+
+.edit-item.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.item-label {
+  font-size: 16px;
+  color: #333;
+  min-width: 80px;
+}
+
+.item-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #999;
+  font-size: 16px;
+}
+
+.item-value.disabled {
+  color: #ccc;
+}
+
+.avatar-preview {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.arrow {
+  font-size: 20px;
+  color: #ccc;
+}
+
+.qr-icon {
+  font-size: 24px;
+}
+
+.item-input {
+  flex: 1;
+  text-align: right;
+  font-size: 16px;
+  color: #333;
+  background: none;
+}
+
+.item-input::placeholder {
+  color: #ccc;
+}
+
+.item-textarea {
+  width: 100%;
+  min-height: 80px;
+  margin-top: 8px;
+  padding: 8px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.item-textarea::placeholder {
+  color: #ccc;
+}
+
+.item-select {
+  flex: 1;
+  text-align: right;
+  font-size: 16px;
+  color: #333;
+  background: none;
+}
+
+.qr-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.qr-modal {
+  background-color: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 360px;
+  overflow: hidden;
+}
+
+.qr-header {
+  padding: 16px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f7f7f7;
+}
+
+.qr-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #333;
+}
+
+.qr-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qr-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.qr-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.qr-id {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.qr-code-container {
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.qr-code-placeholder {
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  border: 2px solid #e5e5e5;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 2px;
+  padding: 10px;
+}
+
+.qr-pixel {
+  width: 16px;
+  height: 16px;
+  background-color: #000;
+  border-radius: 1px;
+}
+
+.qr-hint {
+  font-size: 13px;
+  color: #999;
+  text-align: center;
+  margin: 0;
+}

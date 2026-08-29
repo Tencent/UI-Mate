@@ -1,0 +1,52 @@
+:root {
+  --color-primary: #635BFF;
+  --color-primary-light: #7A73FF;
+  --color-primary-dark: #4B45C6;
+  --color-background: #F6F8FA;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #1A1F36;
+  --color-text-secondary: #697386;
+  --color-text-muted: #A3ACB9;
+  --color-border: #E3E8EE;
+  --color-success: #30B130;
+  --color-danger: #DF1B41;
+  --color-warning: #E5993E;
+  --color-info: #3D7DE5;
+
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
+
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 28px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-base: 16px;
+  --spacing-lg: 20px;
+  --spacing-xl: 24px;
+  --spacing-2xl: 32px;
+  --spacing-3xl: 48px;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.12);
+
+  --header-height: 52px;
+  --nav-height: 44px;
+}

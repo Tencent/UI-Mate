@@ -5,6 +5,12 @@ Combines:
 - UI-Mate's action space, l1/l2/l3 prompt structure, and PyAutoGUI conversion.
 - UI-Mate's XML tool-call format, <tool_response> message wrapping,
   history collapse mechanism, and OpenAI-compatible API backend.
+- Prompt additions covering GUI-only execution, infeasibility, and post-task
+  verification. A demo-guided run omits them to keep the prompt its
+  demonstration-augmented SFT stage was trained on.
+- Two opt-in knobs: keep_first_image pins the step-0 screenshot when collapsing
+  history, and recent_think_steps keeps <think> only for the newest N history
+  steps.
 """
 
 import base64
@@ -19,15 +25,7 @@ from PIL import Image
 
 from core.llm import GenParams, LLMClient, OpenAIClient
 from mm_agents.utils.vision_utils import smart_resize
-
-try:
-    from workflow.consume import apply_workflow_obs, patch_tools_schema
-except ImportError:  # demo-in-the-loop runtime is optional in this release
-    def apply_workflow_obs(messages, obs):
-        return messages
-
-    def patch_tools_schema(tools_def, obs):
-        return tools_def
+from workflow.consume import apply_workflow_obs, patch_tools_schema
 
 logger = None
 
@@ -135,6 +133,31 @@ def _collapse_messages(messages, images_to_keep=10, min_removal_threshold=10,
     return messages, collapsed_any
 
 
+def _collapse_messages_keep_first(messages, images_to_keep=10, min_removal_threshold=10,
+                                  collapse_text="This screenshot has been collapsed."):
+    """Same as _collapse_messages, but the step-0 screenshot is never dropped.
+
+    The kept first image is one more than images_to_keep, so the launcher sets
+    --limit-mm-per-prompt to images_to_keep+1.
+    """
+    for msg in messages:
+        if msg.get("role") != "user" or not isinstance(msg.get("content"), list):
+            continue
+        idx = next((i for i, b in enumerate(msg["content"])
+                    if isinstance(b, dict) and b.get("type") == "image_url"), None)
+        if idx is None:
+            continue
+        first_block = msg["content"].pop(idx)   # Pull out the first image so the base collapser will not drop it.
+        messages, collapsed = _collapse_messages(
+            messages, images_to_keep=images_to_keep,
+            min_removal_threshold=min_removal_threshold, collapse_text=collapse_text)
+        msg["content"].insert(0, first_block)    # Put it back in place.
+        return messages, collapsed
+    return _collapse_messages(
+        messages, images_to_keep=images_to_keep,
+        min_removal_threshold=min_removal_threshold, collapse_text=collapse_text)
+
+
 # ============================================================================
 # UI-Mate action space and tool definition
 # ============================================================================
@@ -221,6 +244,25 @@ def _get_r3_tools_def(description_prompt: str):
 # Uses UI-Mate's XML tool-call format and prompt structure.
 # ============================================================================
 
+PROMPT_ADDITIONS = """<IMPORTANT_NOTES>
+* DO NOT use LibreOffice macros or GIMP Script-Fu to complete tasks. Always use the GUI interface directly with mouse and keyboard actions. Macros and scripting cause reliability issues and task failures.
+* For GIMP tasks, do NOT save or export files unless the instruction explicitly asks you to. Note that existing tasks that require file output will ask you to "export", not "save". Most GIMP tasks are evaluated automatically without requiring you to save.
+* Before starting a task, consider whether it is achievable with the designated application's native GUI features. If the app fundamentally lacks the requested capability, declare it infeasible (finish with status=failure) instead of using CLI tools, Python scripts, or other applications as workarounds.
+* After completing a task, verify the visible or functional result. If your actions had no real effect, reconsider whether the task is feasible.
+</IMPORTANT_NOTES>"""
+
+def _prompt_additions_block(prompt_additions: bool) -> str:
+    return PROMPT_ADDITIONS + "\n\n" if prompt_additions else ""
+
+
+def _finish_rule(prompt_additions: bool) -> str:
+    rule = "- If finishing, use action=finished in the tool call."
+    if prompt_additions:
+        # PROMPT_ADDITIONS asks for infeasible tasks to be declared; say how.
+        rule += " If the task is infeasible, finish with status=failure."
+    return rule
+
+
 def _build_description_prompt():
     """Environment description lines (shared across L1/L2/L3)."""
     lines = [
@@ -266,14 +308,15 @@ def _build_tools_and_format_block(tools_def: dict) -> str:
     )
 
 
-def get_system_message_l1(tools_def: dict) -> str:
+def get_system_message_l1(tools_def: dict, prompt_additions: bool = True) -> str:
     """L1: Action + Tool Call only."""
     tools_block = _build_tools_and_format_block(tools_def)
 
     return (
         "You are a helpful GUI agent.\n\n"
         + tools_block + "\n\n"
-        "# Response format\n\n"
+        + _prompt_additions_block(prompt_additions)
+        + "# Response format\n\n"
         "Response format for every step:\n"
         "1) Action: A single <action>...</action> block containing a short imperative describing what to do in the UI.\n"
         "2) A single or multiple <tool_call>...</tool_call> blocks.\n\n"
@@ -281,18 +324,19 @@ def get_system_message_l1(tools_def: dict) -> str:
         "- Output exactly in the order: <action>...</action>, <tool_call>...</tool_call>.\n"
         "- Be brief: one sentence for action description.\n"
         "- Do not output anything else outside those parts.\n"
-        "- If finishing, use action=finished in the tool call."
+        + _finish_rule(prompt_additions)
     ).strip()
 
 
-def get_system_message_l2(tools_def: dict) -> str:
+def get_system_message_l2(tools_def: dict, prompt_additions: bool = True) -> str:
     """L2: Think + Action + Tool Call."""
     tools_block = _build_tools_and_format_block(tools_def)
 
     return (
         "You are a helpful GUI agent.\n\n"
         + tools_block + "\n\n"
-        "# Response format\n\n"
+        + _prompt_additions_block(prompt_additions)
+        + "# Response format\n\n"
         "Response format for every step:\n"
         "1) Thought: A single <think>...</think> block containing step by step progress assessment and next action analysis.\n"
         "2) Action: A single <action>...</action> block containing a short imperative describing what to do in the UI.\n"
@@ -302,18 +346,19 @@ def get_system_message_l2(tools_def: dict) -> str:
         "- From a first-person perspective, systematically assess progress and errors, evaluate potential next steps, and precisely plan text inputs (cursor position and expected outcomes)\n"
         "- Be brief for Action: one sentence for action description.\n"
         "- Do not output anything else outside those parts.\n"
-        "- If finishing, use action=finished in the tool call."
+        + _finish_rule(prompt_additions)
     ).strip()
 
 
-def get_system_message_l3(tools_def: dict) -> str:
+def get_system_message_l3(tools_def: dict, prompt_additions: bool = True) -> str:
     """L3: Observation + Think + Action + Tool Call."""
     tools_block = _build_tools_and_format_block(tools_def)
 
     return (
         "You are a helpful GUI agent.\n\n"
         + tools_block + "\n\n"
-        "# Response format\n\n"
+        + _prompt_additions_block(prompt_additions)
+        + "# Response format\n\n"
         "Response format for every step:\n"
         "1) Observation: A single <observation>...</observation> block describing the current computer state based on the full screenshot.\n"
         "2) Thought: A single <think>...</think> block containing step by step progress assessment and next action analysis.\n"
@@ -325,17 +370,17 @@ def get_system_message_l3(tools_def: dict) -> str:
         "- For Thought: from a first-person perspective, systematically assess progress and errors, evaluate potential next steps, and precisely plan text inputs (cursor position and expected outcomes)\n"
         "- Be brief for Action: one sentence for action description.\n"
         "- Do not output anything else outside those parts.\n"
-        "- If finishing, use action=finished in the tool call."
+        + _finish_rule(prompt_additions)
     ).strip()
 
 
-def _build_system_prompt(prompt_type: str, tools_def: dict) -> str:
+def _build_system_prompt(prompt_type: str, tools_def: dict, prompt_additions: bool = True) -> str:
     if prompt_type == "l1":
-        return get_system_message_l1(tools_def)
+        return get_system_message_l1(tools_def, prompt_additions)
     elif prompt_type == "l2":
-        return get_system_message_l2(tools_def)
+        return get_system_message_l2(tools_def, prompt_additions)
     elif prompt_type == "l3":
-        return get_system_message_l3(tools_def)
+        return get_system_message_l3(tools_def, prompt_additions)
     else:
         raise ValueError(f"Invalid prompt type: {prompt_type}")
 
@@ -657,13 +702,16 @@ class UIMateAgent:
         history_n: int = 100,
         include_observation_in_history: bool = False,
         include_thinking_in_history: bool = False,
+        recent_think_steps: Optional[int] = None,
         coordinate_type: str = "relative",
         api_backend: str = "openai",
         images_to_keep: int = 20,
+        keep_first_image: bool = False,
         collapse_text: Optional[str] = None,
         enable_traj_slice: bool = False,
         traj_slice_interval: int = 10,
         enable_thinking: bool = False,
+        enable_demo_in_the_loop: bool = False,
         llm_client: Optional[LLMClient] = None,
         **kwargs,  # Accept extra kwargs from registry (name, max_steps, screen_size, client_password, max_trajectory_length, etc.)
     ):
@@ -671,6 +719,8 @@ class UIMateAgent:
         self.prompt_type = prompt_type
         self.include_observation_in_history = include_observation_in_history
         self.include_thinking_in_history = include_thinking_in_history
+        # None keeps every <think> block; N keeps only the newest N history steps.
+        self.recent_think_steps = recent_think_steps
 
         self.max_tokens = max_tokens
         self.top_p = top_p
@@ -681,10 +731,14 @@ class UIMateAgent:
         self.coordinate_type = coordinate_type
         self.api_backend = api_backend
         self.images_to_keep = int(images_to_keep)
+        self.keep_first_image = keep_first_image
         self.collapse_text = collapse_text or self.COLLAPSED_SCREENSHOT_TEXT
         self.enable_traj_slice = enable_traj_slice
         self.traj_slice_interval = traj_slice_interval
         self.enable_thinking = enable_thinking
+        # Set by the same agent.extra key that attaches the workflow hook, so a
+        # guided run keeps the prompt of its demonstration-augmented SFT stage.
+        self.enable_demo_in_the_loop = enable_demo_in_the_loop
         self._llm: LLMClient = llm_client or OpenAIClient()
 
         self.collapsed_message_count = 0
@@ -765,7 +819,11 @@ class UIMateAgent:
         # Rebuilt per step: a hook may patch the schema, and only this obs knows how.
         tools_def = _get_r3_tools_def(_build_description_prompt())
         patch_tools_schema(tools_def, obs)
-        system_prompt = _build_system_prompt(self.prompt_type, tools_def=tools_def)
+        system_prompt = _build_system_prompt(
+            self.prompt_type,
+            tools_def=tools_def,
+            prompt_additions=not self.enable_demo_in_the_loop,
+        )
 
         instruction_prompt = (
             f"\nPlease generate the next move according to the UI screenshot, instruction and previous actions.\n\n"
@@ -805,10 +863,15 @@ class UIMateAgent:
 
             if step_num <= total_steps - 1 and (step_num - 1) < len(self.responses):
                 # Compact history response based on prompt_type settings
+                step_include_thinking = self.include_thinking_in_history
+                if step_include_thinking and self.recent_think_steps is not None:
+                    distance_from_newest_hist = (total_steps - 1) - step_num
+                    if distance_from_newest_hist >= self.recent_think_steps:
+                        step_include_thinking = False
                 compact_resp = _compact_response_for_history(
                     self.responses[step_num - 1],
                     include_observation=self.include_observation_in_history,
-                    include_thinking=self.include_thinking_in_history,
+                    include_thinking=step_include_thinking,
                     prompt_type=self.prompt_type,
                 )
                 messages.append(
@@ -817,6 +880,7 @@ class UIMateAgent:
 
         # Traj slice mechanism
         _traj_save_snapshot = False
+        _collapse = _collapse_messages_keep_first if self.keep_first_image else _collapse_messages
         if self.enable_traj_slice:
             turn_idx = len(self.responses) + 1
             interval = self.traj_slice_interval
@@ -828,7 +892,7 @@ class UIMateAgent:
                 if (turn_idx % interval == 0) and (turn_idx >= interval * 2):
                     _traj_save_snapshot = True
                 elif (turn_idx % interval == 1) and (turn_idx > interval * 2):
-                    messages, _collapsed = _collapse_messages(
+                    messages, _collapsed = _collapse(
                         messages,
                         images_to_keep=interval,
                         min_removal_threshold=interval,
@@ -838,7 +902,7 @@ class UIMateAgent:
                         self.collapsed_message_count += interval
 
         # Apply collapse
-        messages, _ = _collapse_messages(
+        messages, _ = _collapse(
             messages,
             images_to_keep=self.images_to_keep,
             min_removal_threshold=1,

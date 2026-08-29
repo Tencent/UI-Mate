@@ -1,0 +1,89 @@
+
+.dm-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #DDDDDD;
+  background: white;
+  min-height: 50px;
+}
+
+.dm-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dm-user-avatar-container {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.dm-user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+}
+
+.dm-status-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.dm-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dm-user-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1D1C1D;
+}
+
+.dm-user-status {
+  font-size: 13px;
+  color: #616061;
+}
+
+.dm-header-right {
+  display: flex;
+  gap: 4px;
+}
+
+.dm-archive-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 20px;
+  background: #FFF8E5;
+  border-top: 1px solid #F2C744;
+  border-bottom: 1px solid #F2C744;
+  color: #5E4200;
+  font-size: 14px;
+}
+
+.dm-archive-banner button {
+  padding: 5px 10px;
+  border: 1px solid #B65C00;
+  border-radius: 4px;
+  background: #FFFFFF;
+  color: #B65C00;
+  font-weight: 700;
+  cursor: pointer;
+}

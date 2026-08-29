@@ -1,0 +1,7 @@
+# Session state and generated files
+.mock-states/
+.mock-state.json
+.mock-state.initial.json
+.mock-files/
+node_modules/
+dist/

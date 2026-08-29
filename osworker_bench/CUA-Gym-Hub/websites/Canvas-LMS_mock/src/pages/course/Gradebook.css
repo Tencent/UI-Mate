@@ -1,0 +1,246 @@
+.gradebook-page {
+  max-width: none;
+}
+
+.gradebook-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.gradebook-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.gradebook-header-left h1 {
+  font-size: 22px;
+  font-weight: var(--font-weight-light);
+  white-space: nowrap;
+}
+
+.gradebook-dropdowns {
+  display: flex;
+  gap: 4px;
+}
+
+.gb-dropdown-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text-link);
+  border-radius: var(--radius-sm);
+}
+
+.gb-dropdown-btn:hover {
+  background: var(--bg-page);
+  text-decoration: underline;
+}
+
+.gradebook-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gb-search {
+  position: relative;
+}
+
+.gb-search-icon {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+.gb-search-input {
+  padding: 6px 10px 6px 28px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  width: 180px;
+  outline: none;
+  color: var(--text-primary);
+}
+
+.gb-search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(3, 116, 181, 0.15);
+}
+
+/* Table */
+.gradebook-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-content);
+}
+
+.gradebook-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 800px;
+}
+
+.gradebook-table thead {
+  background: var(--bg-module-header);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.gradebook-table th {
+  text-align: left;
+  padding: 8px 10px;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.gb-th-student {
+  min-width: 160px;
+  max-width: 200px;
+  position: sticky;
+  left: 0;
+  background: var(--bg-module-header);
+  z-index: 11;
+  border-right: 2px solid var(--border-color);
+}
+
+.gb-th-total {
+  min-width: 100px;
+  border-right: 1px solid var(--border-color);
+}
+
+.gb-th-assignment {
+  min-width: 100px;
+  max-width: 140px;
+}
+
+.gb-th-assignment-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+  font-size: 11px;
+}
+
+.gb-th-assignment-pts {
+  font-weight: 400;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.gradebook-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+}
+
+.gradebook-table tbody tr:hover {
+  background: rgba(3, 116, 181, 0.02);
+}
+
+.gb-td-student {
+  padding: 6px 10px;
+  position: sticky;
+  left: 0;
+  background: var(--bg-content);
+  z-index: 5;
+  border-right: 2px solid var(--border-color);
+}
+
+.gradebook-table tbody tr:hover .gb-td-student {
+  background: rgba(3, 116, 181, 0.02);
+}
+
+.gb-student-name {
+  font-size: 12px;
+  color: var(--text-link);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+
+.gb-td-total {
+  padding: 6px 10px;
+  border-right: 1px solid var(--border-color);
+}
+
+.gb-total-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-right: 4px;
+}
+
+.gb-total-letter {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.gb-total-na {
+  color: var(--text-secondary);
+}
+
+/* Cells */
+.gb-cell {
+  padding: 4px 8px;
+  text-align: center;
+  cursor: pointer;
+  border-right: 1px solid var(--border-light);
+  min-width: 60px;
+  transition: background 0.1s;
+}
+
+.gb-cell:hover {
+  background: rgba(3, 116, 181, 0.06);
+}
+
+.gb-cell-late {
+  background: #FDE8E8;
+}
+
+.gb-cell-late:hover {
+  background: #FADADA;
+}
+
+.gb-cell-excused {
+  background: #E8F8EF;
+}
+
+.gb-cell-excused:hover {
+  background: #D0F0E0;
+}
+
+.gb-cell-value {
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.gb-cell-excused .gb-cell-value {
+  color: var(--success);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.gb-cell-input {
+  width: 60px;
+  padding: 2px 4px;
+  border: 2px solid var(--primary);
+  border-radius: 2px;
+  text-align: center;
+  font-size: 13px;
+  outline: none;
+  color: var(--text-primary);
+}

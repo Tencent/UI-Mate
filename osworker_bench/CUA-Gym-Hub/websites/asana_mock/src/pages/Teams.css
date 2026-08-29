@@ -1,0 +1,131 @@
+
+.teams-page {
+  padding: 32px 48px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.team-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.team-header h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.add-member-btn {
+  padding: 10px 20px;
+  background-color: #f06a6a;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.add-member-btn:hover {
+  background-color: #e55a5a;
+}
+
+.team-description {
+  font-size: 16px;
+  color: #6d6e6f;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.team-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.team-section h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 16px;
+}
+
+.team-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.team-project-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+.team-project-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.team-project-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.team-project-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-project-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f1f1f;
+}
+
+.team-members-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.team-member-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.team-member-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.member-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f1f1f;
+  margin-bottom: 4px;
+}
+
+.member-title {
+  font-size: 13px;
+  color: #6d6e6f;
+}
+  

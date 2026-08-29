@@ -1,0 +1,77 @@
+{
+  "id": "sre_error_triage_001__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou're Sam, the on-call SRE triaging this morning's overnight production errors. In Sentry, work through every UNRESOLVED issue -- each one shows a production error rate. Classify each by its rate against the SLO band and act on it:\n\n- SPIKING (error rate strictly above the 5.0% SLO threshold): set the issue's priority to High and assign it to the owning service's engineer -- checkout-service belongs to Keith Ryan, payments-api belongs to Maria Chen. Leave it unresolved.\n- ELEVATED (rate between 1.0% and 5.0% inclusive): set the priority to Medium only, and leave it unresolved.\n- NOISE (rate strictly below the 1.0% floor -- already-known low-signal errors): archive the issue.\n\nLeave any issue that is already resolved exactly as it is -- do not reopen or re-triage it.\n\nFor each SPIKING issue, use its service name to: (1) open a tracking issue in the GitLab 'platform-infra' project titled 'Fix: <service> error spike' (for example 'Fix: checkout-service error spike') and move it into the In Progress column; and (2) in Datadog, mute that service's 'Error Budget: <service>' monitor while the spike is being worked. Do NOT touch the Error Budget monitor of any service that is not spiking.\n\nRecord your verdict for every issue you triaged in the 'Error Triage' Google Sheet -- put 'Escalate' for spiking services, 'Monitor' for elevated ones, and 'Archive' for noise, in the Decision column next to each service. Finally, post a short summary of the triage sweep to the Slack channel #sre and pin that message.",
+  "app_type": "sentry_mock,datadog_mock,gitlab_mock,slack_mock,google_sheets_mock",
+  "domain": "sre",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

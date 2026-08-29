@@ -8,6 +8,7 @@ from typing import Callable, Any, Optional, Tuple
 from typing import List, Dict, Union
 
 import gymnasium as gym
+import requests
 
 from desktop_env.controllers.python import PythonController
 from desktop_env.controllers.setup import SetupController
@@ -223,6 +224,13 @@ class DesktopEnv(gym.Env):
             self.controller = PythonController(vm_ip=self.vm_ip, server_port=self.server_port)
             self.setup_controller = SetupController(vm_ip=self.vm_ip, server_port=self.server_port, chromium_port=self.chromium_port, vlc_port=self.vlc_port, cache_dir=self.cache_dir_base, client_password=self.client_password, screen_width=self.screen_width, screen_height=self.screen_height, provider_name=self.provider_name)
 
+            # A stale guest image must not be a hard failure: the VM is usable
+            # even when the sync cannot be performed.
+            try:
+                self._sync_guest_server_files()
+            except Exception as sync_err:
+                logger.warning(f"Guest server sync skipped: {sync_err}")
+
         except Exception as e:
             logger.error(f"_start_emulator failed: {e}")
             try:
@@ -230,6 +238,80 @@ class DesktopEnv(gym.Env):
             except Exception as stop_err:
                 logger.warning(f"Cleanup after interrupt failed: {stop_err}")
             raise
+
+    # The guest runs its own copy of ``desktop_env/server`` baked into the VM
+    # image, so fixes made in this repo stay invisible until the files are
+    # pushed into the guest and the service is restarted. Listed files are kept
+    # in sync on every emulator start.
+    _GUEST_SERVER_DIR = "/home/user/server"
+    _GUEST_SERVER_FILES = ("pyxcursor.py",)
+    _GUEST_SERVER_SERVICE = "osworld.service"
+    _GUEST_RESTART_SETTLE = 3  # seconds
+    _GUEST_RESTART_TIMEOUT = 120  # seconds
+
+    def _sync_guest_server_files(self) -> None:
+        """Replace outdated guest-server files and restart the guest service.
+
+        A guest whose files already match is left untouched, so this costs one
+        small download per boot once the VM image itself carries the fix.
+        """
+        if self.os_type != "Ubuntu":
+            return
+
+        local_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "server")
+        outdated = []
+        for name in self._GUEST_SERVER_FILES:
+            local_path = os.path.join(local_dir, name)
+            try:
+                with open(local_path, "rb") as local_file:
+                    local_bytes = local_file.read()
+            except OSError as read_err:
+                logger.warning(f"Cannot read guest server file {local_path}: {read_err}")
+                continue
+            remote_path = f"{self._GUEST_SERVER_DIR}/{name}"
+            if self.controller.get_file(remote_path) == local_bytes:
+                continue
+            outdated.append({"url": local_path, "path": remote_path})
+
+        if not outdated:
+            return
+
+        logger.info("Updating guest server files: %s", [f["path"] for f in outdated])
+        self.setup_controller.download(outdated)
+        # ``systemctl restart`` tears down the whole unit cgroup, which includes
+        # the process running this very command, so the restart is handed to a
+        # transient unit that lives outside that cgroup.
+        self.setup_controller.execute([
+            "bash",
+            "-c",
+            f"rm -rf {self._GUEST_SERVER_DIR}/__pycache__; "
+            f"echo '{{CLIENT_PASSWORD}}' | sudo -S systemd-run --no-block --collect "
+            f"systemctl restart {self._GUEST_SERVER_SERVICE}",
+        ])
+        self._wait_for_guest_server()
+
+    def _wait_for_guest_server(self) -> None:
+        # systemd-run returns before the old server is torn down, so wait out
+        # the teardown first; otherwise the poll below would immediately
+        # succeed against the process that is about to die.
+        time.sleep(self._GUEST_RESTART_SETTLE)
+        deadline = time.time() + self._GUEST_RESTART_TIMEOUT
+        while time.time() < deadline:
+            try:
+                response = requests.post(
+                    f"http://{self.vm_ip}:{self.server_port}/execute",
+                    json={"command": ["true"]},
+                    timeout=5,
+                )
+                if response.status_code == 200:
+                    logger.info("Guest server restarted successfully.")
+                    return
+            except requests.RequestException:
+                pass
+            time.sleep(2)
+        logger.warning(
+            f"Guest server did not come back within {self._GUEST_RESTART_TIMEOUT}s after restart."
+        )
 
     def _revert_to_snapshot(self):
         # Revert to certain snapshot of the virtual machine, and refresh the path to vm and ip of vm

@@ -1,0 +1,77 @@
+{
+  "id": "recruit_candidate_flow_007__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nAssume today is March 11, 2024. For every candidate currently in Greenhouse (first 5 candidates), run the full onsite‑scheduling pipeline: (1) move them to 'Onsite' in Greenhouse; (2) create a 1‑hour Google Calendar event titled 'Onsite – {Name}' in the earliest weekday 2–5 pm slot that does not clash with any existing event (some slots are already occupied by panel blocks, and some candidates share the same name); (3) send the 'Onsite Invitation' email via Gmail to each candidate with the confirmed time; (4) post '{Name} scheduled for onsite on {date/time}' in the Slack channel #recruiting. Never double‑book the calendar.",
+  "app_type": "greenhouse_mock,google_calendar_mock,gmail_mock,slack_mock",
+  "domain": "recruit",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "id": "ops_catalog_update_003__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (Shopify Admin, Google Docs, Google Sheets, and Slack). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nYou are the catalog manager for Evergreen Goods, reviewing the draft products in Shopify Admin and publishing the ones that are ready. The listing standard is NOT listed here: read the 'Product Listing Standard' doc in Google Docs (the Slack #catalog pin points to it) -- it has the publish checklist and the product-type to collection mapping. Publish (set status Active) only the draft products that pass the checklist; leave incomplete drafts as drafts and leave products that are already active.\n\nIn Google Sheets, open the spreadsheet named 'Catalog Workbook' from the recent-files list (ignore the other files there such as 'Marketing Campaign Tracker' and 'Website Analytics' -- they are not part of this task). 'Catalog Workbook' already has an empty 'Listing Log' tab with the header row (Product, ProductType, Collection). Add one row to that 'Listing Log' tab for every product you publish, then post a one-line summary to #catalog.",
+  "app_type": "shopify_admin_mock,google_docs_mock,google_sheets_mock,slack_mock",
+  "domain": "ops",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

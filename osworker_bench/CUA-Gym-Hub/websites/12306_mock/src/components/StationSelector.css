@@ -1,0 +1,253 @@
+.station-selector {
+  position: absolute;
+  top: 44px;
+  left: 0;
+  width: 420px;
+  background: white;
+  border: 1px solid #D0D0D0;
+  border-radius: 4px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  z-index: 500;
+}
+
+.ss-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: #FAFAFA;
+}
+
+.ss-label {
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+.ss-search-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.ss-search-input {
+  width: 100%;
+  height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 0 28px 0 10px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.ss-search-input:focus {
+  border-color: var(--primary-blue);
+}
+
+.ss-clear {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* Search results */
+.ss-results {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.ss-no-result {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-gray);
+  font-size: 13px;
+}
+
+.ss-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ss-result-item:hover {
+  background: var(--light-blue-bg);
+}
+
+.ss-result-item.selected {
+  background: var(--light-blue-bg);
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+.ss-station-name {
+  font-size: 14px;
+}
+
+.ss-station-city {
+  font-size: 12px;
+  color: var(--text-gray);
+}
+
+/* Tabs */
+.ss-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+
+.ss-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 8px;
+  font-size: 13px;
+  color: var(--text-gray);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.ss-tab.active {
+  color: var(--primary-blue);
+  border-bottom-color: var(--primary-blue);
+  font-weight: bold;
+}
+
+.ss-tab:hover {
+  color: var(--primary-blue);
+}
+
+/* Hot cities */
+.ss-hot-section {
+  padding: 12px 14px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.ss-hot-label {
+  font-size: 12px;
+  color: var(--text-gray);
+  margin-bottom: 8px;
+}
+
+.ss-hot-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ss-hot-item {
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-dark);
+}
+
+.ss-hot-item:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+  background: var(--light-blue-bg);
+}
+
+.ss-hot-item.selected {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+  background: var(--light-blue-bg);
+  font-weight: bold;
+}
+
+/* A-Z section */
+.ss-az-section {
+  max-height: 320px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.ss-az-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 8px 14px;
+  border-bottom: 1px solid var(--border-light);
+  background: #FAFAFA;
+}
+
+.ss-az-letter {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--primary-blue);
+  cursor: pointer;
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+.ss-az-letter:hover {
+  background: var(--light-blue-bg);
+  text-decoration: none;
+}
+
+.ss-az-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 14px;
+  max-height: 260px;
+}
+
+.ss-az-group {
+  margin-bottom: 10px;
+}
+
+.ss-az-group-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--primary-blue);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 6px;
+}
+
+.ss-az-group-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.ss-az-item {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  color: var(--text-dark);
+}
+
+.ss-az-item:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.ss-az-item.selected {
+  border-color: var(--primary-blue);
+  color: white;
+  background: var(--primary-blue);
+}

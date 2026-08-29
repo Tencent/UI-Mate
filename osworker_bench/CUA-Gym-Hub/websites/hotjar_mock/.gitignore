@@ -1,0 +1,4 @@
+.mock-states/
+.mock-files/
+node_modules/
+dist/

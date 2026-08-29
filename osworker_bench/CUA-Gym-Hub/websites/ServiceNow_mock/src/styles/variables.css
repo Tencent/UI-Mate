@@ -1,0 +1,100 @@
+/* XerviceNow Design System Variables */
+:root {
+  /* Banner / Header */
+  --sn-banner-bg: #1b2a32;
+  --sn-banner-height: 48px;
+
+  /* Navigator / Sidebar */
+  --sn-nav-bg: #1f2937;
+  --sn-nav-text: #d1d5db;
+  --sn-nav-text-hover: #ffffff;
+  --sn-nav-selected: #3b82f6;
+  --sn-nav-width: 260px;
+  --sn-nav-hover-bg: #374151;
+  --sn-nav-section-bg: rgba(255,255,255,0.05);
+  --sn-nav-item-color: #c9d3dc;
+
+  /* Content area */
+  --sn-content-bg: #ffffff;
+  --sn-content-alt-bg: #f9fafb;
+
+  /* Borders */
+  --sn-border: #e0e0e0;
+  --sn-border-light: #f0f0f0;
+
+  /* Text */
+  --sn-text-primary: #333333;
+  --sn-text-secondary: #666666;
+  --sn-text-muted: #999999;
+
+  /* Links */
+  --sn-link: #007a5a;
+  --sn-link-hover: #005a42;
+
+  /* Mandatory / required field asterisk */
+  --sn-mandatory: #d32f2f;
+
+  /* Priority colors */
+  --sn-priority-critical: #d32f2f;
+  --sn-priority-high: #f57c00;
+  --sn-priority-moderate: #fbc02d;
+  --sn-priority-low: #388e3c;
+  --sn-priority-planning: #90a4ae;
+
+  /* Work notes background */
+  --sn-worknotes-bg: #fffde7;
+
+  /* Button colors */
+  --sn-btn-primary: #1b6ec2;
+  --sn-btn-primary-hover: #155a9e;
+  --sn-btn-success: #388e3c;
+  --sn-btn-success-hover: #2e7d32;
+  --sn-btn-default: #e0e0e0;
+  --sn-btn-default-hover: #d0d0d0;
+
+  /* Form */
+  --sn-form-label-width: 160px;
+  --sn-form-field-width: 300px;
+
+  /* Status */
+  --sn-success: #2e7d32;
+  --sn-info: #1565c0;
+  --sn-warning: #f9a825;
+  --sn-error: #c62828;
+
+  /* Tabs */
+  --sn-tab-active: #007a5a;
+  --sn-tab-border: #007a5a;
+
+  /* Breadcrumb */
+  --sn-breadcrumb-bg: #f5f5f5;
+
+  /* Table rows */
+  --sn-row-hover: #f5f8ff;
+  --sn-row-selected: #e8f0fe;
+
+  /* Notification badge */
+  --sn-badge-bg: #d32f2f;
+  --sn-badge-text: #ffffff;
+
+  /* Fonts */
+  --sn-font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+  --sn-font-size-xs: 11px;
+  --sn-font-size-sm: 12px;
+  --sn-font-size-base: 13px;
+  --sn-font-size-md: 14px;
+  --sn-font-size-lg: 16px;
+  --sn-font-size-xl: 18px;
+  --sn-font-size-xxl: 22px;
+
+  /* Shadows */
+  --sn-shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+  --sn-shadow-md: 0 2px 8px rgba(0,0,0,0.15);
+  --sn-shadow-lg: 0 4px 16px rgba(0,0,0,0.2);
+
+  /* Z-index layers */
+  --sn-z-banner: 100;
+  --sn-z-nav: 90;
+  --sn-z-dropdown: 200;
+  --sn-z-modal: 300;
+}

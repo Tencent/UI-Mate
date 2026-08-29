@@ -1,0 +1,156 @@
+.visit-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+.visit-date-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  text-align: center;
+}
+
+.visit-day-num {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.visit-month {
+  font-size: var(--font-xs);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+}
+
+.visit-year {
+  font-size: 10px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+
+.visit-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.visit-time {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.visit-provider-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.visit-provider-name {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.visit-provider-dept {
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+}
+
+.visit-badges {
+  display: flex;
+  gap: 6px;
+}
+
+.visit-location {
+  font-size: var(--font-xs);
+  color: var(--color-text-secondary);
+}
+
+.visit-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.btn-text-danger {
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  font-size: var(--font-xs);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+}
+
+.btn-text-danger:hover {
+  background: var(--color-danger-light);
+}
+
+/* Past visits */
+.past-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.past-filter-label {
+  font-size: var(--font-sm);
+  color: var(--color-text-secondary);
+}
+
+.past-filter-select {
+  width: auto;
+  min-width: 160px;
+}
+
+.past-visit-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.past-visit-date {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  min-width: 120px;
+}
+
+.past-visit-provider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.past-provider-name {
+  font-size: var(--font-sm);
+  font-weight: 600;
+  margin-bottom: 4px;
+}

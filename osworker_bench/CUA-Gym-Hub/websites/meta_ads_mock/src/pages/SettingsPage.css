@@ -1,0 +1,28 @@
+.settings-page { padding: 0; max-width: 640px; }
+.settings-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.settings-section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-light);
+}
+.settings-fields { display: flex; flex-direction: column; gap: 0; }
+.notif-prefs { display: flex; flex-direction: column; gap: 0; }
+.notif-pref-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+}
+.notif-pref-row:last-child { border-bottom: none; }
+.notif-pref-label { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+.notif-pref-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }

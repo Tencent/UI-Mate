@@ -1,0 +1,107 @@
+.groups-page {}
+
+.groups-header {
+  margin-bottom: 24px;
+}
+
+.groups-header h1 {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-light);
+}
+
+.groups-section h2 {
+  font-size: var(--font-size-section);
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.groups-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.group-card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-content);
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+
+.group-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.group-card-banner {
+  height: 40px;
+}
+
+.group-card-body {
+  padding: 16px;
+}
+
+.group-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-link);
+  margin-bottom: 4px;
+}
+
+.group-card-course {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.group-card-desc {
+  font-size: 13px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.group-card-members {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.group-card-footer {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--border-light);
+}
+
+.group-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: var(--text-secondary);
+  transition: background 0.1s, color 0.1s;
+}
+
+.group-action:hover {
+  background: rgba(3, 116, 181, 0.06);
+  color: var(--primary);
+}
+
+.groups-empty {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--text-secondary);
+}
+
+.groups-empty svg {
+  margin-bottom: 16px;
+  opacity: 0.4;
+}
+
+.groups-empty p {
+  font-size: 16px;
+}

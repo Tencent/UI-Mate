@@ -140,7 +140,7 @@ instead of changing the id in place. Keep the id unchanged when retiring a task,
 
 The reason is that **id is the primary key across runs.** Renaming prevents `get_unfinished_tasks()` from recognizing historical results,
 forces the entire suite to rerun from scratch, and causes analysis scripts for historical runs to miss every path because they still use the old id.
-Renaming an id after it has entered meta therefore breaks resume and historical analysis.
+The gamedev suite under `evaluation_examples/democua` has already encountered this problem; see the README in that directory.
 
 ### One-time renaming (2026-08)
 
@@ -165,6 +165,10 @@ The historical id mapping was a one-time migration artifact and is not distribut
 
 Changing either category would immediately produce 404 errors. **Any bulk id-renaming operation must therefore update fields precisely at the JSON-structure level
 and must never perform a full-text string replacement over a config.**
+
+In addition, `evaluation_examples/democua/osworker_benchmark_democua` (33 tasks) contains tasks from the
+same source as this directory, each paired with a recorded demo. Those tasks were renamed alongside this
+migration, so their ids match the ids used here.
 
 ## task config format
 

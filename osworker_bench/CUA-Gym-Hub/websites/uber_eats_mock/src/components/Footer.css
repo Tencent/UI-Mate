@@ -1,0 +1,193 @@
+.ue-footer {
+  background: var(--color-black);
+  color: var(--color-white);
+  margin-top: 64px;
+}
+
+.ue-footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 48px 24px 32px;
+}
+
+.ue-footer__brand {
+  margin-bottom: 32px;
+}
+
+.ue-footer__logo {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: var(--font-heading);
+}
+
+.ue-footer__logo-uber {
+  color: var(--color-white);
+}
+
+.ue-footer__logo-eats {
+  color: var(--color-white);
+}
+
+.ue-footer__links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.ue-footer__col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ue-footer__link {
+  font-size: var(--fs-sm);
+  color: #AFAFAF;
+  text-align: left;
+  transition: color 0.15s;
+  text-decoration: none;
+}
+
+.ue-footer__link:hover {
+  color: var(--color-white);
+}
+
+.ue-footer__bottom {
+  border-top: 1px solid #333;
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.ue-footer__stores {
+  display: flex;
+  gap: 12px;
+}
+
+.ue-footer__store-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #555;
+  border-radius: var(--radius-button);
+  color: var(--color-white);
+  transition: border-color 0.15s;
+}
+
+.ue-footer__store-btn:hover {
+  border-color: var(--color-white);
+}
+
+.ue-footer__store-icon {
+  font-size: 20px;
+}
+
+.ue-footer__store-sub {
+  display: block;
+  font-size: 9px;
+  color: #AFAFAF;
+  line-height: 1;
+}
+
+.ue-footer__store-name {
+  display: block;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ue-footer__legal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: var(--fs-xs);
+  color: #AFAFAF;
+}
+
+.ue-footer__dot {
+  color: #555;
+}
+
+.ue-footer__legal-link {
+  color: #AFAFAF;
+  transition: color 0.15s;
+}
+
+.ue-footer__legal-link:hover {
+  color: var(--color-white);
+}
+
+.ue-footer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.ue-footer-modal__dialog {
+  position: relative;
+  width: min(460px, 100%);
+  padding: 28px;
+  border-radius: var(--radius-card);
+  background: var(--color-white);
+  color: var(--color-black);
+  box-shadow: var(--shadow-lg);
+}
+
+.ue-footer-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-gray-700);
+}
+
+.ue-footer-modal__close:hover {
+  background: var(--color-gray-100);
+}
+
+.ue-footer-modal__dialog h2 {
+  margin: 0 32px 12px 0;
+  font-size: var(--fs-xl);
+}
+
+.ue-footer-modal__dialog p {
+  margin: 0 0 20px;
+  color: var(--color-gray-700);
+  line-height: 1.5;
+}
+
+.ue-footer-modal__button {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-button);
+  background: var(--color-black);
+  color: var(--color-white);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .ue-footer__links {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .ue-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

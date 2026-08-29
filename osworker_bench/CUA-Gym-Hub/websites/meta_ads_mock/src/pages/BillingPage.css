@@ -1,0 +1,61 @@
+.billing-page { padding: 0; }
+.billing-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  margin-bottom: 16px;
+  overflow: hidden;
+  padding: 20px;
+}
+.billing-card-title { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; }
+.payment-method-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.pm-icon { font-size: 24px; }
+.pm-info { flex: 1; }
+.pm-name { font-size: 14px; font-weight: 600; }
+.pm-exp { font-size: 12px; color: var(--text-secondary); }
+.pm-primary-badge {
+  background: var(--blue-light);
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.billing-actions { margin-bottom: 12px; }
+.spend-limit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-radius: 6px;
+}
+.billing-meta-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 2px; }
+.billing-meta-value { font-size: 16px; font-weight: 700; }
+.link-btn {
+  color: var(--blue);
+  font-size: 13px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font);
+}
+.link-btn:hover { text-decoration: underline; }
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--border-light);
+  margin-top: 8px;
+}
+.page-info { font-size: 13px; color: var(--text-secondary); }

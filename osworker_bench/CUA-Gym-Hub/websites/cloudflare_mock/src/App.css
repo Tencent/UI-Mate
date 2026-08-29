@@ -1,0 +1,26 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--cf-bg-secondary);
+}
+
+.zone-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - 48px);
+}
+
+.zone-content {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--cf-bg-secondary);
+  min-width: 0;
+}
+
+.account-content {
+  flex: 1;
+  background: var(--cf-bg-secondary);
+  overflow-y: auto;
+}

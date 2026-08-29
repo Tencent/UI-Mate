@@ -1,0 +1,43 @@
+.audiences-page { padding: 0; }
+.page-card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.page-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+.page-title { font-size: 18px; font-weight: 700; margin: 0; }
+.page-actions { display: flex; gap: 8px; align-items: center; }
+
+.data-table-basic {
+  width: 100%;
+  border-collapse: collapse;
+}
+.data-table-basic th {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: left;
+  background: #FAFBFC;
+}
+.data-table-basic td {
+  font-size: 13px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+.data-table-basic tr:last-child td { border-bottom: none; }
+.data-table-basic tr:hover td { background: var(--hover-row); }
+.row-selected td { background: var(--blue-light) !important; }
+
+.btn-danger { color: var(--red); border-color: var(--red); }
+.btn-danger:hover { background: #FFF0F0; }

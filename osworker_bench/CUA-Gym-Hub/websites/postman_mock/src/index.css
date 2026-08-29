@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Syntax Highlighting overrides for Prism */
+code[class*="language-"],
+pre[class*="language-"] {
+  text-shadow: none !important;
+  font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace !important;
+  font-size: 12px !important;
+}
+
+.token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string {
+    background: transparent !important;
+}
+
+/* Method color utilities */
+.method-get { color: #00AA55; }
+.method-post { color: #EAB308; }
+.method-put { color: #2563EB; }
+.method-delete { color: #EF4444; }
+.method-patch { color: #8B5CF6; }
+.method-head { color: #6B7280; }
+.method-options { color: #6B7280; }
+
+/* Resizable divider */
+.resize-handle {
+  cursor: row-resize;
+  user-select: none;
+  transition: background-color 0.15s;
+}
+.resize-handle:hover,
+.resize-handle.active {
+  background-color: #FF6C37;
+}
+
+/* Tab styles */
+.tab-item {
+  transition: background-color 0.1s;
+}
+.tab-item:hover .tab-close {
+  opacity: 1;
+}
+.tab-close {
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+/* Icon rail active indicator */
+.icon-rail-item.active {
+  border-left: 2px solid #FF6C37;
+}

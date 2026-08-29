@@ -1,0 +1,92 @@
+name: Trademark Takedown Request
+description: Request removal, rename, or modification of a mock that uses your trademark
+title: "[Trademark] "
+labels: ["trademark", "legal"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reaching out. CUA-Gym-Hub is a research project; we
+        have no interest in retaining any specific brand identity, and we
+        will act on valid trademark takedown requests within **7 days** of
+        acknowledgement.
+
+        Please complete the form below so we can verify the request and
+        identify the correct mock(s) to remove or modify.
+
+  - type: input
+    id: company
+    attributes:
+      label: Trademark holder
+      description: Name of the company or individual that owns the trademark.
+      placeholder: e.g., Example Corp.
+    validations:
+      required: true
+
+  - type: input
+    id: trademark
+    attributes:
+      label: Trademark name(s) at issue
+      description: The specific trademark(s) you are asking us to remove from this repository.
+      placeholder: e.g., Example, Example Cloud, Example Suite
+    validations:
+      required: true
+
+  - type: input
+    id: mock_path
+    attributes:
+      label: Affected mock(s)
+      description: Directory path(s) under websites/ that contain the trademark, if known.
+      placeholder: e.g., websites/example_mock/
+    validations:
+      required: false
+
+  - type: dropdown
+    id: action
+    attributes:
+      label: Requested action
+      options:
+        - Remove the mock entirely
+        - Rename the mock (specify in details below)
+        - Remove the logo / visual asset only
+        - Other (describe in details)
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Additional details
+      description: Any context, alternative naming preferences, or specific elements you want removed.
+      placeholder: |
+        e.g., "Please also remove the colour scheme similar to ours from
+        the mock header, and rename the navigation labels."
+    validations:
+      required: false
+
+  - type: input
+    id: authority
+    attributes:
+      label: Your role / authority to make this request
+      description: e.g., "Trademark counsel", "Director of IP", "Authorised representative". A signature block in your email is sufficient.
+    validations:
+      required: true
+
+  - type: input
+    id: contact_email
+    attributes:
+      label: Contact email
+      description: For acknowledgement and follow-up correspondence.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: acknowledgements
+    attributes:
+      label: Acknowledgement
+      options:
+        - label: I am authorised by the trademark holder to submit this request.
+          required: true
+        - label: I understand this repository is a non-commercial research project and is distributed under the Apache 2.0 License.
+          required: true

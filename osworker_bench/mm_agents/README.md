@@ -8,7 +8,12 @@ and dynamically loaded by name at runtime via `create_agent(name)`.
 | Name | Class | Module | `predict` signature |
 |------|-----|------|--------------|
 | `ui_mate` | `UIMateAgent` | `ui_mate.py` | tuple |
-| `ui_mate_promptv2` | `UIMatePromptV2Agent` | `ui_mate_promptv2.py` | tuple |
+
+`UIMateAgent` covers both benchmark configurations. Its system prompt carries
+the `IMPORTANT_NOTES` additions unless `enable_demo_in_the_loop` is set, since a
+demo-guided run keeps the prompt of its demonstration-augmented SFT stage.
+`keep_first_image` and `recent_think_steps` are per-configuration knobs, both
+off by default.
 
 The "`predict` signature" describes the return shape of each class's own implementation:
 `tuple` returns `(response, actions)`, while `opencua` returns
@@ -26,7 +31,7 @@ Create agents by name rather than importing concrete agent classes directly:
 ```python
 from core.registry import create_agent
 
-agent = create_agent("ui_mate_promptv2", model="UI_Mate")
+agent = create_agent("ui_mate", model="UI_Mate")
 agent.reset()
 
 instruction = "Please help me to find the nearest restaurant."

@@ -1,0 +1,77 @@
+{
+  "id": "ar_remittance_008__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in (QuickBooks, Google Sheets, and Gmail). Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nAssume today is April 30, 2026. FIRST, read the remittance email in Gmail: it names two invoices whose payments just cleared by wire. Record those payments in QuickBooks so each of those two invoices becomes status 'Paid' (use the 'Receive payment' action on the invoice). THEN build an Accounts Receivable aging report from the remaining QuickBooks open invoices into the 'AR Aging' tab of the Google Sheet. Consider only invoices whose status is 'Sent' or 'Overdue' (skip Paid/Draft -- including the two you just marked paid). For each, compute days overdue = today - dueDate. Bucket into: Current (not yet due, days<=0), '1-30', '31-60', '61-90', '90+'. In the sheet, fill columns Customer, InvoiceNumber, Total, DueDate, DaysOverdue, Bucket -- one row per qualifying invoice, sorted by DaysOverdue descending (most overdue first). Then below the rows add a summary block: a row per bucket label in column A and the SUM of Total for that bucket in column C, in this fixed bucket order (Current, 1-30, 31-60, 61-90, 90+), and a final 'Grand Total' row with the sum of all qualifying invoice totals in column C.",
+  "app_type": "quickbooks_mock,google_sheets_mock,gmail_mock",
+  "domain": "ar",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

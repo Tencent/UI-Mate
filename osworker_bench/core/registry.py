@@ -40,7 +40,7 @@ def register_agent(
     Register an agent.
 
     Args:
-        name: Unique name for the agent (e.g., "ui_mate", "ui_mate_promptv2")
+        name: Unique name for the agent (e.g., "ui_mate")
         module_path: Python module path (e.g., "mm_agents.ui_mate")
         class_name: Class name in the module (e.g., "UIMateAgent")
         default_config: Default configuration for the agent
@@ -135,7 +135,8 @@ def create_agent(name: str, **kwargs) -> Any:
 
 # ================== Register Built-in Agents ==================
 
-# UI-Mate base agent.
+# UI-Mate agent. keep_first_image and recent_think_steps are per-configuration
+# knobs on this one class; see configs/osworker_benchmark/.
 register_agent(
     name="ui_mate",
     module_path="mm_agents.ui_mate",
@@ -147,24 +148,6 @@ register_agent(
         "coordinate_type": "relative",
         "api_backend": "openai",
         "images_to_keep": 20,
-    },
-    predict_signature="tuple",
-)
-
-# UI-Mate PromptV2 variant used by the default benchmark configuration.
-register_agent(
-    name="ui_mate_promptv2",
-    module_path="mm_agents.ui_mate_promptv2",
-    class_name="UIMatePromptV2Agent",
-    default_config={
-        "action_space": "pyautogui",
-        "observation_type": "screenshot",
-        "history_n": 100,
-        "coordinate_type": "relative",
-        "api_backend": "openai",
-        "images_to_keep": 20,
-        "recent_think_steps": None,
-        "keep_first_image": True,
     },
     predict_signature="tuple",
 )

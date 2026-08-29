@@ -1,0 +1,23 @@
+node:internal/fs/watchers:316
+    const error = new UVException({
+                  ^
+
+Error: ENOSPC: System limit for number of file watchers reached, watch '/cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/assets/screenshots/mock_audience_modal.png'
+    at FSWatcher.<computed> (node:internal/fs/watchers:316:19)
+    at Object.watch (node:fs:2537:36)
+    at createFsWatchInstance (file:///cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42780:17)
+    at setFsWatchListener (file:///cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42827:15)
+    at NodeFsHandler._watchWithNodeFs (file:///cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:42982:14)
+    at NodeFsHandler._handleFile (file:///cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43046:23)
+    at NodeFsHandler._addToNodeFs (file:///cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43288:21)
+Emitted 'error' event on FSWatcher instance at:
+    at FSWatcher._handleError (file:///cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:44481:10)
+    at NodeFsHandler._addToNodeFs (file:///cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:43296:18) {
+  errno: -28,
+  syscall: 'watch',
+  code: 'ENOSPC',
+  path: '/cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/assets/screenshots/mock_audience_modal.png',
+  filename: '/cpfs01/data/shared/Group-m6/bowen/CUA-Gym-Websites/meta_ads_mock/assets/screenshots/mock_audience_modal.png'
+}
+
+Node.js v24.14.1

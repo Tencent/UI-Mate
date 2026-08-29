@@ -1,0 +1,118 @@
+.pages-page {}
+
+.pages-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.pages-header h1 {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-light);
+}
+
+.pages-table-wrapper {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-content);
+}
+
+.pages-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pages-table thead {
+  background: var(--bg-module-header);
+}
+
+.pages-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  white-space: nowrap;
+}
+
+.pages-th-sortable {
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pages-th-sortable:hover {
+  color: var(--primary);
+}
+
+.pages-table td {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pages-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.pages-table tbody tr:hover {
+  background: rgba(3, 116, 181, 0.03);
+}
+
+.pages-front-page-cell {
+  width: 30px;
+  text-align: center;
+}
+
+.pages-front-page-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.pages-front-page-btn:hover {
+  opacity: 0.7;
+}
+
+.pages-title-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-link);
+  font-weight: 600;
+}
+
+.pages-title-link:hover {
+  text-decoration: underline;
+}
+
+.pages-front-label {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 6px;
+  background: #FFF3E0;
+  color: #E65100;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.pages-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.pages-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}

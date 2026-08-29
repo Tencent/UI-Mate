@@ -1,0 +1,15 @@
+
+.state-inspector {
+  padding: 20px;
+  background-color: #1e1e1e;
+  min-height: 100vh;
+  color: #d4d4d4;
+  font-family: 'Courier New', monospace;
+}
+
+.state-inspector pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 12px;
+  line-height: 1.5;
+}

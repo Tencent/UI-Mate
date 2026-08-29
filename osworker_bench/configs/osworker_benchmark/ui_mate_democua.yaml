@@ -1,0 +1,81 @@
+# DemoCUA Benchmark configuration (UI-Mate, demo-in-the-loop)
+# Usage:
+#   MOCK_APP_BASE_URL=http://<mock-host> \
+#     bash scripts/osworker_benchmark/start_osworker_benchmark_democua_test.sh
+#
+# Design notes:
+#   * The task suite is defined by evaluation_examples/democua/osworker_benchmark_democua.json
+#     and contains 33 cases, each paired with a recorded demo. These 33 tasks are a
+#     subset of the 100-case OSWorker Benchmark and share its cache unchanged.
+#   * Each task's reward and setup files are read from osworker_cache/<task_id>/.
+#   * Demos are read from <demo_dir>/<task_id>/trajectory_captioned*.json.
+#     enable_demo_in_the_loop together with demo_in_the_loop_mode is what makes
+#     this a demo run; drop both and the agent falls back to the no-demo baseline.
+#   * MOCK_APP_BASE_URL points to the separately deployed mock backend.
+#   * vLLM downloads tencent/UI-Mate-democua-27B from Hugging Face on first launch.
+#     MODEL_PATH may override it with another repository ID or local checkpoint.
+
+environment:
+  provider_name: docker
+  region: us-east-1
+  headless: true
+  screen_width: 1920
+  screen_height: 1080
+  os_type: Ubuntu
+  client_password: password
+  # Every task in this suite reaches the mock backend through the proxy pool,
+  # so the proxy is applied unconditionally rather than per task.
+  enable_proxy: true
+  force_proxy: true
+  cache_dir: osworker_cache
+
+agent:
+  name: ui_mate
+  model: UI_Mate_DemoCUA
+  model_path: tencent/UI-Mate-democua-27B
+  action_space: pyautogui
+  observation_type: screenshot
+  max_tokens: 65536
+  temperature: 1.0
+  top_p: 0.95
+  max_trajectory_length: 200
+  extra:
+    prompt_type: l2
+    history_n: 200
+    images_to_keep: 5
+    coordinate_type: relative
+    api_backend: openai
+    include_observation_in_history: false
+    include_thinking_in_history: true
+    enable_thinking: true
+    # The demo suite keeps the collapse policy of the demonstration-augmented SFT
+    # stage, so the step-0 screenshot is not pinned; ui_mate.yaml pins it.
+    keep_first_image: false
+    enable_traj_slice: false
+    password: password
+    # ---- what makes this a demo run ----
+    enable_demo_in_the_loop: true
+    demo_in_the_loop_mode: key-action-runtime
+
+run:
+  mode: test
+  max_steps: 500
+  num_envs: 10
+  sleep_after_execution: 5.0
+  settle_wait: 20.0
+  env_ready_wait: 60.0
+  record_video: true
+  test_all_meta_path: evaluation_examples/democua/osworker_benchmark_democua.json
+  test_config_base_dir: evaluation_examples/democua/osworker_benchmark_democua
+  result_dir: ./results/democua/osworker_benchmark_democua
+  # <demo_dir>/<task_id>/trajectory_captioned*.json
+  demo_dir: evaluation_examples/democua/osworker_benchmark_democua/demos
+  log_level: INFO
+
+vllm:
+  tensor_parallel_size: 2
+  data_parallel_size: 1
+  pipeline_parallel_size: 1
+  port: 8081
+  max_model_len: 65536
+  extra_args: "--revision 3ade2378fc84032d5017c1a9c93c4eaa77d65e57 --gpu-memory-utilization 0.85 --mm-encoder-tp-mode data"

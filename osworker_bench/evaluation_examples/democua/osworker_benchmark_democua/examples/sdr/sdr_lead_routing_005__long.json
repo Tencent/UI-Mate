@@ -1,0 +1,77 @@
+{
+  "id": "sdr_lead_routing_005__long",
+  "difficulty": "hard",
+  "instruction": "The apps for this task are already open in separate browser tabs and logged in. Just switch between these tabs to do the task -- no sign-in or URL needed.\n\nRoute every Salesforce lead with status 'New'. Use Annual Revenue to assign a tier and act: >=$5,000,000 -> Enterprise, set Status 'Working' and Owner 'Sarah Chen'; $1,000,000-4,999,999 -> Mid-Market, Owner 'Tom Ray'; <$1,000,000 -> SMB, Owner 'Tom Ray'; if Annual Revenue is blank -> set Status 'Unqualified'. For each lead, add a row to the 'Routing Log' Google Sheet and post one line in the Slack channel #sales-routing in the format '{Company} -> {Tier} -> {Owner or Unqualified}', where {Company} is the lead's Company name, {Tier} is one of 'Enterprise' / 'Mid-Market' / 'SMB' / 'Unqualified' chosen by the rules above, and the third field is the assigned owner name -- or the literal word 'Unqualified' when Annual Revenue is blank. Examples: 'NoRev -> Enterprise -> John Smith', 'Acme Corp -> Unqualified -> Unqualified'.",
+  "app_type": "salesforce_mock,google_sheets_mock,slack_mock",
+  "domain": "sdr",
+  "_source": "lc_task_py",
+  "config": [
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "_cua_gym_vm_bridge.sh",
+            "path": "/tmp/_cua_gym_vm_bridge.sh"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "bash /tmp/_cua_gym_vm_bridge.sh '{CLIENT_PASSWORD}' 9000 9097",
+        "shell": true
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "initial_setup.py",
+            "path": "/home/user/initial_setup.py"
+          }
+        ]
+      }
+    },
+    {
+      "type": "execute",
+      "parameters": {
+        "command": "python3 /home/user/initial_setup.py"
+      }
+    },
+    {
+      "type": "upload_cache_file",
+      "parameters": {
+        "files": [
+          {
+            "local_path": "reward.py",
+            "path": "/home/user/_cua_reward.py"
+          }
+        ]
+      }
+    }
+  ],
+  "evaluator": {
+    "func": "cua_gym_reward",
+    "result": {
+      "type": "cache_file",
+      "path": "_cua_reward_stdout.txt"
+    },
+    "postconfig": [
+      {
+        "type": "execute",
+        "parameters": {
+          "command": [
+            "python3",
+            "/home/user/_cua_reward.py"
+          ],
+          "stdout": "_cua_reward_stdout.txt",
+          "stderr": "_cua_reward_stderr.txt",
+          "shell": false
+        }
+      }
+    ]
+  }
+}

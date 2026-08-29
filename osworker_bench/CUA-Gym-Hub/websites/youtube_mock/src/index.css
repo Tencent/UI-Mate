@@ -1,0 +1,150 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --yt-red: #FF0000;
+  --yt-red-hover: #cc0000;
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F2F2F2;
+  --bg-tertiary: #E5E5E5;
+  --text-primary: #0F0F0F;
+  --text-secondary: #606060;
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  --active-bg: rgba(0, 0, 0, 0.1);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --sidebar-bg: #FFFFFF;
+  --header-bg: #FFFFFF;
+  --chip-bg: #F2F2F2;
+  --chip-active-bg: #0F0F0F;
+  --chip-active-text: #FFFFFF;
+  --card-hover: rgba(0, 0, 0, 0.05);
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+  --subscribe-bg: #0F0F0F;
+  --subscribe-text: #FFFFFF;
+  --subscribe-hover: #272727;
+  --subscribed-bg: #F2F2F2;
+  --subscribed-text: #0F0F0F;
+  --pill-bg: rgba(0, 0, 0, 0.05);
+  --pill-hover: rgba(0, 0, 0, 0.1);
+  --description-bg: rgba(0, 0, 0, 0.05);
+  --input-bg: transparent;
+  --input-border: rgba(0, 0, 0, 0.1);
+  --input-focus-border: #0F0F0F;
+  --toast-bg: #323232;
+  --toast-text: #FFFFFF;
+  --blue-link: #065FD4;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0F0F0F;
+  --bg-secondary: #181818;
+  --bg-tertiary: #272727;
+  --text-primary: #F1F1F1;
+  --text-secondary: #AAAAAA;
+  --hover-bg: rgba(255, 255, 255, 0.1);
+  --active-bg: rgba(255, 255, 255, 0.2);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --sidebar-bg: #0F0F0F;
+  --header-bg: #0F0F0F;
+  --chip-bg: #272727;
+  --chip-active-bg: #F1F1F1;
+  --chip-active-text: #0F0F0F;
+  --card-hover: rgba(255, 255, 255, 0.1);
+  --overlay-bg: rgba(0, 0, 0, 0.8);
+  --subscribe-bg: #F1F1F1;
+  --subscribe-text: #0F0F0F;
+  --subscribe-hover: #D9D9D9;
+  --subscribed-bg: #272727;
+  --subscribed-text: #F1F1F1;
+  --pill-bg: rgba(255, 255, 255, 0.1);
+  --pill-hover: rgba(255, 255, 255, 0.2);
+  --description-bg: rgba(255, 255, 255, 0.1);
+  --input-bg: transparent;
+  --input-border: rgba(255, 255, 255, 0.2);
+  --input-focus-border: #3EA6FF;
+  --toast-bg: #F1F1F1;
+  --toast-text: #0F0F0F;
+  --blue-link: #3EA6FF;
+}
+
+body {
+  font-family: "Roboto", "Arial", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+input, textarea {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(128, 128, 128, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(128, 128, 128, 0.6);
+}
+
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--toast-bg);
+  color: var(--toast-text);
+  padding: 12px 24px;
+  border-radius: 4px;
+  z-index: 10000;
+  font-size: 14px;
+  font-weight: 400;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  animation: toastSlideUp 0.3s ease-out;
+  white-space: nowrap;
+}
+
+@keyframes toastSlideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

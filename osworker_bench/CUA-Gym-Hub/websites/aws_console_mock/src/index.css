@@ -1,0 +1,386 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AWS Cloudscape-inspired base styles */
+body {
+  @apply bg-aws-bg text-aws-text font-aws text-aws-body;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* ========================
+   Cloudscape Button Styles
+   ======================== */
+.aws-btn {
+  @apply px-4 py-1.5 text-sm font-bold transition-all cursor-pointer inline-flex items-center justify-center gap-1;
+  border-radius: 20px;
+  letter-spacing: 0.01em;
+  line-height: 20px;
+  min-height: 32px;
+}
+.aws-btn:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+.aws-btn:focus-visible {
+  @apply outline-none ring-2 ring-aws-blue ring-offset-1;
+}
+.aws-btn-primary {
+  @apply bg-aws-blue text-white hover:bg-blue-700 border border-transparent;
+}
+.aws-btn-primary:active:not(:disabled) {
+  @apply bg-blue-800;
+}
+.aws-btn-call-to-action {
+  @apply bg-aws-orange text-white hover:bg-aws-hover border border-transparent;
+}
+.aws-btn-secondary {
+  @apply bg-white text-aws-text border border-aws-border hover:bg-gray-50;
+}
+.aws-btn-secondary:active:not(:disabled) {
+  @apply bg-gray-100;
+}
+.aws-btn-danger {
+  @apply bg-white text-aws-error border border-aws-error hover:bg-red-50;
+}
+.aws-btn-danger:active:not(:disabled) {
+  @apply bg-red-100;
+}
+.aws-btn-link {
+  @apply bg-transparent text-aws-blue hover:underline border-none px-1;
+}
+.aws-btn-icon {
+  @apply p-1.5 bg-transparent text-aws-text-secondary hover:bg-gray-100 border-none;
+  border-radius: 4px;
+  min-height: auto;
+}
+
+/* ========================
+   Cloudscape Input Styles
+   ======================== */
+.aws-input {
+  @apply w-full px-3 py-1.5 text-sm border border-aws-border bg-white text-aws-text transition-colors;
+  border-radius: 8px;
+  line-height: 20px;
+  min-height: 32px;
+}
+.aws-input:focus {
+  @apply outline-none border-aws-blue ring-1 ring-aws-blue;
+}
+.aws-input:disabled {
+  @apply bg-gray-50 text-aws-text-disabled cursor-not-allowed;
+}
+.aws-input::placeholder {
+  @apply text-aws-text-disabled;
+}
+
+select.aws-input {
+  @apply pr-8 appearance-none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23545B64' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m4 6 4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 12px;
+}
+
+/* ========================
+   Cloudscape Container/Card
+   ======================== */
+.aws-card {
+  @apply bg-white p-5 border border-aws-border shadow-sm;
+  border-radius: 16px;
+}
+.aws-card-flat {
+  @apply bg-white p-5 border border-aws-border;
+  border-radius: 16px;
+}
+
+/* Container header pattern */
+.aws-container-header {
+  @apply flex items-center justify-between pb-4 mb-4 border-b border-aws-border;
+}
+.aws-container-header h2 {
+  @apply text-lg font-bold text-aws-text;
+}
+
+/* ========================
+   Cloudscape Table
+   ======================== */
+.aws-table {
+  @apply w-full text-sm text-left;
+}
+.aws-table thead {
+  @apply bg-gray-50/80 text-aws-text-secondary font-medium border-b border-aws-border;
+}
+.aws-table th {
+  @apply px-4 py-2.5 text-sm;
+  font-weight: 600;
+}
+.aws-table td {
+  @apply px-4 py-2.5;
+}
+.aws-table tbody tr {
+  @apply border-b border-gray-100 hover:bg-blue-50/30 transition-colors;
+}
+.aws-table tbody tr.selected {
+  @apply bg-blue-50/50;
+}
+
+/* ========================
+   Cloudscape Link
+   ======================== */
+.aws-link {
+  @apply text-aws-blue hover:underline cursor-pointer;
+}
+
+/* ========================
+   Status Badges
+   ======================== */
+.aws-badge {
+  @apply inline-flex items-center gap-1.5 px-2.5 py-0.5 text-xs font-medium;
+  border-radius: 16px;
+}
+.aws-badge-success {
+  @apply bg-green-50 text-green-800 border border-green-200;
+}
+.aws-badge-error {
+  @apply bg-red-50 text-red-800 border border-red-200;
+}
+.aws-badge-warning {
+  @apply bg-yellow-50 text-yellow-800 border border-yellow-200;
+}
+.aws-badge-info {
+  @apply bg-blue-50 text-blue-800 border border-blue-200;
+}
+.aws-badge-neutral {
+  @apply bg-gray-100 text-gray-700 border border-gray-200;
+}
+
+/* Status dot badges (inline) */
+.aws-status {
+  @apply inline-flex items-center gap-1.5 text-xs font-medium;
+}
+.aws-status-dot {
+  @apply w-2 h-2 rounded-full flex-shrink-0;
+}
+
+/* ========================
+   Cloudscape Sidebar
+   ======================== */
+.aws-sidebar-item {
+  @apply flex items-center gap-2 px-4 py-1.5 text-sm text-aws-text-secondary hover:bg-gray-50 cursor-pointer transition-colors;
+  border-left: 3px solid transparent;
+  font-weight: 400;
+}
+.aws-sidebar-item.active {
+  @apply text-aws-blue;
+  background-color: #f2f8fd;
+  border-left-color: #0972D3;
+  font-weight: 600;
+}
+.aws-sidebar-item.disabled {
+  @apply text-aws-text-disabled cursor-default hover:bg-transparent;
+}
+.aws-sidebar-section {
+  @apply px-4 py-2 text-xs text-aws-text-secondary;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* ========================
+   Cloudscape Tabs
+   ======================== */
+.aws-tabs {
+  @apply flex gap-0 border-b border-aws-border;
+}
+.aws-tab {
+  @apply pb-2.5 px-4 text-sm font-medium border-b-2 transition-colors cursor-pointer;
+}
+.aws-tab-active {
+  @apply border-aws-blue text-aws-blue font-bold;
+}
+.aws-tab-inactive {
+  @apply border-transparent text-aws-text-secondary hover:text-aws-text hover:border-gray-300;
+}
+
+/* ========================
+   Cloudscape Alert/Flash
+   ======================== */
+.aws-alert {
+  @apply flex items-start gap-3 p-4 text-sm border;
+  border-radius: 12px;
+}
+.aws-alert-success {
+  @apply bg-green-50 border-green-200 text-green-800;
+}
+.aws-alert-error {
+  @apply bg-red-50 border-red-200 text-red-800;
+}
+.aws-alert-warning {
+  @apply bg-yellow-50 border-yellow-200 text-yellow-800;
+}
+.aws-alert-info {
+  @apply bg-blue-50 border-blue-200 text-blue-800;
+}
+
+/* ========================
+   Form Group
+   ======================== */
+.aws-form-group {
+  @apply space-y-1.5;
+}
+.aws-form-label {
+  @apply block text-sm font-bold text-aws-text;
+}
+.aws-form-description {
+  @apply text-xs text-aws-text-disabled;
+}
+.aws-form-error {
+  @apply text-xs text-aws-error;
+}
+
+/* ========================
+   Cloudscape Modal
+   ======================== */
+.aws-modal-overlay {
+  @apply fixed inset-0 bg-black/60 flex items-center justify-center z-50;
+  backdrop-filter: blur(2px);
+}
+.aws-modal {
+  @apply bg-white shadow-xl w-full border border-aws-border;
+  border-radius: 16px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.aws-modal-header {
+  @apply flex items-center justify-between px-6 py-4 border-b border-aws-border;
+}
+.aws-modal-header h3 {
+  @apply font-bold text-lg;
+}
+.aws-modal-body {
+  @apply px-6 py-5;
+}
+.aws-modal-footer {
+  @apply flex justify-end gap-2 px-6 py-4 border-t border-aws-border bg-gray-50;
+  border-radius: 0 0 16px 16px;
+}
+
+/* ========================
+   Cloudscape Key-Value pairs
+   ======================== */
+.aws-kv-grid {
+  @apply grid grid-cols-2 gap-x-8 gap-y-4 text-sm;
+}
+.aws-kv-label {
+  @apply text-aws-text-secondary font-medium;
+}
+.aws-kv-value {
+  @apply text-aws-text;
+}
+
+/* ========================
+   Cloudscape Header
+   ======================== */
+.aws-page-header {
+  @apply flex items-center justify-between mb-6;
+}
+.aws-page-header h1 {
+  @apply text-2xl font-bold text-aws-text;
+}
+.aws-page-header-description {
+  @apply text-sm text-aws-text-secondary mt-1;
+}
+
+/* ========================
+   Cloudscape Toggle
+   ======================== */
+.aws-toggle {
+  @apply relative inline-flex h-5 w-9 items-center rounded-full transition-colors cursor-pointer;
+}
+.aws-toggle-on {
+  @apply bg-aws-blue;
+}
+.aws-toggle-off {
+  @apply bg-gray-300;
+}
+.aws-toggle-dot {
+  @apply inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform;
+}
+.aws-toggle-dot-on {
+  @apply translate-x-4;
+}
+.aws-toggle-dot-off {
+  @apply translate-x-0.5;
+}
+
+/* ========================
+   Misc / Utilities
+   ======================== */
+.aws-empty-state {
+  @apply flex flex-col items-center justify-center py-12 text-center;
+}
+.aws-empty-state-icon {
+  @apply text-aws-text-disabled mb-3;
+}
+.aws-empty-state-title {
+  @apply text-lg font-bold text-aws-text mb-1;
+}
+.aws-empty-state-description {
+  @apply text-sm text-aws-text-secondary max-w-md;
+}
+
+/* Hover card effect */
+.aws-card-hover {
+  @apply transition-all hover:shadow-md hover:border-aws-blue;
+}
+
+/* Code block */
+.aws-code {
+  @apply font-mono text-sm bg-gray-900 text-green-400 p-4 overflow-x-auto;
+  border-radius: 8px;
+}
+
+/* Progress bar */
+.aws-progress {
+  @apply w-full bg-gray-100 overflow-hidden;
+  border-radius: 4px;
+  height: 6px;
+}
+.aws-progress-bar {
+  @apply h-full transition-all;
+  border-radius: 4px;
+}
+
+/* Animation */
+@keyframes slideInRight {
+  from { transform: translateX(300px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-slide-in-right {
+  animation: slideInRight 0.2s ease-out;
+}
+.animate-fade-in {
+  animation: fadeIn 0.15s ease-out;
+}

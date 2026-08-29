@@ -1,0 +1,108 @@
+
+.user-popover {
+  width: 300px;
+  background: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.popover-header {
+  position: relative;
+  background: #F8F8F8;
+  padding: 20px 20px 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.popover-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  border: 3px solid #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.popover-status-indicator {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  margin-left: 24px;
+}
+
+.popover-status-dot {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+}
+
+.popover-body {
+  padding: 12px 20px 8px;
+}
+
+.popover-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1D1C1D;
+  margin-bottom: 2px;
+}
+
+.popover-display-name {
+  font-size: 14px;
+  color: #616061;
+  margin-bottom: 8px;
+}
+
+.popover-status-emoji {
+  margin-right: 4px;
+}
+
+.popover-title {
+  font-size: 13px;
+  color: #616061;
+  margin-bottom: 8px;
+}
+
+.popover-local-time {
+  font-size: 13px;
+  color: #616061;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.popover-status-message {
+  font-size: 13px;
+  color: #1D1C1D;
+  padding: 8px 10px;
+  background: #F8F8F8;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+
+.popover-actions {
+  padding: 12px 20px 16px;
+  border-top: 1px solid #F0F0F0;
+}
+
+.popover-message-btn {
+  width: 100%;
+  padding: 8px 16px;
+  background: #007A5A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.popover-message-btn:hover {
+  background: #148567;
+}

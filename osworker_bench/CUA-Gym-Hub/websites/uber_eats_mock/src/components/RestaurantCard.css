@@ -1,0 +1,153 @@
+.rest-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.15s ease;
+}
+
+.rest-card:hover {
+  transform: translateY(-2px);
+}
+
+.rest-card__image-link {
+  display: block;
+  text-decoration: none;
+}
+
+.rest-card__image {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rest-card__emoji {
+  font-size: 52px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+/* Promo badge - top left like real Xber Eats */
+.rest-card__promo-badge {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px 4px 8px;
+  border-radius: 0 4px 4px 0;
+  letter-spacing: 0.2px;
+}
+
+/* Rating badge - top right */
+.rest-card__rating-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--color-black);
+  backdrop-filter: blur(4px);
+}
+
+.rest-card__fav {
+  position: absolute;
+  top: 12px;
+  right: 48px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.15s ease;
+  color: var(--color-gray-700);
+}
+
+.rest-card__fav:hover {
+  background: var(--color-white);
+  transform: scale(1.1);
+}
+
+.rest-card__fav--active {
+  color: var(--color-black);
+}
+
+.rest-card__info {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 0;
+}
+
+.rest-card__row1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.rest-card__name {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.rest-card__row2 {
+  font-size: var(--fs-sm);
+  color: var(--color-gray-500);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rest-card__delivery-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rest-card__uber-one-icon {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.rest-card__dot {
+  color: var(--color-gray-300);
+}
+
+.rest-card__row3 {
+  font-size: var(--fs-xs);
+  color: var(--color-gray-400);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rest-card__stars {
+  color: var(--color-gray-500);
+}
+
+.rest-card__reviews {
+  color: var(--color-gray-400);
+}
+
+.rest-card__time {
+  color: var(--color-gray-400);
+}

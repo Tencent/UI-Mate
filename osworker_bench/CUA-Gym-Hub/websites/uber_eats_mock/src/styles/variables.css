@@ -1,0 +1,41 @@
+:root {
+  --color-primary: #06C167;
+  --color-primary-dark: #048A46;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gray-100: #F6F6F6;
+  --color-gray-200: #EEEEEE;
+  --color-gray-300: #CCCCCC;
+  --color-gray-400: #AFAFAF;
+  --color-gray-500: #6B6B6B;
+  --color-gray-700: #545454;
+  --color-gray-900: #1A1A1A;
+  --color-error: #E54B4B;
+  --color-star: #FFD700;
+  --color-uber-green: #06C167;
+
+  --font-family: "UberMoveText", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-heading: "UberMove", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --radius-card: 16px;
+  --radius-button: 8px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 24px;
+  --fs-xxl: 32px;
+  --fs-display: 36px;
+
+  --header-height: 64px;
+  --max-width: 1200px;
+  --cart-width: 420px;
+  --sidebar-width: 280px;
+
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-dropdown: 0 4px 24px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+}

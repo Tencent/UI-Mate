@@ -1,0 +1,4 @@
+# Session state files
+.mock-states/
+.mock-state.json
+.mock-state.initial.json

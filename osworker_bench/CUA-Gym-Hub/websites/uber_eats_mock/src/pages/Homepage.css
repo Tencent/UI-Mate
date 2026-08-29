@@ -1,0 +1,290 @@
+.homepage {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Categories */
+.homepage__categories {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  margin-bottom: 4px;
+}
+
+.homepage__cat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  min-width: 76px;
+  padding: 4px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--radius-card);
+  transition: transform 0.15s ease;
+}
+
+.homepage__cat-chip:hover {
+  transform: scale(1.05);
+}
+
+.homepage__cat-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-circle);
+  background: var(--color-gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.homepage__cat-chip:hover .homepage__cat-icon-wrap {
+  background: var(--color-gray-200);
+}
+
+.homepage__cat-icon {
+  font-size: 28px;
+}
+
+.homepage__cat-name {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Promo Banner Carousel */
+.homepage__banner-carousel {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.homepage__banner-track {
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+
+.homepage__promo-banner {
+  display: none;
+  height: 160px;
+  border-radius: var(--radius-card);
+  color: var(--color-white);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.homepage__promo-banner--active {
+  display: flex;
+  align-items: center;
+}
+
+.homepage__promo-banner-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.homepage__promo-banner-title {
+  font-size: var(--fs-xxl);
+  font-weight: 700;
+  font-family: var(--font-heading);
+  margin-bottom: 4px;
+}
+
+.homepage__promo-banner-subtitle {
+  font-size: var(--fs-md);
+  opacity: 0.9;
+}
+
+.homepage__promo-banner-shape {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radius-circle);
+}
+
+.homepage__banner-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  background: var(--color-white);
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: background 0.15s;
+}
+
+.homepage__banner-arrow:hover {
+  background: var(--color-gray-100);
+}
+
+.homepage__banner-arrow--left {
+  left: 12px;
+}
+
+.homepage__banner-arrow--right {
+  right: 12px;
+}
+
+.homepage__banner-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.homepage__banner-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-circle);
+  background: var(--color-gray-300);
+  transition: all 0.2s;
+}
+
+.homepage__banner-dot--active {
+  background: var(--color-black);
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* Sections */
+.homepage__section {
+  margin-bottom: 40px;
+}
+
+.homepage__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.homepage__section-title {
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  font-family: var(--font-heading);
+}
+
+.homepage__see-all {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.homepage__see-all:hover {
+  text-decoration: underline;
+}
+
+/* Scrollable row */
+.homepage__scroll-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.homepage__scroll-item {
+  min-width: 280px;
+  max-width: 320px;
+  flex-shrink: 0;
+}
+
+/* Grid */
+.homepage__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Uber One Banner */
+.homepage__uber-one-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: var(--color-black);
+  color: var(--color-white);
+  border-radius: var(--radius-card);
+  margin-bottom: 40px;
+  gap: 16px;
+}
+
+.homepage__uber-one-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.homepage__uber-one-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-circle);
+  background: #D4A843;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.homepage__uber-one-title {
+  font-size: var(--fs-md);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.homepage__uber-one-sub {
+  font-size: var(--fs-sm);
+  opacity: 0.7;
+}
+
+.homepage__uber-one-cta {
+  padding: 10px 20px;
+  background: var(--color-white);
+  color: var(--color-black);
+  font-weight: 700;
+  font-size: var(--fs-sm);
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.homepage__uber-one-cta:hover {
+  background: #e2e2e2;
+}
+
+@media (max-width: 1024px) {
+  .homepage__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .homepage__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .homepage {
+    padding: 16px;
+  }
+
+  .homepage__uber-one-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .homepage__uber-one-content {
+    flex-direction: column;
+  }
+}

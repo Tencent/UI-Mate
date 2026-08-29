@@ -1,0 +1,70 @@
+.triage-row {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 40px;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 12px;
+}
+.triage-row:hover { background: rgba(255,255,255,0.02); }
+.triage-row:hover .triage-row-actions { opacity: 1; }
+
+.triage-row-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.triage-row-id {
+  font-family: ui-monospace, SF Mono, Menlo, monospace;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.triage-row-title {
+  font-size: 13px;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.triage-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.1s;
+  flex-shrink: 0;
+}
+.triage-row:hover .triage-row-actions { opacity: 1; }
+
+.triage-accept-btn {
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(39,166,68,0.15);
+  border: 1px solid rgba(39,166,68,0.3);
+  color: #27a644;
+  font-size: 12px;
+  font-weight: 510;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.triage-accept-btn:hover { background: rgba(39,166,68,0.25); }
+
+.triage-decline-btn {
+  padding: 4px 10px;
+  border-radius: var(--radius-md);
+  background: rgba(229,72,77,0.1);
+  border: 1px solid rgba(229,72,77,0.25);
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 510;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.triage-decline-btn:hover { background: rgba(229,72,77,0.2); }

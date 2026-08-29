@@ -1,0 +1,217 @@
+
+.message-composer {
+  border-top: none;
+  background: white;
+  padding: 8px 20px 16px;
+  position: relative;
+}
+
+.composer-container {
+  border: 1px solid #BBBBBB;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.composer-container:focus-within {
+  border-color: #1264A3;
+  box-shadow: 0 0 0 1px #1264A3;
+}
+
+.composer-toolbar {
+  display: flex;
+  gap: 0;
+  padding: 4px 8px;
+  border-bottom: 1px solid #EEEEEE;
+  background: #FAFAFA;
+}
+
+.toolbar-btn {
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #616061;
+  transition: all 0.15s;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+}
+
+.toolbar-btn:hover {
+  background: #E8E8E8;
+  color: #1D1C1D;
+}
+
+.composer-input-wrapper {
+  position: relative;
+}
+
+.composer-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  font-family: inherit;
+  font-size: 15px;
+  resize: none;
+  min-height: 40px;
+  max-height: 200px;
+  line-height: 22px;
+  outline: none;
+  background: transparent;
+}
+
+.composer-input::placeholder {
+  color: #8D8D8D;
+}
+
+.composer-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 8px;
+  border-top: 1px solid #EEEEEE;
+  background: #FAFAFA;
+}
+
+.composer-actions-left {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.action-btn {
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.15s;
+  color: #616061;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+}
+
+.action-btn:hover {
+  background: #E8E8E8;
+  color: #1D1C1D;
+}
+
+.send-btn {
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.15s;
+  color: #BBBBBB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+}
+
+.send-btn.has-content {
+  color: #FFFFFF;
+  background: #007A5A;
+  border-radius: 4px;
+}
+
+.send-btn.has-content:hover {
+  background: #148567;
+}
+
+.send-btn:hover:not(:disabled):not(.has-content) {
+  background: #F0F0F0;
+}
+
+.send-btn:disabled {
+  color: #DDDDDD;
+  cursor: not-allowed;
+}
+
+/* Attachment Preview Styles */
+.composer-attachments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 8px 12px;
+  border-bottom: 1px solid #EEEEEE;
+}
+
+.attachment-preview {
+  position: relative;
+  max-width: 200px;
+}
+
+.attachment-preview-image {
+  width: 100%;
+  max-width: 200px;
+  max-height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #DDDDDD;
+}
+
+.attachment-file-preview {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #F8F8F8;
+  border: 1px solid #DDDDDD;
+  border-radius: 8px;
+  max-width: 300px;
+}
+
+.file-icon {
+  font-size: 20px;
+}
+
+.file-name {
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-size {
+  font-size: 12px;
+  color: #616061;
+}
+
+.remove-attachment-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  background: #1D1C1D;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.action-btn.active {
+  background: #E8E8E8;
+  color: #1264A3;
+}
+

@@ -75,8 +75,14 @@ class Xcursor:
         XOpenDisplay.restype = ctypes.POINTER(Display)
         XOpenDisplay.argtypes = [ctypes.c_char_p]
 
-        if not self.display:
-            self.display = self.xlib.XOpenDisplay(display)  # (display) or (None)
+        # The connection must be cached on the class, not on the instance: /screenshot
+        # builds a fresh Xcursor() per request, so an instance-level cache leaks one
+        # XOpenDisplay() connection per screenshot and exhausts the X server's client
+        # slots ("Maximum number of clients reached") after a few hundred screenshots,
+        # taking the whole guest server down.
+        if not Xcursor.display:
+            Xcursor.display = self.xlib.XOpenDisplay(display)  # (display) or (None)
+        self.display = Xcursor.display
 
     def argbdata_to_pixdata(self, data, len):
         if data == None or len < 1: return None

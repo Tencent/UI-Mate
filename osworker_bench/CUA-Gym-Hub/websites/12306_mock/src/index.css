@@ -1,0 +1,145 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-blue: #2B6CB0;
+  --dark-blue: #1A4B80;
+  --header-blue: #1B3A5C;
+  --accent-orange: #F08519;
+  --light-blue-bg: #EBF4FA;
+  --white: #FFFFFF;
+  --text-dark: #333333;
+  --text-gray: #999999;
+  --text-light: #666666;
+  --available-green: #21A038;
+  --waitlist-orange: #FF8C00;
+  --sold-out-gray: #CCCCCC;
+  --price-red: #E4393C;
+  --border: #E0E0E0;
+  --border-light: #F0F0F0;
+  --bg-gray: #F5F5F5;
+  --font: "Microsoft YaHei", "PingFang SC", -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text-dark);
+  background: var(--bg-gray);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-blue);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font);
+}
+
+input, select, textarea {
+  font-family: var(--font);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Toast notifications */
+.toast-container {
+  position: fixed;
+  top: 90px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.toast {
+  padding: 10px 16px;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  min-width: 200px;
+  max-width: 320px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  animation: slideIn 0.3s ease;
+  cursor: pointer;
+}
+
+.toast.success { background: var(--available-green); }
+.toast.warning { background: #FF8C00; }
+.toast.error { background: #F5222D; }
+.toast.info { background: var(--primary-blue); }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Train type badges */
+.train-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  margin-right: 4px;
+  line-height: 1;
+}
+.train-badge.G { background: #cf1322; }
+.train-badge.D { background: #1890ff; }
+.train-badge.C { background: #722ed1; }
+.train-badge.K { background: #52c41a; }
+.train-badge.T { background: #13c2c2; }
+.train-badge.Z { background: #2f54eb; }
+
+/* Availability text */
+.avail-green { color: var(--available-green); font-weight: bold; }
+.avail-orange { color: var(--waitlist-orange); font-weight: bold; }
+.avail-gray { color: var(--sold-out-gray); }
+.avail-dash { color: #ccc; }
+
+/* Status badges */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.status-paid { background: #f6ffed; color: #52C41A; border: 1px solid #b7eb8f; }
+.status-pending { background: #fff7e6; color: #fa8c16; border: 1px solid #ffd591; }
+.status-done { background: #f5f5f5; color: #8c8c8c; border: 1px solid #d9d9d9; }
+.status-refunded { background: #fff1f0; color: #f5222d; border: 1px solid #ffa39e; }
+.status-changed { background: #e6f7ff; color: #1890ff; border: 1px solid #91d5ff; }
+.status-cancelled { background: #f5f5f5; color: #8c8c8c; border: 1px solid #d9d9d9; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }

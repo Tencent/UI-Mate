@@ -237,7 +237,7 @@ def build_argparser() -> argparse.ArgumentParser:
     agent_group.add_argument("--max_trajectory_length", type=int, default=None, help="Max history length")
     agent_group.add_argument("--prompt_type", type=str, default=None, help="Prompt type (e.g. l2, l3), overrides agent.extra.prompt_type")
     agent_group.add_argument("--history_n", type=int, default=None, help="History turns for agent, overrides agent.extra.history_n")
-    agent_group.add_argument("--recent_think_steps", type=int, default=None, help="Keep <think> only for the most recent N history steps (promptv2); overrides agent.extra.recent_think_steps. Pass a large value (>= max_steps) to preserve all.")
+    agent_group.add_argument("--recent_think_steps", type=int, default=None, help="Keep <think> only for the most recent N history steps; overrides agent.extra.recent_think_steps. Pass a large value (>= max_steps) to preserve all.")
 
     # Run args
     run_group = parser.add_argument_group("Run")

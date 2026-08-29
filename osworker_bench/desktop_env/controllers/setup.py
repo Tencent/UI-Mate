@@ -149,6 +149,17 @@ class SetupController:
         
         return True
 
+    # Public wrappers so callers outside the JSON ``config`` pipeline (e.g.
+    # DesktopEnv pushing guest-server files on boot) can reuse the same
+    # download/execute plumbing.
+    def download(self, files: List[Dict[str, str]]) -> None:
+        self._download_setup(files)
+
+    def execute(self, command: List[str], stdout: str = "", stderr: str = "", shell: bool = False,
+                until: Optional[Dict[str, Any]] = None, raise_on_error: bool = False) -> None:
+        self._execute_setup(command, stdout=stdout, stderr=stderr, shell=shell, until=until,
+                            raise_on_error=raise_on_error)
+
     def _disable_apt_auto_update_setup(self):
         """Disable packagekit and apt automatic update services to avoid apt lock conflicts (e.g. packagekitd holding /var/lib/apt/lists/lock)."""
         password = self.client_password
@@ -182,7 +193,34 @@ class SetupController:
             if not url or not path:
                 raise Exception(f"Setup Download - Invalid URL ({url}) or path ({path}).")
 
-            if not os.path.exists(cache_path):
+            # A source may also be local: either a ``file://`` URI or a plain
+            # filesystem path, as used when pushing a file from this repo into
+            # the guest. Those are copied into the cache instead of fetched
+            # over HTTP.
+            local_src: Optional[str] = None
+            if url.startswith("file://"):
+                from urllib.parse import urlparse, unquote
+                local_src = unquote(urlparse(url).path)
+            elif "://" not in url and os.path.exists(url):
+                local_src = url
+
+            if local_src is not None:
+                if not os.path.exists(local_src):
+                    raise FileNotFoundError(f"Setup Download - Local source not found: {local_src}")
+                # The cache key is derived from the source path alone, so a local
+                # file edited since a previous run would otherwise keep being
+                # served from a stale cache entry.
+                stale = True
+                if os.path.exists(cache_path):
+                    src_stat = os.stat(local_src)
+                    cache_stat = os.stat(cache_path)
+                    stale = (src_stat.st_size != cache_stat.st_size
+                             or src_stat.st_mtime > cache_stat.st_mtime)
+                if stale:
+                    os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+                    logger.info(f"Copying local file {local_src} to cache {cache_path}")
+                    shutil.copyfile(local_src, cache_path)
+            elif not os.path.exists(cache_path):
                 logger.info(f"Cache file not found, downloading from {url} to {cache_path}")
                 max_retries = 3
                 downloaded = False

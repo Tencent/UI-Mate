@@ -1,0 +1,13 @@
+.appshell { display: flex; height: 100vh; overflow: hidden; }
+
+.appshell-main {
+  margin-top: 52px;
+  flex: 1;
+  overflow-y: auto;
+  transition: margin-left 0.2s ease;
+  min-height: calc(100vh - 52px);
+  background: var(--page-bg);
+}
+
+.main-expanded { margin-left: 220px; }
+.main-collapsed { margin-left: 48px; }
