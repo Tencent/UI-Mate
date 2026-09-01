@@ -12,6 +12,7 @@ Tencent HY Frontier
 [![arXiv](https://img.shields.io/badge/arXiv-b31b1b?logo=arxiv&logoColor=white)](https://arxiv.org/abs/2608.15930)
 [![Models](https://img.shields.io/badge/%F0%9F%A4%97%20Models-tencent%2Fui--mate-ffd21e)](https://huggingface.co/collections/tencent/ui-mate)
 [![OSWorkerBench](https://img.shields.io/badge/%F0%9F%A4%97%20OSWorkerBench-osworker__bench-ff8f00)](osworker_bench/)
+[![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-tencent%2FOSWorkerBench-ffd21e)](https://huggingface.co/datasets/tencent/OSWorkerBench)
 
 </div>
 
@@ -139,6 +140,19 @@ long-horizon workflows and one-shot procedural learning. The evaluation
 harness, tasks, demonstrations, and evaluators live in
 [`osworker_bench/`](osworker_bench/).
 
+The dataset is also available at
+[`tencent/OSWorkerBench`](https://huggingface.co/datasets/tencent/OSWorkerBench)
+with a browser-based Dataset Viewer and a detailed end-to-end evaluation guide.
+The default configuration contains the 100 benchmark tasks, while the
+`demonstrations` configuration exposes 3,989 captioned GUI-action steps from
+the 33 released self-demonstrations:
+
+```python
+from datasets import load_dataset
+
+tasks = load_dataset("tencent/OSWorkerBench")
+demonstrations = load_dataset("tencent/OSWorkerBench", "demonstrations")
+```
 
 | 100 tasks                     | 41 applications                             | 10 job families                | 33 + 45 demonstrations              |
 | ----------------------------- | ------------------------------------------- | ------------------------------ | ----------------------------------- |
