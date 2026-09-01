@@ -430,7 +430,7 @@ verify the resulting application and artifact state.
 
 ## 📚 Citation
 
-If you find UI-Mate useful in your research or applications, please cite:
+If you find UI-Mate useful in your research or applications, please cite our technical report:
 
 ```bibtex
 @article{uimate2026,
